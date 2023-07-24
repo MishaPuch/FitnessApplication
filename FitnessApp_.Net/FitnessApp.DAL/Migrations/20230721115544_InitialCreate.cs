@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FitnessApp.Migrations
+namespace FitnessApp.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -17,7 +17,7 @@ namespace FitnessApp.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    day = table.Column<DateTime>(type: "datetime2", nullable: false),
                     exerciseId = table.Column<int>(type: "int", nullable: false),
                     times = table.Column<int>(type: "int", nullable: false),
                     dietId = table.Column<int>(type: "int", nullable: false)
@@ -39,7 +39,8 @@ namespace FitnessApp.Migrations
                     foto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     protein = table.Column<double>(type: "float", nullable: false),
                     carbonFat = table.Column<double>(type: "float", nullable: false),
-                    calorificValue = table.Column<int>(type: "int", nullable: false)
+                    calorificValue = table.Column<int>(type: "int", nullable: false),
+                    typeOfMeal = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

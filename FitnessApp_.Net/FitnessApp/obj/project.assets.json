@@ -1278,11 +1278,26 @@
           }
         }
       },
+      "FitnessApp.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FitnessApp.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FitnessApp.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FitnessApp.BLL.dll": {}
+        }
+      },
       "FitnessApp.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.9"
+          "Microsoft.EntityFrameworkCore": "7.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.9",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9"
         },
         "compile": {
           "bin/placeholder/FitnessApp.DAL.dll": {}
@@ -4031,6 +4046,11 @@
         "version.txt"
       ]
     },
+    "FitnessApp.BLL/1.0.0": {
+      "type": "project",
+      "path": "../FitnessApp.BLL/FitnessApp.BLL.csproj",
+      "msbuildProject": "../FitnessApp.BLL/FitnessApp.BLL.csproj"
+    },
     "FitnessApp.DAL/1.0.0": {
       "type": "project",
       "path": "../FitnessApp.DAL/FitnessApp.DAL.csproj",
@@ -4039,7 +4059,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "FitnessApp.DAL >= 1.0.0",
+      "FitnessApp.BLL >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.9",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
@@ -4077,8 +4097,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\misha\\Desktop\\FitnessApp\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
-              "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApp\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj"
+            "C:\\Users\\misha\\Desktop\\FitnessApp\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {
+              "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApp\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj"
             }
           }
         }

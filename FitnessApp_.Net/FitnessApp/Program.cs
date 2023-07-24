@@ -1,4 +1,8 @@
+using FitnessApp.BLL.DI_Service;
+using FitnessApp.BLL.Services;
 using FitnessApp.DAL;
+using FitnessApp.DAL.InterfaceRepositories;
+using FitnessApp.DAL.repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,14 @@ IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
 string connectionString = configuration.GetSection("Data").Value;
 
 builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddTransient<ICalendarRepository, CalendarRepository>();
+builder.Services.AddTransient<IDietRepository, DietRepository>();
+
+builder.Services.AddTransient<IUserService, UserService>();
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

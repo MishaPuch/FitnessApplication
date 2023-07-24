@@ -6,7 +6,7 @@ namespace FitnessApp.Models
     {
         
         public int id { get; set; }
-        public DateTime date { get; set; }
+        public DateTime day { get; set; }
         public int exerciseId { get; set; }        
         public int times { get; set; }
         public int dietId { get; set; } 

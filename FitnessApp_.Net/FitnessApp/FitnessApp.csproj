@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FitnessApp.DAL\FitnessApp.DAL.csproj" />
+    <ProjectReference Include="..\FitnessApp.BLL\FitnessApp.BLL.csproj" />
   </ItemGroup>
 
 </Project>

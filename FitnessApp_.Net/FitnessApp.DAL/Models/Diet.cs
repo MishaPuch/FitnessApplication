@@ -10,6 +10,7 @@
         public double protein { get; set; }
         public double carbonFat { get; set; }
         public int calorificValue { get; set; }
+        public int typeOfMeal { get; set; }
 
     }
 }

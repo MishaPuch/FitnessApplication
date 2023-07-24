@@ -4,16 +4,19 @@ using FitnessApp.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FitnessApp.Migrations
+namespace FitnessApp.DAL.Migrations
 {
     [DbContext(typeof(FitnessAppContext))]
-    partial class FitnessAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230721115544_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace FitnessApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("day")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("dietId")
@@ -79,6 +82,9 @@ namespace FitnessApp.Migrations
 
                     b.Property<double>("protein")
                         .HasColumnType("float");
+
+                    b.Property<int>("typeOfMeal")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
