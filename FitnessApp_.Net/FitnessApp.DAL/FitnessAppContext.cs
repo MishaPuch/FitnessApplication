@@ -12,6 +12,7 @@ namespace FitnessApp.DAL
     {
         public FitnessAppContext(DbContextOptions<FitnessAppContext> options) : base(options)
         {
+
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Calendar> Calendars { get; set; }

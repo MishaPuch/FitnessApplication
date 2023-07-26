@@ -121,3 +121,6 @@ C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\obj\Debug\net6.0\Fi
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\obj\Debug\net6.0\ref\FitnessApp.dll
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\FitnessApp.DAL.dll
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\FitnessApp.DAL.pdb
+C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\FitnessApp.BLL.dll
+C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\FitnessApp.BLL.pdb
+C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\web.config

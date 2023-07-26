@@ -10,3 +10,5 @@ C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\obj\Debug\net6.
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\obj\Debug\net6.0\refint\FitnessApp.DAL.dll
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\obj\Debug\net6.0\FitnessApp.DAL.pdb
 C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\obj\Debug\net6.0\ref\FitnessApp.DAL.dll
+C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\bin\Debug\net6.0\FitnessApp.DAL.runtimeconfig.json
+C:\Users\misha\Desktop\FitnessApp\FitnessApp_.Net\FitnessApp.DAL\obj\Debug\net6.0\FitnessApp.DAL.genruntimeconfig.cache
