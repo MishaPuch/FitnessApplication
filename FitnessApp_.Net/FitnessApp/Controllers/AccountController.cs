@@ -63,7 +63,7 @@ namespace FitnessApp.Controllers
         public async Task DeleteUser(int id)
         {
             await userService.DeleteUserAsync(id);
-            Console.WriteLine($"user :id {id} - was saccesfully changed");
+            Console.WriteLine($"user :id {id} - was saccesfully deleted");
 
         }
 
