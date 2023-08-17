@@ -36,7 +36,7 @@ namespace FitnessApp.DAL.repositories
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.userEmail == email);
+            return await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == email);
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
@@ -46,22 +46,14 @@ namespace FitnessApp.DAL.repositories
 
         public async Task UpdateUserAsync(User user)
         {
-            var changingUser = await _context.Users.FindAsync(user.id);
-            changingUser.userEmail = user.userEmail;
-            changingUser.userName = user.userName;
-            changingUser.password = user.password;
-            changingUser.age = user.age;
-            changingUser.sex = user.sex;
-            changingUser.calorificValue = user.calorificValue;
-            changingUser.restTime = user.restTime;
-
-
+            var changingUser = await _context.Users.FindAsync(user.Id);
+            changingUser = user;
             await _context.SaveChangesAsync();
         }
 
         public async Task<User> GetByPasswordAndEmailAsync(string email, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u=>u.userEmail==email && u.password==password);
+            return await _context.Users.FirstOrDefaultAsync(u=>u.UserEmail==email && u.Password==password);
         }
     }
 }

@@ -51,13 +51,13 @@ namespace FitnessApp.Controllers
             // Сохранение пользователя в базу данных или коллекцию
 
             await userService.CreateUserAsync(user);
-            Console.WriteLine($"user : {user.id} - was saccesfully created");
+            Console.WriteLine($"user : {user.Id} - was saccesfully created");
         }
         [HttpPut("changeData")]
         public async Task ChangeUserData([FromBody]User user)
         {                         
             await userService.CangeUserDataAsync(user);
-            Console.WriteLine($"user : {user.id} - was saccesfully changed");
+            Console.WriteLine($"user : {user.Id} - was saccesfully changed");
         }
         [HttpDelete("DeleteUser/{id:int}")]
         public async Task DeleteUser(int id)

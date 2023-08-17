@@ -4,19 +4,19 @@ namespace FitnessApp.Models
 {
     public class User
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [StringLength(100)]
-        public string userName { get; set; }
+        public string UserName { get; set; }
         [RegularExpression(@"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")]
         [Required]
-        public string userEmail { get; set; }
+        public string UserEmail { get; set; }
         [StringLength(100)]
         [Required]
-        public string password { get; set; }
-        public string sex { get; set; }
+        public string Password { get; set; }
+        public string Sex { get; set; }
         [Range(0, 110)]
-        public int age { get; set; }
-        public int restTime { get; set; }
-        public int calorificValue { get; set; }
+        public int Age { get; set; }
+        public int RestTime { get; set; }
+        public int CalorificValue { get; set; }
     }
 }

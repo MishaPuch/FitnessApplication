@@ -2,9 +2,9 @@
 {
     public class Exercise
     {
-        public int id { get; set; }
-        public string exerciseName { get; set; }
-        public string exerciseDescription { get; set; }
-        public string exerciseVideo { get; set; }
+        public int Id { get; set; }
+        public string ExerciseName { get; set; }
+        public string ExerciseDescription { get; set; }
+        public string ExerciseVideo { get; set; }
     }
 }

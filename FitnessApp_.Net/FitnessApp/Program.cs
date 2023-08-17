@@ -24,9 +24,10 @@
     builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
 
     builder.Services.AddTransient<IUserRepository, UserRepository>();
+/*
     builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
     builder.Services.AddTransient<ICalendarRepository, CalendarRepository>();
-    builder.Services.AddTransient<IDietRepository, DietRepository>();
+    builder.Services.AddTransient<IDietRepository, DietRepository>();*/
 
     builder.Services.AddTransient<IUserService, UserService>();
 
