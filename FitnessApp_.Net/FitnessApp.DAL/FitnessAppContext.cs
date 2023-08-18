@@ -21,6 +21,7 @@ namespace FitnessApp.DAL
         public DbSet<Diet> Diet { get; set; }
         public DbSet<CalorificCoefficientValue> CalorificCoefficientValues { get; set; }
         public DbSet<Meal> Meals{ get; set; }
+        public DbSet<Trening> Trenings { get; set; }
 
 
 
