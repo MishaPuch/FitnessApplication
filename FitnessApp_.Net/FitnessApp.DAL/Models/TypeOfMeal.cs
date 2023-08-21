@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Models
 {
-    public class Trening
+    public class TypeOfMeal
     {
         public int Id { get; set; }
-        public int DayId { get; set; }
-        public int MuscleGroup { get; set; }
-        public int ExerciseId { get; set; }
+        public string NameFoodType { get; set; }
     }
 }

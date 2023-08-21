@@ -3,6 +3,7 @@ using FitnessApp.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.DAL.Migrations
 {
     [DbContext(typeof(FitnessAppContext))]
-    partial class FitnessAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230821074355_fixDB")]
+    partial class fixDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,40 +110,6 @@ namespace FitnessApp.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Trenings");
-                });
-
-            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMeal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameFoodType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypesOfMeal");
-                });
-
-            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMuscleGroup", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameMucleGroup")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfMuscleGroups");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DaysofDiet", b =>
