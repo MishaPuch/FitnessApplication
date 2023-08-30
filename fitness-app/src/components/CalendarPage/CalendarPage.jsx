@@ -33,7 +33,10 @@ const CalendarPage = () => {
             </div>
             <div className="app">
                 <div >
-                    <Card className="calendar-container custom-calendar"  >                         
+                    <Card
+                     className="calendar-container custom-calendar"
+                     style={{marginLeft:'20px' , marginBottom:'20px'}}     
+                     >                         
                         <div >
                             <Calendar
                                 value={date}

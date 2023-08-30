@@ -9,23 +9,34 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DAL
 {
-    public class FitnessAppContext:DbContext
+    public class FitnessAppContext : DbContext
     {
         public FitnessAppContext(DbContextOptions<FitnessAppContext> options) : base(options)
         {
 
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<DaysofDiet> DaysofDiet { get; set; }
+        public DbSet<DaysOfDietAndExercise> DaysOfDietAndExercise { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Diet> Diet { get; set; }
         public DbSet<CalorificCoefficientValue> CalorificCoefficientValues { get; set; }
-        public DbSet<Meal> Meals{ get; set; }
+        public DbSet<Meal> Meals { get; set; }
         public DbSet<Trening> Trenings { get; set; }
         public DbSet<TypeOfMeal> TypesOfMeal { get; set; }
         public DbSet<TypeOfMuscleGroup> TypeOfMuscleGroups { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+           
+
+     
+
+           
 
 
+
+        }
     }
 }

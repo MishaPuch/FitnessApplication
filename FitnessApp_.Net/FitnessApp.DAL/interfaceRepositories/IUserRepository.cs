@@ -11,6 +11,5 @@ namespace FitnessApp.DAL.InterfaceRepositories
         public Task AddUserAsync(User user);
         public Task UpdateUserAsync(User user);
         public Task DeleteUserAsync(int userId);
-
     }
 }

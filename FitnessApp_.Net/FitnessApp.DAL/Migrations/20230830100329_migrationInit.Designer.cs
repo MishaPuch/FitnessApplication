@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.DAL.Migrations
 {
     [DbContext(typeof(FitnessAppContext))]
-    [Migration("20230821075824_addTb")]
-    partial class addTb
+    [Migration("20230830100329_migrationInit")]
+    partial class migrationInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,10 +38,12 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<double>("CalorificValue")
                         .HasColumnType("float");
 
-                    b.Property<int>("TypeOfMeal")
+                    b.Property<int>("TypeOfMealId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeOfMealId");
 
                     b.ToTable("CalorificCoefficientValues");
                 });
@@ -82,10 +84,12 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
-                    b.Property<int>("TypeOfMeal")
+                    b.Property<int>("TypeOfMealId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeOfMealId");
 
                     b.ToTable("Meals");
                 });
@@ -104,10 +108,14 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MuscleGroup")
+                    b.Property<int>("MuscleGroupId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("MuscleGroupId");
 
                     b.ToTable("Trenings");
                 });
@@ -146,7 +154,7 @@ namespace FitnessApp.DAL.Migrations
                     b.ToTable("TypeOfMuscleGroups");
                 });
 
-            modelBuilder.Entity("FitnessApp.Models.DaysofDiet", b =>
+            modelBuilder.Entity("FitnessApp.Models.DaysOfDietAndExercise", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,6 +166,9 @@ namespace FitnessApp.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("DietId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Month")
                         .HasColumnType("int");
 
                     b.Property<string>("Times")
@@ -172,7 +183,13 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DaysofDiet");
+                    b.HasIndex("DietId");
+
+                    b.HasIndex("TreningId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DaysOfDietAndExercise");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Diet", b =>
@@ -189,10 +206,9 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<int>("MealId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeOfMeal")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("MealId");
 
                     b.ToTable("Diet");
                 });
@@ -217,7 +233,12 @@ namespace FitnessApp.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MuscleGroupId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MuscleGroupId");
 
                     b.ToTable("Exercises");
                 });
@@ -260,6 +281,113 @@ namespace FitnessApp.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.CalorificCoefficientValue", b =>
+                {
+                    b.HasOne("FitnessApp.DAL.Models.TypeOfMeal", "TypeOfMeal")
+                        .WithMany()
+                        .HasForeignKey("TypeOfMealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TypeOfMeal");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
+                {
+                    b.HasOne("FitnessApp.DAL.Models.TypeOfMeal", "TypeOfMeal")
+                        .WithMany("Meals")
+                        .HasForeignKey("TypeOfMealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("TypeOfMeal");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.Trening", b =>
+                {
+                    b.HasOne("FitnessApp.Models.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitnessApp.DAL.Models.TypeOfMuscleGroup", "MuscleGroup")
+                        .WithMany("Trenings")
+                        .HasForeignKey("MuscleGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("MuscleGroup");
+                });
+
+            modelBuilder.Entity("FitnessApp.Models.DaysOfDietAndExercise", b =>
+                {
+                    b.HasOne("FitnessApp.Models.Diet", "Diet")
+                        .WithMany()
+                        .HasForeignKey("DietId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitnessApp.DAL.Models.Trening", "Trening")
+                        .WithMany()
+                        .HasForeignKey("TreningId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitnessApp.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Diet");
+
+                    b.Navigation("Trening");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FitnessApp.Models.Diet", b =>
+                {
+                    b.HasOne("FitnessApp.DAL.Models.Meal", "Meal")
+                        .WithMany("Diets")
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Meal");
+                });
+
+            modelBuilder.Entity("FitnessApp.Models.Exercise", b =>
+                {
+                    b.HasOne("FitnessApp.DAL.Models.TypeOfMuscleGroup", "MuscleGroup")
+                        .WithMany("Exercises")
+                        .HasForeignKey("MuscleGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("MuscleGroup");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
+                {
+                    b.Navigation("Diets");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMeal", b =>
+                {
+                    b.Navigation("Meals");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMuscleGroup", b =>
+                {
+                    b.Navigation("Exercises");
+
+                    b.Navigation("Trenings");
                 });
 #pragma warning restore 612, 618
         }

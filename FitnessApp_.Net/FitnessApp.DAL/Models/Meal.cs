@@ -1,8 +1,13 @@
-﻿using System;
+﻿using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FitnessApp.DAL.Models
 {
@@ -17,7 +22,8 @@ namespace FitnessApp.DAL.Models
         public double Fat { get; set; }
         public double Carbon { get; set; }
         public int CalorificOfMeal { get; set; }
-        public int TypeOfMeal { get; set; }
 
+        public int TypeOfMealId { get; set; }
+        public virtual TypeOfMeal TypeOfMeal { get; set; }
     }
 }

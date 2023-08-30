@@ -1,9 +1,13 @@
     using FitnessApp.BLL.DI_Service;
-    using FitnessApp.BLL.Services;
+using FitnessApp.BLL.Interface;
+using FitnessApp.BLL.Services;
     using FitnessApp.DAL;
-    using FitnessApp.DAL.InterfaceRepositories;
+using FitnessApp.DAL.DiRepositories;
+using FitnessApp.DAL.interfaceRepositories;
+using FitnessApp.DAL.InterfaceRepositories;
     using FitnessApp.DAL.repositories;
-    using Microsoft.EntityFrameworkCore;
+using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
 
     var builder = WebApplication.CreateBuilder(args);
 
@@ -24,15 +28,27 @@
     builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
 
     builder.Services.AddTransient<IUserRepository, UserRepository>();
-/*
+    builder.Services.AddTransient<IDaysOfDietAndExerciseRepository, DaysOfDietAndExerciseRepository>();
+    builder.Services.AddTransient<ITypeOfMuscleGroupRepository, TypeOfMuscleGroupRepository>();
+    builder.Services.AddTransient<ITreningRepository, TreningRepository>();
     builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
-    builder.Services.AddTransient<ICalendarRepository, CalendarRepository>();
-    builder.Services.AddTransient<IDietRepository, DietRepository>();*/
+    builder.Services.AddTransient<IDietRepository, DietRepository>();
+    builder.Services.AddTransient<IMealRepository, MealRepository>();
+    builder.Services.AddTransient<ITypeOfMealRepository, TypeOfMealRepository>();
 
+    builder.Services.AddTransient<IDaysOfDietAndExerciseService, DaysOfDietAndExerciseService>();
     builder.Services.AddTransient<IUserService, UserService>();
+    builder.Services.AddTransient<IExerciseService, ExerciseService>();
+    builder.Services.AddTransient<ITreningService, TreningService>();
+    builder.Services.AddTransient<ITypeOfMuscleGroupService, TypeOfMuscleGroupService>();
+    builder.Services.AddTransient<IDietService, DietService>();
+    builder.Services.AddTransient<IMealService, MealService>();
+    builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
+
+
 
 ////////////////////////////////////
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
     {
         options.AddDefaultPolicy(builder =>
         {

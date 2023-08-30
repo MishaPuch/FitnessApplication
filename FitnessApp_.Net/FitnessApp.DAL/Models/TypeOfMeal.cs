@@ -1,8 +1,5 @@
-﻿using System;
+﻿using FitnessApp.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Models
 {
@@ -10,5 +7,6 @@ namespace FitnessApp.DAL.Models
     {
         public int Id { get; set; }
         public string NameFoodType { get; set; }
+
     }
 }

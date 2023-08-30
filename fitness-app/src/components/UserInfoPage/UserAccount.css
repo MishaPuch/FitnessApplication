@@ -1,7 +1,7 @@
 .container {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
   }
   
 .calendar {
@@ -15,6 +15,7 @@
 .trening{
   width: 550px;
   margin-top:22px;
+  
 }
 .diet{
  

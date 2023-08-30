@@ -1,35 +1,3 @@
-// import React from 'react';
-
-// import Header from '../Header/Header';
-// import TaskBar from '../TaskBar/TaskBar';
-
-// import '../UserInfoPage/UserAccount.css'
-// import { Card } from 'primereact/card';
-
-// export default function Statistic() {
-  
-//     return (
-//         <div className="container">
-//         <div className="avatar">
-//             <Header />    
-//         </div>
-//         <div className="container">
-//             <div className="taskbar">
-//                 <TaskBar />
-//             </div>
-//         </div>
-
-//         <div className="app"> 
-//             <Card>
-//                 statistic 
-//             </Card>   
-           
-//         </div>
-
-//     </div>
-//     )
-// }
-
 import React from 'react';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';

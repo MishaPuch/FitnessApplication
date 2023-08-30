@@ -34,7 +34,7 @@ export default function UserPage(props){
                     <Card 
                         onMouseEnter={() => setHoveredDietCard('diet')}
                         onMouseLeave={() => setHoveredDietCard(null)}
-                        className={hoveredDietCard === 'diet' ? 'hovered-card' : ''}
+                        style={{ width: '550px' , height : '239px'  }}     
                     >
                         <DataScrollerDiet/>
                         {hoveredDietCard === 'diet' && <div className="card-overlay">Diet</div>}
@@ -46,7 +46,7 @@ export default function UserPage(props){
                     <Card
                         onMouseEnter={() => setHoveredTreningCard('diet')}
                         onMouseLeave={() => setHoveredTreningCard(null)}
-                        className={hoveredTreningCard === 'diet' ? 'hovered-card' : ''}
+                        style={{ width: '550px' , height : '239px'  }}     
                     >
                         <DataScroller />
                         {hoveredTreningCard === 'diet' && <div className="card-overlay">Trening</div>}

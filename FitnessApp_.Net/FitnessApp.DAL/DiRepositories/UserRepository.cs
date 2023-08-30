@@ -12,9 +12,9 @@ namespace FitnessApp.DAL.repositories
     public class UserRepository : IUserRepository
     {
         private readonly FitnessAppContext _context;
-        public UserRepository(FitnessAppContext _context) 
-        { 
-            this._context = _context;
+        public UserRepository(FitnessAppContext context) 
+        {
+            _context = context;
         }
         
         public async Task AddUserAsync(User user)
