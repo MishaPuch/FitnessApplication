@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../State/UserState';
+import { PlanDataContext } from '../../State/PlanDataState';
 import { Link } from 'react-router-dom';
 
 
@@ -11,7 +11,7 @@ import { Card } from 'primereact/card';
 
 
 const LoginForm = () => {
-    const { setUser } = useContext(UserContext);
+    const {planData , setPlanData } = useContext(PlanDataContext);
 
     const [isLogged, setIsLogged] = useState(false);
 
@@ -33,11 +33,11 @@ const LoginForm = () => {
                     'Content-Type': 'application/json',
                 },
             });
-
+                
             if (response.ok) {
                 const responseData = await response.json();
-                console.log(responseData);
-                setUser(responseData);
+                setPlanData(responseData);
+                console.log(planData);
                 setIsLogged(true);
             } else {
                 alert('Error while fetching users');

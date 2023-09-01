@@ -10,9 +10,9 @@ namespace FitnessApp.BLL.Interface
 {
     public interface IDaysOfDietAndExerciseService
     {
-        public Task<List<FullModel>> GetTodaysPlanAsync(int userId);
+        public Task<List<FullModel>> GetUserTodaysPlanAsync(int userId);
         public Task<List<FullModel>> GetAllPlans();
         public Task<List<FullModel>> GetDalyPlanAsync(int userId, int month, int day);
-
+        public  Task<List<FullModel>> GetAllUserPlansAsync(int userId);
     }
 }

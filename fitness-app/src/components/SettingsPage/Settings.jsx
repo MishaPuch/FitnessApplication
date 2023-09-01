@@ -3,7 +3,7 @@ import React, { useContext , useState} from 'react';
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
 
-import { UserContext } from '../../State/UserState';
+import { PlanDataContext } from '../../State/PlanDataState';
 import { InputText } from 'primereact/inputtext';
 
 import './Settings.css'
@@ -13,7 +13,7 @@ import { Button } from 'primereact/button';
 
 export default function Settings() {
 
-    const {user ,setValue}=useContext(UserContext)
+    const {planData }=useContext(PlanDataContext)
         
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -71,15 +71,15 @@ export default function Settings() {
                     <div className="">
                         <span className="p-float-label grid-item">
                             <p>Name</p>
-                            <InputText id="username" value={user.userName} onChange={(e) => handleNameChange(e.target.value)} />
+                            <InputText id="username" value={planData[0].user.userName} onChange={(e) => handleNameChange(e.target.value)} />
                         </span>
                         <span className="p-float-label grid-item">
                             <p>Email</p>
-                            <InputText id="useremail" value={user.userEmail} onChange={(e) => handleEmailChange(e.target.value)} />
+                            <InputText id="useremail" value={planData[0].user.userEmail} onChange={(e) => handleEmailChange(e.target.value)} />
                         </span>
                         <span className="p-float-label grid-item">
                             <p>Password</p>
-                            <InputText id="password" value={user.password} onChange={(e) => handlePasswordChange(e.target.value)} />
+                            <InputText id="password" value={planData[0].user.password} onChange={(e) => handlePasswordChange(e.target.value)} />
                         </span>
                         <span className="p-float-label grid-item">
                         <div className="p-2" >
@@ -97,15 +97,15 @@ export default function Settings() {
                     <div className="grid-item">
                         <span className="p-float-label grid-item">
                             <p>Gender</p>
-                            <InputText id="age" value={user.sex} onChange={(e) =>handleSexSelect(e.target.value)} />
+                            <InputText id="age" value={planData[0].user.sex} onChange={(e) =>handleSexSelect(e.target.value)} />
                         </span>
                         <span className="p-float-label grid-item">
                             <p>Age</p>
-                            <InputText id="age" value={user.age} onChange={(e) => handleAgeChange(e.target.value)} />
+                            <InputText id="age" value={planData[0].user.age} onChange={(e) => handleAgeChange(e.target.value)} />
                         </span>
                         <span className="p-float-label grid-item">
                             <p>Rest Time (sec.)</p>
-                            <InputText id="restTime" value={user.restTime} onChange={(e) => setTimeout(e.target.value)} />
+                            <InputText id="restTime" value={planData[0].user.restTime} onChange={(e) => setTimeout(e.target.value)} />
                         </span>
                         <br/>
                         <br/>

@@ -18,40 +18,39 @@ namespace FitnessApp.BLL.Services
     public class DaysOfDietAndExerciseService : IDaysOfDietAndExerciseService
     {
         private readonly IDaysOfDietAndExerciseRepository _daysOfDietAndExerciseeRepository;
-        private readonly ITypeOfMuscleGroupService _typeOfMuscleGroupService;
         private readonly ITreningService _treningService;
-        private readonly IExerciseService _exerciseService;
         private readonly IDietService _dietService;
-        private readonly IMealService _mealService;
-        private readonly ITypeOfMealService _typeOfMealService;
         private readonly IUserService _userService;
+        private readonly ICalorificCoefficientRepository _calorificCoefficientService;
 
 
         public DaysOfDietAndExerciseService(
             IDaysOfDietAndExerciseRepository daysOfDietAndExerciseRepository,
-            ITypeOfMuscleGroupService typeOfMuscleGroupService,
-            IExerciseService exerciseService,
             ITreningService treningService,
             IDietService dietService,
-            IMealService mealService,
-            ITypeOfMealService typeOfMealService,
-            IUserService userService
+            IUserService userService,
+            ICalorificCoefficientRepository calorificCoefficientService
             )
         {
             _daysOfDietAndExerciseeRepository = daysOfDietAndExerciseRepository;
-            _typeOfMuscleGroupService = typeOfMuscleGroupService;
             _treningService = treningService;  
-            _exerciseService= exerciseService;
             _dietService= dietService;
-            _mealService= mealService;
-            _typeOfMealService= typeOfMealService;
             _userService = userService;
+            _calorificCoefficientService = calorificCoefficientService;
         }
 
         public async Task<List<FullModel>> GetAllPlans()
         {
             List<DaysOfDietAndExercise> allDaysPlans = await _daysOfDietAndExerciseeRepository.GetAllDaysPlansAsync();
             List<FullModel> fullModel = await MakefullModel( allDaysPlans );
+
+            return fullModel;
+        }
+
+        public async Task<List<FullModel>> GetAllUserPlansAsync(int userId)
+        {
+            List<DaysOfDietAndExercise> allUserPlans = await _daysOfDietAndExerciseeRepository.GetAllUserPlansAsync(userId);
+            List<FullModel> fullModel= await MakefullModel(allUserPlans);
 
             return fullModel;
         }
@@ -64,7 +63,7 @@ namespace FitnessApp.BLL.Services
             return fullModel;
         }
 
-        public async Task<List<FullModel>> GetTodaysPlanAsync(int userId)
+        public async Task<List<FullModel>> GetUserTodaysPlanAsync(int userId)
         {
             List<DaysOfDietAndExercise> todaysPlan = await _daysOfDietAndExerciseeRepository.GetTodaysPlanAsync(userId);
             List<FullModel> fullModel = await MakefullModel(todaysPlan);
@@ -80,6 +79,8 @@ namespace FitnessApp.BLL.Services
             {
                 FullModel fullModel = new FullModel();
 
+
+
                 fullModel.Id = day.Id;
                 fullModel.DayId = day.DayId;
                 fullModel.Times = day.Times;
@@ -88,6 +89,13 @@ namespace FitnessApp.BLL.Services
                 fullModel.Diet = await _dietService.GetDietByIdAsync(day.DietId);
                 fullModel.Month = day.Month;
 
+                CalorificCoefficientValue coefficientValue = await _calorificCoefficientService.GetCoefficientValueByCaloryAndTypeOfMealAsync(fullModel.User.CalorificValue, fullModel.Diet.Meal.TypeOfMealId);
+
+                fullModel.Diet.Meal.Fat = fullModel.Diet.Meal.Fat * coefficientValue.CalorificCoefficient;
+                fullModel.Diet.Meal.Carbon = fullModel.Diet.Meal.Carbon * coefficientValue.CalorificCoefficient;
+                fullModel.Diet.Meal.Protein = fullModel.Diet.Meal.Protein * coefficientValue.CalorificCoefficient;
+                fullModel.Diet.Meal.CalorificOfMeal = fullModel.Diet.Meal.CalorificOfMeal * coefficientValue.CalorificCoefficient;
+               
                 daysJSON.Add(fullModel);
             }
             return daysJSON;

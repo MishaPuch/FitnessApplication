@@ -3,7 +3,7 @@ import React, { useContext , useState} from 'react';
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
 
-import { UserContext } from '../../State/UserState';
+import { DataPlanContext } from '../../State/PlanDataState';
 import { InputText } from 'primereact/inputtext';
 
 import './Settings.css'
@@ -12,7 +12,7 @@ import { Card } from 'primereact/card';
 
 export default function Settings() {
 
-    const {user ,setValue}=useContext(UserContext)
+    const {user ,setValue}=useContext(DataPlanContext)
         
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

@@ -11,7 +11,7 @@ namespace FitnessApp.DAL.DiRepositories
 {
     public class DaysOfDietAndExerciseRepository : IDaysOfDietAndExerciseRepository
     {
-        private  FitnessAppContext _context;
+        private readonly FitnessAppContext _context;
         public DaysOfDietAndExerciseRepository(FitnessAppContext context) 
         { 
             _context = context;
@@ -28,7 +28,11 @@ namespace FitnessApp.DAL.DiRepositories
 
         public async Task<List<FitnessApp.Models.DaysOfDietAndExercise>> GetTodaysPlanAsync(int userId)
         {
-            return await _context.DaysOfDietAndExercise.Include(x => x.Trening).Include(x => x.User).Include(x => x.Diet).Where(u => (u.User.Id == userId) && (u.DayId == 1)).ToListAsync(); ;
+            return await _context.DaysOfDietAndExercise.Include(x => x.Trening).Include(x => x.User).Include(x => x.Diet).Where(u => (u.User.Id == userId) && (u.DayId == 1)).ToListAsync(); 
+        }
+        public async Task<List<FitnessApp.Models.DaysOfDietAndExercise>> GetAllUserPlansAsync(int userId)
+        {
+            return await _context.DaysOfDietAndExercise.Include(x => x.Trening).Include(x => x.User).Include(x => x.Diet).Where(u => u.User.Id == userId).ToListAsync();
         }
     }
 }

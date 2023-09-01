@@ -7,7 +7,7 @@ import CalendarPage from './components/CalendarPage/CalendarPage'
 import LoginForm from './components/Login/Login'; 
 import UserAccount from './components/UserInfoPage/UserAccount'
 import Registration from './components/Registration/Registration';
-import { UserProvider } from './State/UserState';
+import { PlanDataProvider } from './State/PlanDataState';
 import Settings from './components/SettingsPage/Settings';
 import HomePage from './components/Trenings/HomeTrening/HomeTrening';
 import GymPage from './components/Trenings/GymTrening/GymTrening';
@@ -17,10 +17,10 @@ function App() {
   return (
      <div className="App">
       <header className="App-header">
-      <UserProvider>
+      <PlanDataProvider>
         <BrowserRouter>
           <Routes>
-
+            
               <Route path="/" element={<LoginForm />} />
               <Route path="/account" element={<UserAccount />} />
               <Route path="/registration" element={<Registration />} />
@@ -33,7 +33,7 @@ function App() {
               
           </Routes>
         </BrowserRouter>
-      </UserProvider>
+      </PlanDataProvider>
 
       </header>
     </div>

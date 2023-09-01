@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.DAL.Migrations
 {
     [DbContext(typeof(FitnessAppContext))]
-    [Migration("20230830100329_migrationInit")]
-    partial class migrationInit
+    [Migration("20230901100901_MigrationInit")]
+    partial class MigrationInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,8 +56,8 @@ namespace FitnessApp.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalorificOfMeal")
-                        .HasColumnType("int");
+                    b.Property<double>("CalorificOfMeal")
+                        .HasColumnType("float");
 
                     b.Property<double>("Carbon")
                         .HasColumnType("float");
@@ -297,9 +297,9 @@ namespace FitnessApp.DAL.Migrations
             modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
                 {
                     b.HasOne("FitnessApp.DAL.Models.TypeOfMeal", "TypeOfMeal")
-                        .WithMany("Meals")
+                        .WithMany()
                         .HasForeignKey("TypeOfMealId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TypeOfMeal");
@@ -314,9 +314,9 @@ namespace FitnessApp.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FitnessApp.DAL.Models.TypeOfMuscleGroup", "MuscleGroup")
-                        .WithMany("Trenings")
+                        .WithMany()
                         .HasForeignKey("MuscleGroupId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Exercise");
@@ -354,9 +354,9 @@ namespace FitnessApp.DAL.Migrations
             modelBuilder.Entity("FitnessApp.Models.Diet", b =>
                 {
                     b.HasOne("FitnessApp.DAL.Models.Meal", "Meal")
-                        .WithMany("Diets")
+                        .WithMany()
                         .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Meal");
@@ -365,29 +365,12 @@ namespace FitnessApp.DAL.Migrations
             modelBuilder.Entity("FitnessApp.Models.Exercise", b =>
                 {
                     b.HasOne("FitnessApp.DAL.Models.TypeOfMuscleGroup", "MuscleGroup")
-                        .WithMany("Exercises")
+                        .WithMany()
                         .HasForeignKey("MuscleGroupId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MuscleGroup");
-                });
-
-            modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
-                {
-                    b.Navigation("Diets");
-                });
-
-            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMeal", b =>
-                {
-                    b.Navigation("Meals");
-                });
-
-            modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMuscleGroup", b =>
-                {
-                    b.Navigation("Exercises");
-
-                    b.Navigation("Trenings");
                 });
 #pragma warning restore 612, 618
         }

@@ -35,15 +35,18 @@ using Microsoft.EntityFrameworkCore;
     builder.Services.AddTransient<IDietRepository, DietRepository>();
     builder.Services.AddTransient<IMealRepository, MealRepository>();
     builder.Services.AddTransient<ITypeOfMealRepository, TypeOfMealRepository>();
+    builder.Services.AddTransient<ICalorificCoefficientRepository, CalorificCoefficientRepository>();
 
+    builder.Services.AddTransient<IUserService, UserService>();   
     builder.Services.AddTransient<IDaysOfDietAndExerciseService, DaysOfDietAndExerciseService>();
-    builder.Services.AddTransient<IUserService, UserService>();
     builder.Services.AddTransient<IExerciseService, ExerciseService>();
     builder.Services.AddTransient<ITreningService, TreningService>();
     builder.Services.AddTransient<ITypeOfMuscleGroupService, TypeOfMuscleGroupService>();
     builder.Services.AddTransient<IDietService, DietService>();
     builder.Services.AddTransient<IMealService, MealService>();
     builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
+  //  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
+
 
 
 

@@ -8,8 +8,9 @@ const itemTemplate = (data) => {
                 <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
                     <div className="flex flex-column align-items-center lg:align-items-start gap-3">
                         <div className="flex flex-column gap-1">
-                            <div className="text-2xl font-bold text-900">{data}</div>
-                            <div className="text-700">description</div>
+                            <div className="text-2xl font-bold text-900">{data.exerciseName}</div>
+                            
+                            <div className="text-700">{data.exerciseDescription}</div>
                         </div>
                     </div>
                 </div>

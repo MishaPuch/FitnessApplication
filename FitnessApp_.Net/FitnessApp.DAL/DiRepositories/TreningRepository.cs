@@ -18,7 +18,7 @@ namespace FitnessApp.DAL.DiRepositories
         }
         public async Task<Trening> GetTreningByIdAsync(int treningId)
         {
-            return await _context.Trenings.Include(x=>x.Exercise).ThenInclude(x=>x.MuscleGroup).Include(x=>x.MuscleGroup).FirstOrDefaultAsync(t=>t.Id == treningId);
+            return await _context.Trenings.Include(x=>x.Exercise).ThenInclude(x=>x.MuscleGroup).FirstOrDefaultAsync(t=>t.Id == treningId);
         }
     }
 }

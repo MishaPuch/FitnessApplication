@@ -1,11 +1,11 @@
-﻿ using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace FitnessApp.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationInit : Migration
+    public partial class MigrationInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,7 +74,7 @@ namespace FitnessApp.DAL.Migrations
                         column: x => x.MuscleGroupId,
                         principalTable: "TypeOfMuscleGroups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,7 +111,7 @@ namespace FitnessApp.DAL.Migrations
                     Protein = table.Column<double>(type: "float", nullable: false),
                     Fat = table.Column<double>(type: "float", nullable: false),
                     Carbon = table.Column<double>(type: "float", nullable: false),
-                    CalorificOfMeal = table.Column<int>(type: "int", nullable: false),
+                    CalorificOfMeal = table.Column<double>(type: "float", nullable: false),
                     TypeOfMealId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -122,7 +122,7 @@ namespace FitnessApp.DAL.Migrations
                         column: x => x.TypeOfMealId,
                         principalTable: "TypesOfMeal",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,23 +133,18 @@ namespace FitnessApp.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DayId = table.Column<int>(type: "int", nullable: false),
                     ExerciseId = table.Column<int>(type: "int", nullable: false),
-                    MuscleGroupId = table.Column<int>(type: "int", nullable: false)
+                    MuscleGroupId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trenings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trenings_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
-                        principalTable: "Exercises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Trenings_TypeOfMuscleGroups_MuscleGroupId",
                         column: x => x.MuscleGroupId,
                         principalTable: "TypeOfMuscleGroups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Restrict); // Измените на ReferentialAction.Restrict
+
                 });
 
             migrationBuilder.CreateTable(
@@ -169,7 +164,7 @@ namespace FitnessApp.DAL.Migrations
                         column: x => x.MealId,
                         principalTable: "Meals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

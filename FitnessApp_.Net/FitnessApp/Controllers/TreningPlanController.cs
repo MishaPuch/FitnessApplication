@@ -18,10 +18,10 @@ namespace FitnessApp.Controllers
         }
 
         // GET: api/<TreningPlanController>/GetPlan/{userId:int}
-        [HttpGet("GetPlan/{userId:int}")]
-        public async Task<List<FullModel>> GetPlan(int userId)
+        [HttpGet("GetUserTodaysPlan/{userId:int}")]
+        public async Task<List<FullModel>> GetUserTodaysPlan(int userId)
         {
-            return await _daysOfDietAndExerciseService.GetTodaysPlanAsync(userId);
+            return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(userId);
         }
 
         // GET: api/<TreningPlanController>/GetAllPlans
@@ -31,6 +31,12 @@ namespace FitnessApp.Controllers
             return await _daysOfDietAndExerciseService.GetAllPlans();
         }
 
+        // GET: api/<TreningPlanController>/GetAllUserPlans/{userId:int}
+        [HttpGet("GetAllUserPlans/{userId:int}")]
+        public async Task<List<FullModel>> GetAllUserPlans(int userId)
+        {
+            return await _daysOfDietAndExerciseService.GetAllUserPlansAsync(userId);
+        }
         // POST api/<TreningPlanController>
         [HttpPost]
         public void Post([FromBody] string value)

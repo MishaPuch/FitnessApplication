@@ -13,6 +13,6 @@ namespace FitnessApp.DAL.interfaceRepositories
         public Task<List<DaysOfDietAndExercise>> GetAllDaysPlansAsync();
         public Task<List<DaysOfDietAndExercise>> GetDalyPlanAsync(int userId, int month, int day);
         public Task<List<DaysOfDietAndExercise>> GetTodaysPlanAsync(int userId);
-        
+        public Task<List<DaysOfDietAndExercise>> GetAllUserPlansAsync(int userId);
     }
 }

@@ -10,6 +10,7 @@ namespace FitnessApp.DAL.Models
     public class TypeOfMuscleGroup
     {
         public int Id { get; set; }
-        public string NameMucleGroup { get; set; }
+        public string NameMuscleGroup { get; set; }
+
     }
 }

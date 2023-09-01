@@ -1,9 +1,9 @@
 import React, { Fragment  , useContext, useState} from "react";
-import { UserContext } from '../../State/UserState';
+import { PlanDataContext } from '../../State/PlanDataState';
+
 import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
-
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -12,7 +12,7 @@ import { Card } from 'primereact/card';
 
 function Registration(){
 
-const { setUser } = useContext(UserContext);
+const { setUser } = useContext(PlanDataContext);
 const navigate = useNavigate();
 const [isRegistrated , setIsRegistrated] = useState(false);
 

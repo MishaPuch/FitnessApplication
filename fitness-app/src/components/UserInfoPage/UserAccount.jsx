@@ -1,5 +1,4 @@
-import {  useState } from "react";
-//import Calendar from "./Calendar/Calendar";
+import { useState  } from "react";
 import TaskBar from "../TaskBar/TaskBar.jsx";
 import Header from "../Header/Header";
 import DataScroller from './ScrollCards/ScrollComponentTrening'
@@ -14,10 +13,10 @@ import { Card } from 'primereact/card';
 export default function UserPage(props){
 
     const [date , setDate]=useState(new Date());
-
     const [hoveredTreningCard, setHoveredTreningCard] = useState(null);
     const [hoveredDietCard, setHoveredDietCard] = useState(null);
 
+    
 
 
     return(
@@ -26,7 +25,7 @@ export default function UserPage(props){
             <Header />    
         </div>
         <div className="container">
-            <div className="">
+            <div>
                 <TaskBar />
             </div>
             <div className="card-conteiner">
