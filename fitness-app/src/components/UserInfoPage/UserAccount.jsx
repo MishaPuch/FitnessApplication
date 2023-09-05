@@ -16,9 +16,6 @@ export default function UserPage(props){
     const [hoveredTreningCard, setHoveredTreningCard] = useState(null);
     const [hoveredDietCard, setHoveredDietCard] = useState(null);
 
-    
-
-
     return(
     <div className="container">
         <div className="avatar">
@@ -37,7 +34,6 @@ export default function UserPage(props){
                     >
                         <DataScrollerDiet/>
                         {hoveredDietCard === 'diet' && <div className="card-overlay">Diet</div>}
-
                     </Card>
 
                 </div>

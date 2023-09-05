@@ -7,7 +7,6 @@ import './Header.css';
 const Header = () => {
     const { planData } = useContext(PlanDataContext);
 
-    console.log(planData);
 
     if (!planData) {
         return <div>Loading...</div>;

@@ -18,6 +18,13 @@ namespace FitnessApp.Controllers
         }
 
         // GET: api/<TreningPlanController>/GetPlan/{userId:int}
+        [HttpGet("GetDalyPlan/{userId:int}/{month:int}/{dayId:int}")]
+        public async Task<List<FullModel>> GetDalyPlan(int userId ,int month ,int dayId)
+        {
+            return await _daysOfDietAndExerciseService.GetDalyPlanAsync(userId, month, dayId);
+        }
+
+        // GET: api/<TreningPlanController>/GetPlan/{userId:int}
         [HttpGet("GetUserTodaysPlan/{userId:int}")]
         public async Task<List<FullModel>> GetUserTodaysPlan(int userId)
         {

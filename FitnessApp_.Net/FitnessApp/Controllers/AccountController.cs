@@ -22,39 +22,51 @@ namespace FitnessApp.Controllers
             _userService = userService;
             _daysOfDietAndExerciseService = daysOfDietAndExerciseService;
         }
+
+        // GET: api/<AccountController>
         [HttpGet]
         public async Task<List<User>> GetUsers()
         {
             return await _userService.GetAllUsersAsync();
         }
-        [HttpGet("user/{id:int}")]
-        public async Task<User> GetUser(int id)
+
+        // GET: api/<AccountController>/GetUsers/user/{userId}
+        [HttpGet("user/{userId:int}")]
+        public async Task<User> GetUser(int userId)
         {
-            return await _userService.GetUserByIdAsync(id);
+            return await _userService.GetUserByIdAsync(userId);
         }
+
+        // GET: api/<AccountController>/user/{userEmail}/{password}
         [HttpGet("user/{userEmail}/{password}")]
         public async Task<List<FullModel>> GetUserVerification(string userEmail, string password)
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
             return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(user.Id); 
         }
+
+        // POST: api/<AccountController>
         [HttpPost]
         public async Task Register([FromBody] User user)
         {
             await _userService.CreateUserAsync(user);
             Console.WriteLine($"user : {user.Id} - was saccesfully created");
         }
+
+        // PUT: api/<AccountController>/changeData
         [HttpPut("changeData")]
         public async Task ChangeUserData([FromBody]User user)
         {                         
             await _userService.CangeUserDataAsync(user);
             Console.WriteLine($"user : {user.Id} - was saccesfully changed");
         }
-        [HttpDelete("DeleteUser/{id:int}")]
-        public async Task DeleteUser(int id)
+
+        // DELETE: api/<AccountController>/DeleteUser/{userId}
+        [HttpDelete("DeleteUser/{userId:int}")]
+        public async Task DeleteUser(int userId)
         {
-            await _userService.DeleteUserAsync(id);
-            Console.WriteLine($"user :id {id} - was saccesfully deleted");
+            await _userService.DeleteUserAsync(userId);
+            Console.WriteLine($"user :id {userId} - was saccesfully deleted");
 
         }
 

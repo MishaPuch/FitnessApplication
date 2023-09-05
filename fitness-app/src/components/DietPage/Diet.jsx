@@ -1,4 +1,4 @@
-import {React , useState} from 'react';
+import {React , useState, useContext} from 'react';
 
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
@@ -8,14 +8,14 @@ import { Card } from 'primereact/card';
 import { Image } from 'primereact/image';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
-
-import itemTemplate from '../CardItem/CardItem'
+import { PlanDataContext } from '../../State/PlanDataState';
+import CardItemDiet from '../CardItem/CardItemDiet'
 
 
 export default function Diet() {
     
-    const [products, setProducts] = useState(["some","some","some","some","some","some" ,"some","some","some" ,"some"]);
-
+    const {planData , setPlanData }=useContext(PlanDataContext);
+    const [products, setProducts] = useState(planData);
 
     return (
     <div className="container">
@@ -32,7 +32,7 @@ export default function Diet() {
                 
                     <Card>
                     <div className="card">
-                        <DataScroller value={products} itemTemplate={itemTemplate} rows={9} inline scrollHeight="330px"/>
+                        <DataScroller value={products} itemTemplate={CardItemDiet} rows={9} inline scrollHeight="330px"/>
                         <Button
                             icon="pi pi-arrow-circle-right"
                             style={{ marginTop :'20px' , marginBottom : '-20px ' }}
@@ -45,10 +45,15 @@ export default function Diet() {
         <div className="calendar">
             <Card style={{ width: '596px' , height : '500px'  }}>
             <div>
-                <Image src="https://media.tenor.com/Kae4sxhslT4AAAAS/work-out-gym.gif" indicatorIcon={'pi pi-check'}  preview width="400" />
+                <Image src="https://hips.hearstapps.com/hmg-prod/images/steak-grain-bowl-1-1654094751.jpeg?crop=0.784xw:0.587xh;0.136xw,0.188xh&resize=1200:*" indicatorIcon={'pi pi-check'}  preview width="500" />
             </div>            
             <div>
-                Some Food
+                name of meal <br/>
+                ingridients of meal <br/>
+                instructions to cook <br/>
+                colorify of meal <br/>
+                protein/carbon of meal <br/>
+
             </div>
             </Card>
             

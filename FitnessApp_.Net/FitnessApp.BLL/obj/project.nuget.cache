@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EBZxdqjSkK+uu2JW9RSNqG9EEJf9ImvsfJ4vyBOAMrLiH5OB25m6akubejMZqYPsOkpXPQpppYquZUsyLSedxA==",
+  "dgSpecHash": "dWmXJ4wQ+qNfQwQJ8W+GavFFgt64DPB/WMLX1GSOeOVOAuXLW9K96PQtGoXyyisWAwHhGgerG82hgpehRMbaMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApp\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
+  "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\misha\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

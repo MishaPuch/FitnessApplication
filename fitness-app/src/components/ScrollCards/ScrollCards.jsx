@@ -1,21 +1,22 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext} from 'react';
 import { Button } from 'primereact/button';
 import { DataScroller } from 'primereact/datascroller';
-import itemTemplate from '../CardItem/CardItem'
+import itemTemplate from '../CardItem/CardItemTrening'
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { PlanDataContext } from '../../State/PlanDataState';
 
 import './ScrollCards.css'
 //import { ProductService } from './service/ProductService';
 
-export default function ScrollCards() {
-    const [products, setProducts] = useState(["some","some","some","some","some","some" ,"some"]);
+export default function ScrollCardsTrening() {
 
-    useEffect(() => {
-       // ProductService.getProducts().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+    const {planData , setPlanData }=useContext(PlanDataContext);
+    const [products, setProducts] = useState(planData);
+    
+    
+  
     return (
         <div className="card">
             <DataScroller value={products} itemTemplate={itemTemplate} rows={9} inline scrollHeight="330px"/>
