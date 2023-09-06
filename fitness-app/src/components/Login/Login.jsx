@@ -37,7 +37,6 @@ const LoginForm = () => {
             if (response.ok) {
                 const responseData = await response.json();
                 setPlanData(responseData);
-                console.log(planData);
                 setIsLogged(true);
             } else {
                 alert('Error while fetching users');

@@ -9,9 +9,14 @@ const itemTemplate = (data) => {
             const diet={
                 foodName : meal.foodName,
                 foodInstructions :meal.foodInstructions,
+                foodIngredients : meal.foodIngredients,
                 foto : meal.foto,
                 typeOfMeal : typeOfMeal.nameFoodType,
+                carbon:meal.carbon,
+                fat:meal.fat,
+                protein:meal.protein,
             }
+            console.log(diet);
             
     return (
         <div className="col-15">
@@ -27,7 +32,7 @@ const itemTemplate = (data) => {
                         <div className="flex flex-column gap-2">
                             <span className="flex align-items-center gap-2">
                                 <i className="pi pi-tag product-category-icon"></i>
-                                <span className="font-semibold">{diet.typeOfMeal}</span>
+                                <span className="font-semibold">{diet.foodIngredients}</span>
                             </span>
                         </div>
                     </div>

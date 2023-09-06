@@ -11,7 +11,8 @@ const itemTemplate = (data) => {
         exerciseName :exercise.exerciseName,
         exerciseDescription : exercise.exerciseDescription,
         exerciseVideo : exercise.exerciseVideo,
-        //muscleGroup : muscleGroup,
+        muscleGroup : muscleGroup,
+        times : data.times,
     }
     return (
         <div className="col-15">
@@ -21,17 +22,17 @@ const itemTemplate = (data) => {
                     <div className="flex flex-column align-items-center lg:align-items-start gap-3">
                         <div className="flex flex-column gap-1">
                             <div className="text-2xl font-bold text-900">{trening.exerciseName}</div>
-                            <div className="text-700">{trening.exerciseName}</div>
+                            <div className="text-700">{trening.exerciseDescription}</div>
                         </div>
                         <div className="flex flex-column gap-2">
                             <span className="flex align-items-center gap-2">
                                 <i className="pi pi-tag product-category-icon"></i>
-                                <span className="font-semibold">{trening.exerciseName}</span>
+                                <span className="font-semibold">{trening.muscleGroup}</span>
                             </span>
                         </div>
                     </div>
                     <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
-                        <span className="text-2xl font-semibold">${trening.exerciseName}</span>
+                        <span className="text-2xl font-semibold">${trening.times}</span>
                     </div>
                 </div>
             </div>
