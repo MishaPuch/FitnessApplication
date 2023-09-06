@@ -42,7 +42,9 @@ namespace FitnessApp.Controllers
         public async Task<List<FullModel>> GetUserVerification(string userEmail, string password)
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
-            return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(user.Id); 
+            if (user != null)
+                return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(user.Id);
+            else return new List<FullModel>();   
         }
 
         // POST: api/<AccountController>

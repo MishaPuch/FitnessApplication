@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'primereact/button';
 
-const itemTemplate = (data) => {
+const itemTemplateDiet = (data) => {
     
     const meal =data.diet.meal;
             const typeOfMeal =data.diet.meal.typeOfMeal;
@@ -16,7 +16,6 @@ const itemTemplate = (data) => {
                 fat:meal.fat,
                 protein:meal.protein,
             }
-            console.log(diet);
             
     return (
         <div className="col-15">
@@ -45,4 +44,4 @@ const itemTemplate = (data) => {
     );
 };
 
-export default itemTemplate;
+export default itemTemplateDiet;

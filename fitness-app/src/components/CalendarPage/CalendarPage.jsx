@@ -9,6 +9,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 import TaskBar from '../TaskBar/TaskBar';
 import Header from '../Header/Header';
+import SelectedDate from './SelectedDate/SelectedDate';
 
 const CalendarPage = () => {
 
@@ -48,16 +49,10 @@ const CalendarPage = () => {
                         </div>
                     </Card>
                     <div className="card  justify-content-center justify-item-center">
-                        <Sidebar visible={visible} onHide={() => setVisible(false)}  style={{ width: '1300px', height: '600px', margin: '100px' , borderRadius:'5px' ,boxShadow : '5px 4px 10px' }}>
+                        <Sidebar visible={visible} onHide={() => setVisible(false)}  
+                            style={{ width: '1300px', height: '600px', margin: '100px' , borderRadius:'5px' ,boxShadow : '5px 4px 10px' }}>
                             <div>
-                                <h2>your selected day is :</h2>
-                            </div>
-                            <div>
-                                <Card>
-                                <p>
-                                     {date.toDateString()}
-                                </p>
-                                </Card>
+                                    <SelectedDate day={date.toDateString()} />
                             </div>
                         </Sidebar>
                     </div>

@@ -33,7 +33,7 @@ const LoginForm = () => {
                     'Content-Type': 'application/json',
                 },
             });
-                
+            
             if (response.ok) {
                 const responseData = await response.json();
                 setPlanData(responseData);
@@ -41,8 +41,10 @@ const LoginForm = () => {
             } else {
                 alert('Error while fetching users');
             }
+            
         } catch (error) {
             console.error('Error:', error);
+            alert('You pass wrong email or password');
         }
     };
 useEffect(()=>{

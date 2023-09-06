@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'primereact/button';
 
-const itemTemplate = (data) => {
+const itemTemplateTrening = (data) => {
     
     const exercise =data.trening.exercise;
     const muscleGroup =data.trening.muscleGroup.nameMuscleGroup;
@@ -40,4 +40,4 @@ const itemTemplate = (data) => {
     );
 };
 
-export default itemTemplate;
+export default itemTemplateTrening;
