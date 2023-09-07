@@ -10,6 +10,7 @@ namespace FitnessApp.BLL.Interface
     public interface ITreningService
     {
         public Task<Trening> GetTreningByIdAsync(int treningId);
+        public Task<List<Trening>> GetTreningsByTreningScheduleIdAsync(int treningAndDietSheduleId);
 
     }
 }

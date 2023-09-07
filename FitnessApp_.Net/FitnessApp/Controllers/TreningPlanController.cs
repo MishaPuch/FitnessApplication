@@ -11,8 +11,8 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class TreningPlanController : ControllerBase
     {
-        private readonly IDaysOfDietAndExerciseService _daysOfDietAndExerciseService;
-        public TreningPlanController(IDaysOfDietAndExerciseService daysOfDietAndExerciseService)
+        private readonly ITrainingAndDietSchedule _daysOfDietAndExerciseService;
+        public TreningPlanController(ITrainingAndDietSchedule daysOfDietAndExerciseService)
         {
             _daysOfDietAndExerciseService= daysOfDietAndExerciseService;
         }

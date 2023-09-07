@@ -20,6 +20,11 @@ namespace FitnessApp.BLL.Interface
         {
             return await _treningRepository.GetTreningByIdAsync(treningId);
         }
+        public async Task<List<Trening>> GetTreningsByTreningScheduleIdAsync(int treningAndDietSheduleId)
+        {
+            return await _treningRepository.GetTreningsByTreningScheduleIdAsync(treningAndDietSheduleId);
+        }
+
 
     }
 }

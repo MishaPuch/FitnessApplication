@@ -1,5 +1,5 @@
 ﻿using FitnessApp.DAL.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FitnessApp.Models
 {
@@ -9,7 +9,9 @@ namespace FitnessApp.Models
         public int MealId { get; set; }
         public virtual Meal Meal { get; set; }
         public int DayId { get; set; }
-
+        public int TrainingAndDietScheduleId { get; set; }
+        [JsonIgnore]
+        public virtual TrainingAndDietSchedule TrainingAndDietSchedule { get; set; }
     }
 }
 

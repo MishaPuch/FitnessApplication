@@ -9,6 +9,8 @@ namespace FitnessApp.DAL.interfaceRepositories
 {
     public interface ITreningRepository
     {
-        public Task<Trening> GetTreningByIdAsync(int TreningId);  
+        public Task<Trening> GetTreningByIdAsync(int TreningId);
+        public Task<List<Trening>> GetTreningsByTreningScheduleIdAsync(int TreningScheduleId);
+
     }
 }

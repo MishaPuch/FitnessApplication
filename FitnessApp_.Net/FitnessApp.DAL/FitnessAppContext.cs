@@ -15,8 +15,9 @@ namespace FitnessApp.DAL
         {
 
         }
+
         public DbSet<User> Users { get; set; }
-        public DbSet<DaysOfDietAndExercise> DaysOfDietAndExercise { get; set; }
+        public DbSet<TrainingAndDietSchedule> TrainingAndDietSchedule { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Diet> Diet { get; set; }
         public DbSet<CalorificCoefficientValue> CalorificCoefficientValues { get; set; }
@@ -24,19 +25,11 @@ namespace FitnessApp.DAL
         public DbSet<Trening> Trenings { get; set; }
         public DbSet<TypeOfMeal> TypesOfMeal { get; set; }
         public DbSet<TypeOfMuscleGroup> TypeOfMuscleGroups { get; set; }
+        public DbSet<TypeOfTrening> TypesOfTrening { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-           
-
-     
-
-           
-
-
-
         }
     }
 }

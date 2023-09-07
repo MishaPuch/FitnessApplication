@@ -12,11 +12,11 @@ namespace FitnessApp.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IDaysOfDietAndExerciseService _daysOfDietAndExerciseService;
+        private readonly ITrainingAndDietSchedule _daysOfDietAndExerciseService;
 
         public AccountController(
             IUserService userService,
-            IDaysOfDietAndExerciseService daysOfDietAndExerciseService
+            ITrainingAndDietSchedule daysOfDietAndExerciseService
             ) 
         { 
             _userService = userService;

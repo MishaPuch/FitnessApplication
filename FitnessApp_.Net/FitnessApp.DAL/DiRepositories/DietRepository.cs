@@ -21,5 +21,10 @@ namespace FitnessApp.DAL.DiRepositories
         {
             return await _context.Diet.Include(x=>x.Meal).ThenInclude(x=>x.TypeOfMeal).FirstOrDefaultAsync(d=>d.Id== dietId);
         }
+
+        public async Task<List<Diet>> GetDietByTreningScheduleIdAsync(int treningScheduleId)
+        {
+            return await _context.Diet.Include(x => x.Meal).ThenInclude(x => x.TypeOfMeal).Where(x => x.TrainingAndDietSchedule.Id == treningScheduleId).ToListAsync();
+        }
     }
 }

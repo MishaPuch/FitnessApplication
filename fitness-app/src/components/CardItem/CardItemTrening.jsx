@@ -32,7 +32,7 @@ const itemTemplateTrening = (data) => {
                         </div>
                     </div>
                     <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
-                        <span className="text-2xl font-semibold">${trening.times}</span>
+                        <span className="text-2xl font-semibold">{trening.times}</span>
                     </div>
                 </div>
             </div>

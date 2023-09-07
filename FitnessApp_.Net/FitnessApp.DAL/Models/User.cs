@@ -18,5 +18,6 @@ namespace FitnessApp.Models
         public int Age { get; set; }
         public int RestTime { get; set; }
         public int CalorificValue { get; set; }
+        public DateTime DateOFLastPayment { get; set; }
     }
 }
