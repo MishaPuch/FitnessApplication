@@ -1,19 +1,7 @@
 import React from 'react';
-import { Button } from 'primereact/button';
 
 const itemTemplateTrening = (data) => {
     
-    const exercise =data.trening.exercise;
-    const muscleGroup =data.trening.muscleGroup.nameMuscleGroup;
-
-
-    const trening={
-        exerciseName :exercise.exerciseName,
-        exerciseDescription : exercise.exerciseDescription,
-        exerciseVideo : exercise.exerciseVideo,
-        muscleGroup : muscleGroup,
-        times : data.times,
-    }
     return (
         <div className="col-15">
             <div className="flex flex-column xl:flex-row xl:align-items-start p-1 gap-3">
@@ -21,18 +9,18 @@ const itemTemplateTrening = (data) => {
                 <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
                     <div className="flex flex-column align-items-center lg:align-items-start gap-3">
                         <div className="flex flex-column gap-1">
-                            <div className="text-2xl font-bold text-900">{trening.exerciseName}</div>
-                            <div className="text-700">{trening.exerciseDescription}</div>
+                            <div className="text-2xl font-bold text-900">{data.exerciseName}</div>
+                            <div className="text-700">{data.exerciseDescription}</div>
                         </div>
                         <div className="flex flex-column gap-2">
                             <span className="flex align-items-center gap-2">
                                 <i className="pi pi-tag product-category-icon"></i>
-                                <span className="font-semibold">{trening.muscleGroup}</span>
+                                <span className="font-semibold">{data.nameMuscleGroup}</span>
                             </span>
                         </div>
                     </div>
                     <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
-                        <span className="text-2xl font-semibold">{trening.times}</span>
+                        <span className="text-2xl font-semibold">{data.times}</span>
                     </div>
                 </div>
             </div>

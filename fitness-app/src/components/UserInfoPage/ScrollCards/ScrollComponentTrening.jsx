@@ -1,41 +1,38 @@
-import React, { useEffect ,useContext } from 'react';
+import React, { useContext } from 'react';
 import { DataScroller } from 'primereact/datascroller';
-import itemTemplate from '../CardItem/CardItemTrening'
+import itemTemplate from '../CardItem/CardItemTrening';
 import { PlanDataContext } from '../../../State/PlanDataState';
-//import { ProductService } from './service/ProductService';
 
 export default function ScrollCards() {
-
     const { planData } = useContext(PlanDataContext);
+    const trenings = GetfullTrening(); 
 
-    const treningExercise = [];
+    function GetfullTrening() {
+        const allTrening = [];
 
-    const GetfullTrening=()=>{
         planData.forEach(item => {
-                
-            const exercise =item.trening.exercise;
-            const muscleGroup =item.trening.muscleGroup.nameMuscleGroup;
-    
-    
-            const trening={
-                exerciseName :exercise.exerciseName,
-                exerciseDescription : exercise.exerciseDescription,
-                exerciseVideo : exercise.exerciseVideo,
-                //muscleGroup : muscleGroup,
-            }
-            
-            treningExercise.push(trening);
+            const trening = item.trening;
 
+            trening.forEach(treningItem => {
+                const exercise = treningItem.exercise;
+
+                const treningObj = {
+                    times: treningItem.times,
+                    exerciseName: exercise.exerciseName,
+                    exerciseDescription: exercise.exerciseDescription,
+                    exerciseVideo: exercise.exerciseVideo,
+                    nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                };
+                allTrening.push(treningObj);
+            })
         });
-        return treningExercise;
+        return allTrening;
     }
-    useEffect(() => {
-       // ProductService.getProducts().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    console.log(trenings);
 
     return (
         <div className="card">
-            <DataScroller value={GetfullTrening()} itemTemplate={itemTemplate} rows={6} inline scrollHeight="160px"/>
+            <DataScroller value={trenings} itemTemplate={itemTemplate} rows={trenings.length} inline scrollHeight="160px" />
         </div>
-    )
+    );
 }

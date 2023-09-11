@@ -23,7 +23,6 @@ namespace FitnessApp.BLL.Services
         private readonly IUserService _userService;
         private readonly ICalorificCoefficientRepository _calorificCoefficientService;
 
-
         public TrainingAndDietSchedule(
             DAL.interfaceRepositories.ITrainingAndDietSchedule daysOfDietAndExerciseRepository,
             ITreningService treningService,
@@ -55,9 +54,9 @@ namespace FitnessApp.BLL.Services
             return fullModel;
         }
 
-        public async Task<List<FullModel>> GetDalyPlanAsync(int userId, int month, int day)
+        public async Task<List<FullModel>> GetDalyPlanAsync(int userId, DateTime day)
         {
-            List<Models.TrainingAndDietSchedule> dalyPlan = await _daysOfDietAndExerciseeRepository.GetDalyPlanAsync(userId, month, day);
+            List<Models.TrainingAndDietSchedule> dalyPlan = await _daysOfDietAndExerciseeRepository.GetDalyPlanAsync(userId, day);
             List<FullModel> fullModel = await MakefullModel(dalyPlan);
 
             return fullModel;
@@ -80,24 +79,22 @@ namespace FitnessApp.BLL.Services
                 FullModel fullModel = new FullModel();
 
                 fullModel.Id = day.Id;
-                fullModel.DayId = day.DayId;
+                fullModel.Day = day.Day;
                 fullModel.Trening = await _treningService.GetTreningsByTreningScheduleIdAsync(day.Id);
                 fullModel.User = await _userService.GetUserByIdAsync(day.UserId);
                 fullModel.Diet = await _dietService.GetDietByTreningScheduleIdAsync(day.Id);
-                fullModel.Month = day.Month;
 
                 foreach (var diet in fullModel.Diet)
                 {
                     CalorificCoefficientValue coefficientValue = await _calorificCoefficientService.GetCoefficientValueByCaloryAndTypeOfMealAsync(fullModel.User.CalorificValue, diet.Meal.TypeOfMeal.Id);
 
-                      
-                      diet.Meal.Fat = diet.Meal.Fat * coefficientValue.CalorificCoefficient;
-                      diet.Meal.Carbon = diet.Meal.Carbon * coefficientValue.CalorificCoefficient;
-                      diet.Meal.Protein = diet.Meal.Protein * coefficientValue.CalorificCoefficient;
-                      diet.Meal.CalorificOfMeal = diet.Meal.CalorificOfMeal * coefficientValue.CalorificCoefficient;
-                     
-                    daysJSON.Add(fullModel);
-                } 
+                    diet.Meal.Fat = diet.Meal.Fat * coefficientValue.CalorificCoefficient;
+                    diet.Meal.Carbon = diet.Meal.Carbon * coefficientValue.CalorificCoefficient;
+                    diet.Meal.Protein = diet.Meal.Protein * coefficientValue.CalorificCoefficient;
+                    diet.Meal.CalorificOfMeal = diet.Meal.CalorificOfMeal * coefficientValue.CalorificCoefficient;
+                }
+                daysJSON.Add(fullModel);
+
             }
             return daysJSON;
         }

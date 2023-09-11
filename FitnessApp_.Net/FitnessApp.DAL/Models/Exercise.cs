@@ -13,5 +13,4 @@ namespace FitnessApp.Models
         public int TypeOfTreningId { get; set; }
         public virtual TypeOfTrening TypeOfTrening { get; set; }
     }
-
 }

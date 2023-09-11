@@ -8,7 +8,6 @@ namespace FitnessApp.Models
         public int Id { get; set; }
         public int MealId { get; set; }
         public virtual Meal Meal { get; set; }
-        public int DayId { get; set; }
         public int TrainingAndDietScheduleId { get; set; }
         [JsonIgnore]
         public virtual TrainingAndDietSchedule TrainingAndDietSchedule { get; set; }

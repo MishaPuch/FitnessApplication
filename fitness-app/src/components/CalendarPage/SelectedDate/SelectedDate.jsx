@@ -5,43 +5,88 @@ import { DataScroller } from 'primereact/datascroller';
 import itemTemplateTrening from "../../CardItem/CardItemTrening";
 import itemTemplateDiet from "../../CardItem/CardItemDiet";
 import { Card } from "primereact/card";
-const SelectedDate = (props) =>{
+const SelectedDate = (props) => {
+    const { planData } = useContext(PlanDataContext);
+    const userId = planData[0].user.id;
+    const dayToJSON= props.dayToJSON;
+    const [fullDay, setFullDay] = useState([]);
+    
+    useEffect(() => {
+        GetData();
+    }, [dayToJSON]);
 
-    const {planData , setPlanData}=useContext(PlanDataContext);
-
-
-    const userId=planData[0].user.id;
-    const day = props.day;
-
-    const [fullDay, setFullDay] = useState();
-
-    const  GetData= async() =>{
-    try {
-            const response = await fetch(`https://localhost:7060/api/TreningPlan/GetUserTodaysPlan/${userId}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const GetData = async () => {
+        try {
+            console.log(dayToJSON);
+            const response = await fetch(`https://localhost:7060/api/TreningPlan/GetDalyPlan/${userId}/${dayToJSON}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
-        
-            if (response.ok) {
 
+            if (response.ok) {
                 const responseData = await response.json();
                 setFullDay(responseData);
-                console.log(fullDay);
-            } 
-            else {
+            } else {
                 alert('Error while fetching users');
             }
-    }
-    catch (error) {
-        console.error('Error:', error);
-    }
-    
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
-    useEffect(()=>{
-        GetData();
-    },[fullDay]) 
+
+    const trenings = GetfullTrening();
+
+    function GetfullTrening() {
+        const allTrening = [];
+        
+        if (fullDay) {
+            fullDay.forEach(item => {
+                const trening = item.trening;
+
+                trening.forEach(treningItem => {
+                    const exercise = treningItem.exercise;
+
+                    const treningObj = {
+                        times: treningItem.times,
+                        exerciseName: exercise.exerciseName,
+                        exerciseDescription: exercise.exerciseDescription,
+                        exerciseVideo: exercise.exerciseVideo,
+                        nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                    };
+                    allTrening.push(treningObj);
+                    
+                })
+            });
+        }
+
+        return allTrening;
+    }
+
+    const dietProducts = GetfullDiet();
+
+    function GetfullDiet() {
+        const allDietProducts = [];
+
+        if (fullDay) {
+            fullDay.forEach(item => {
+                const diets = item.diet;
+                diets.forEach(dietItem => {
+                    const typeOfMeal = dietItem.meal.typeOfMeal;
+                    const diet = {
+                        foodName: dietItem.meal.foodName,
+                        foodInstructions: dietItem.meal.foodInstructions,
+                        foto: dietItem.meal.foto,
+                        typeOfMeal: typeOfMeal.nameFoodType,
+                    }
+                    allDietProducts.push(diet);
+                })
+            });
+        }
+      
+        return allDietProducts;
+    }
     return(
         <div>          
             <p style={{ marginTop:'-20px' ,marginBottom:'-90px', padding:'20px'}} >
@@ -51,13 +96,13 @@ const SelectedDate = (props) =>{
 >
                 <p style={{margin:'30px'}}>Trening</p>
                 <div className="card">
-                    <DataScroller value={fullDay} itemTemplate={itemTemplateTrening} rows={9} inline scrollHeight="330px"/>
+                <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
                 </div>
             </Card>
             <Card style={{ marginTop:'-60px' ,marginBottom:'-90px', padding:'10px'}} >
                 <p style={{margin:'30px'}}>Diet</p>
                 <div className="card">
-                    <DataScroller value={fullDay} itemTemplate={itemTemplateDiet} rows={9} inline scrollHeight="330px"/>
+                <DataScroller value={dietProducts} itemTemplate={itemTemplateDiet} rows={dietProducts.length} inline scrollHeight="330px"/>
                 </div>
             </Card>
         </div>

@@ -5,7 +5,6 @@ const PlanDataContext = createContext();
 const PlanDataProvider=({children})=>{
     
     const [planData , setPlanData]=useState([]);
-    console.log(planData);
     return(
         <PlanDataContext.Provider value={{planData,setPlanData}}>
             {children}

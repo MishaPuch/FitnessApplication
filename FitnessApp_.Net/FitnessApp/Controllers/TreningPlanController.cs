@@ -11,38 +11,41 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class TreningPlanController : ControllerBase
     {
-        private readonly ITrainingAndDietSchedule _daysOfDietAndExerciseService;
-        public TreningPlanController(ITrainingAndDietSchedule daysOfDietAndExerciseService)
+        private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
+        public TreningPlanController(ITrainingAndDietSchedule trainingAndDietSchedule)
         {
-            _daysOfDietAndExerciseService= daysOfDietAndExerciseService;
+            _trainingAndDietSchedule = trainingAndDietSchedule;
         }
 
         // GET: api/<TreningPlanController>/GetPlan/{userId:int}
-        [HttpGet("GetDalyPlan/{userId:int}/{month:int}/{dayId:int}")]
-        public async Task<List<FullModel>> GetDalyPlan(int userId ,int month ,int dayId)
+        [HttpGet("GetDalyPlan/{userId:int}/{day:DateTime}")]
+        public async Task<List<FullModel>> GetDalyPlan(int userId, DateTime day)
         {
-            return await _daysOfDietAndExerciseService.GetDalyPlanAsync(userId, month, dayId);
+            DateTime date = day.AddDays(1);
+            var fullModel = await _trainingAndDietSchedule.GetDalyPlanAsync(userId, date);
+            return fullModel;
         }
+
 
         // GET: api/<TreningPlanController>/GetPlan/{userId:int}
         [HttpGet("GetUserTodaysPlan/{userId:int}")]
         public async Task<List<FullModel>> GetUserTodaysPlan(int userId)
         {
-            return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(userId);
+            return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(userId);
         }
 
         // GET: api/<TreningPlanController>/GetAllPlans
         [HttpGet("GetAllPlans")]
         public async Task<List<FullModel>> GetAllPlans()
         {
-            return await _daysOfDietAndExerciseService.GetAllPlans();
+            return await _trainingAndDietSchedule.GetAllPlans();
         }
 
         // GET: api/<TreningPlanController>/GetAllUserPlans/{userId:int}
         [HttpGet("GetAllUserPlans/{userId:int}")]
         public async Task<List<FullModel>> GetAllUserPlans(int userId)
         {
-            return await _daysOfDietAndExerciseService.GetAllUserPlansAsync(userId);
+            return await _trainingAndDietSchedule.GetAllUserPlansAsync(userId);
         }
         // POST api/<TreningPlanController>
         [HttpPost]

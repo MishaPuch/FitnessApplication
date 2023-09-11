@@ -8,9 +8,8 @@ namespace FitnessApp.Models
     public class TrainingAndDietSchedule
     {
         public int Id { get; set; }
-
         [Required]
-        public int DayId { get; set; }
+        public DateTime Day { get; set; }
         [Required]
         public int UserId { get; set; }
         public User User { get; set; }
@@ -20,7 +19,5 @@ namespace FitnessApp.Models
         [Required]
         [JsonIgnore]
         public ICollection<Trening> Trainings { get; set; } 
-        public int Month { get; set; }
-
     }
 }

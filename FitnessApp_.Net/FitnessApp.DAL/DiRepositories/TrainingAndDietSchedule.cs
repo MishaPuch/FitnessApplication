@@ -21,14 +21,14 @@ namespace FitnessApp.DAL.DiRepositories
             return await _context.TrainingAndDietSchedule.Include(x=>x.Trainings).Include(x=>x.User).Include(x=>x.Diets).ToListAsync();
         }
 
-        public async Task<List<FitnessApp.Models.TrainingAndDietSchedule>> GetDalyPlanAsync(int userId, int month, int dayId)
+        public async Task<List<FitnessApp.Models.TrainingAndDietSchedule>> GetDalyPlanAsync(int userId, DateTime day)
         {
-            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u=> (u.User.Id == userId)&&(u.Month==month)&&(u.DayId==dayId)).ToListAsync();
+            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u=> (u.User.Id == userId)&&(u.Day==day)).ToListAsync();
         }
 
         public async Task<List<FitnessApp.Models.TrainingAndDietSchedule>> GetTodaysPlanAsync(int userId)
         {
-            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u => (u.User.Id == userId) && (u.DayId == 1)).ToListAsync(); 
+            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u => (u.User.Id == userId) && (u.Day == DateTime.Now.Date)).ToListAsync(); 
         }
         public async Task<List<FitnessApp.Models.TrainingAndDietSchedule>> GetAllUserPlansAsync(int userId)
         {

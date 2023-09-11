@@ -22,7 +22,6 @@ namespace FitnessApp.DAL.Models
         public double Fat { get; set; }
         public double Carbon { get; set; }
         public double CalorificOfMeal { get; set; }
-
         public int TypeOfMealId { get; set; }
         public virtual TypeOfMeal TypeOfMeal { get; set; }
     }

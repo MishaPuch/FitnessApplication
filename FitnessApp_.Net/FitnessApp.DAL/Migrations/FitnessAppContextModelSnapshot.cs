@@ -100,13 +100,7 @@ namespace FitnessApp.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DayId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MuscleGroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Times")
@@ -119,8 +113,6 @@ namespace FitnessApp.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ExerciseId");
-
-                    b.HasIndex("MuscleGroupId");
 
                     b.HasIndex("TrainingAndDietSchedulesId");
 
@@ -186,9 +178,6 @@ namespace FitnessApp.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DayId")
-                        .HasColumnType("int");
-
                     b.Property<int>("MealId")
                         .HasColumnType("int");
 
@@ -247,11 +236,8 @@ namespace FitnessApp.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DayId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -336,12 +322,6 @@ namespace FitnessApp.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.DAL.Models.TypeOfMuscleGroup", "MuscleGroup")
-                        .WithMany()
-                        .HasForeignKey("MuscleGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FitnessApp.Models.TrainingAndDietSchedule", "TrainingAndDietSchedules")
                         .WithMany("Trainings")
                         .HasForeignKey("TrainingAndDietSchedulesId")
@@ -349,8 +329,6 @@ namespace FitnessApp.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Exercise");
-
-                    b.Navigation("MuscleGroup");
 
                     b.Navigation("TrainingAndDietSchedules");
                 });

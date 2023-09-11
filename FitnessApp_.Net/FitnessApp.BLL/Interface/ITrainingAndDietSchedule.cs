@@ -12,7 +12,7 @@ namespace FitnessApp.BLL.Interface
     {
         public Task<List<FullModel>> GetUserTodaysPlanAsync(int userId);
         public Task<List<FullModel>> GetAllPlans();
-        public Task<List<FullModel>> GetDalyPlanAsync(int userId, int month, int day);
+        public Task<List<FullModel>> GetDalyPlanAsync(int userId, DateTime day);
         public  Task<List<FullModel>> GetAllUserPlansAsync(int userId);
     }
 }

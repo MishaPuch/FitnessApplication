@@ -1,4 +1,4 @@
-import {React , useState, useContext} from 'react';
+import {React , useContext} from 'react';
 
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
@@ -14,9 +14,30 @@ import CardItemDiet from '../CardItem/CardItemDiet'
 
 export default function Diet() {
     
-    const {planData , setPlanData }=useContext(PlanDataContext);
-    const [products, setProducts] = useState(planData);
+    const {planData  }=useContext(PlanDataContext);
 
+    const dietProducts = GetfullDiet();
+
+    function GetfullDiet(){
+        const allDietProducts = [];
+        planData.forEach(item => {
+                
+            const diets =item.diet;
+            diets.forEach(dietItem=>{
+                    
+                const typeOfMeal =dietItem.meal.typeOfMeal;
+                    
+                const diet={
+                    foodName : dietItem.meal.foodName,
+                    foodInstructions : dietItem.meal.foodInstructions,
+                    foto : dietItem.meal.foto,
+                    typeOfMeal : typeOfMeal.nameFoodType,
+                }
+                allDietProducts.push(diet);
+            })
+        });
+        return allDietProducts;
+    }
     return (
     <div className="container">
     <div className="avatar">
@@ -32,7 +53,7 @@ export default function Diet() {
                 
                     <Card>
                     <div className="card">
-                        <DataScroller value={products} itemTemplate={CardItemDiet} rows={9} inline scrollHeight="330px"/>
+                        <DataScroller value={dietProducts} itemTemplate={CardItemDiet} rows={dietProducts.length} inline scrollHeight="330px"/>
                         <Button
                             icon="pi pi-arrow-circle-right"
                             style={{ marginTop :'20px' , marginBottom : '-20px ' }}

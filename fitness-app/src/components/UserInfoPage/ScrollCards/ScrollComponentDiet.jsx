@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { PlanDataContext } from '../../../State/PlanDataState';
 import { DataScroller } from 'primereact/datascroller';
 import itemTemplate from '../CardItem/CardItemDiet';
@@ -8,33 +8,34 @@ export default function ScrollCards() {
 
     const { planData } = useContext(PlanDataContext);
 
-    const dietProducts = [];
+    const dietProducts = GetfullDiet();
 
-    const GetfullDiet=()=>{
+    function GetfullDiet(){
+        const allDietProducts = [];
         planData.forEach(item => {
                 
-            const meal =item.diet.meal;
-            const typeOfMeal =item.diet.meal.typeOfMeal;
-    
-            const diet={
-                foodName : meal.foodName,
-                foodInstructions :meal.foodInstructions,
-                foto : meal.foto,
-                typeOfMeal : typeOfMeal.nameFoodType,
-            }
-            
-            dietProducts.push(diet);
+            const diets =item.diet;
+            diets.forEach(dietItem=>{
+                    
+                const typeOfMeal =dietItem.meal.typeOfMeal;
+                    
+                const diet={
+                    foodName : dietItem.meal.foodName,
+                    foodInstructions : dietItem.meal.foodInstructions,
+                    foto : dietItem.meal.foto,
+                    typeOfMeal : typeOfMeal.nameFoodType,
+                }
+                allDietProducts.push(diet);
+            })
         });
-        return dietProducts;
+        return allDietProducts;
     }
-
-     useEffect(() => {
-        // ProductService.getProducts().then((data) => setProducts(data));
-     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    console.log(dietProducts );
 
     return (
         <div className="card">
-            <DataScroller value={GetfullDiet()} itemTemplate={itemTemplate} rows={6} inline scrollHeight="160px"/>
+            
+            <DataScroller value={dietProducts} itemTemplate={itemTemplate} rows={dietProducts.length} inline scrollHeight="160px"/>
         </div>
     )
 }

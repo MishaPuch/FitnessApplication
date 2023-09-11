@@ -11,6 +11,5 @@ namespace FitnessApp.DAL.Models
     {
         public int Id { get; set; }
         public string NameMuscleGroup { get; set; }
-
     }
 }

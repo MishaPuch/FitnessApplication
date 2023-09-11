@@ -1,21 +1,8 @@
 import React from 'react';
-import { Button } from 'primereact/button';
 
 const itemTemplateDiet = (data) => {
     
-    const meal =data.diet.meal;
-            const typeOfMeal =data.diet.meal.typeOfMeal;
     
-            const diet={
-                foodName : meal.foodName,
-                foodInstructions :meal.foodInstructions,
-                foodIngredients : meal.foodIngredients,
-                foto : meal.foto,
-                typeOfMeal : typeOfMeal.nameFoodType,
-                carbon:meal.carbon,
-                fat:meal.fat,
-                protein:meal.protein,
-            }
             
     return (
         <div className="col-15">
@@ -25,18 +12,18 @@ const itemTemplateDiet = (data) => {
                 <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
                     <div className="flex flex-column align-items-center lg:align-items-start gap-3">
                         <div className="flex flex-column gap-1">
-                            <div className="text-2xl font-bold text-900">{diet.foodName}</div>
-                            <div className="text-700">{diet.foodInstructions}</div>
+                            <div className="text-2xl font-bold text-900">{data.foodName}</div>
+                            <div className="text-700">{data.foodInstructions}</div>
                         </div>
                         <div className="flex flex-column gap-2">
                             <span className="flex align-items-center gap-2">
                                 <i className="pi pi-tag product-category-icon"></i>
-                                <span className="font-semibold">{diet.foodIngredients}</span>
+                                <span className="font-semibold">{data.foodIngredients}</span>
                             </span>
                         </div>
                     </div>
                     <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
-                        <span className="text-2xl font-semibold">${diet.typeOfMeal}</span>
+                        <span className="text-2xl font-semibold">${data.typeOfMeal}</span>
                     </div>
                 </div>
             </div>

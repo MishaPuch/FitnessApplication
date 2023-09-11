@@ -14,16 +14,10 @@ namespace FitnessApp.DAL.Models
     public class Trening
     {
         public int Id { get; set; }
-        public int DayId { get; set; }
         public int ExerciseId { get; set; }
         public virtual Exercise Exercise { get; set; }
-        public int MuscleGroupId { get; set; }
-        public virtual TypeOfMuscleGroup MuscleGroup { get; set; }
         [JsonIgnore]
         public virtual TrainingAndDietSchedule TrainingAndDietSchedules { get; set; }
         public string Times { get; set; }
-
-
-
     }
 }

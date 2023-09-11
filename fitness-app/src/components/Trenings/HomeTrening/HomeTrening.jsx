@@ -1,20 +1,46 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 
 import TaskBar from '../../TaskBar/TaskBar';
 import Header from '../../Header/Header';
 
 import { Card } from 'primereact/card';
 import { Image } from 'primereact/image';
+import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
-
-
+import itemTemplateTrening from '../../CardItem/CardItemTrening';
+import { PlanDataContext } from '../../../State/PlanDataState';
 import '../../UserInfoPage/UserAccount.css'
-import DataScroller from '../../ScrollCards/ScrollCards'
+//import DataScroller from '../../ScrollCards/ScrollCards'
 import '../GymTrening/GymTrening.css'
 
 
 const HomePage=()=>{
 
+    const {planData }=useContext(PlanDataContext);
+    const trenings = GetfullTrening();
+
+    function GetfullTrening() {
+        const allTrening = [];
+
+        planData.forEach(item => {
+            const trening = item.trening;
+
+            trening.forEach(treningItem => {
+                const exercise = treningItem.exercise;
+
+                const treningObj = {
+                    times: treningItem.times,
+                    exerciseName: exercise.exerciseName,
+                    exerciseDescription: exercise.exerciseDescription,
+                    exerciseVideo: exercise.exerciseVideo,
+                    nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                };
+                allTrening.push(treningObj);
+            })
+        });
+
+        return allTrening;
+    }
     return(
         <div className="container">
             <div className="avatar">
@@ -30,8 +56,11 @@ const HomePage=()=>{
                         <Card style={{ width: '600px' , height : '500px'  }}>
                             <Card>
                                 <div>
-                                    <DataScroller/>
-                                    
+                                <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
+                                    <Button
+                                    icon="pi pi-arrow-circle-right"
+                                    style={{ marginTop :'20px' , marginBottom : '-20px ' }}
+                                />                                    
                                 </div>
                             </Card> 
                         </Card>
