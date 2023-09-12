@@ -12,7 +12,7 @@ namespace FitnessApp.BLL.DI_Service
         public Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
         public Task<List<User>> GetAllUsersAsync();
         public Task<User> GetUserByIdAsync(int id);
-        public Task CreateUserAsync(User user);
+        public Task<User> CreateUserAsync(User user);
         public Task CangeUserDataAsync(User user);
 
         public Task DeleteUserAsync(int userId);

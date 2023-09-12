@@ -11,6 +11,7 @@ namespace FitnessApp.BLL.Interface
     {
         public Task<Diet> GetDietByIdAsync(int dietId);
         public Task<List<Diet>> GetDietByTreningScheduleIdAsync(int treningScheduleId);
+        public Task<List<Diet>> MakeDietForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules);
 
 
     }

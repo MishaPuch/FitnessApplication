@@ -16,7 +16,7 @@ import './GymTrening.css'
 const GymPage=()=>{
     const {planData  }=useContext(PlanDataContext);
     const trenings = GetfullTrening();
-
+    console.log(planData);
     function GetfullTrening() {
         const allTrening = [];
 
@@ -32,8 +32,14 @@ const GymPage=()=>{
                     exerciseDescription: exercise.exerciseDescription,
                     exerciseVideo: exercise.exerciseVideo,
                     nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                    typeOfTrening: exercise.typeOfTrening.typeOfTreningValue,
                 };
-                allTrening.push(treningObj);
+                if(treningObj.typeOfTrening=="Home"){
+
+                }
+                else if(treningObj.typeOfTrening == "Gym"){
+                    allTrening.push(treningObj);
+                }
             })
         });
 
@@ -51,15 +57,14 @@ const GymPage=()=>{
             <div className="card-conteiner">
                 <div className="">
                     <Card style={{ width: '600px' , height : '500px'  }}>
-
                         <Card>
-                        <div className="card">
-                        <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
-                            <Button
-                                icon="pi pi-arrow-circle-right"
-                                style={{ marginTop :'20px' , marginBottom : '-20px ' }}
-                            />
-                        </div>
+                            <div className="card">
+                            <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
+                                <Button
+                                    icon="pi pi-arrow-circle-right"
+                                    style={{ marginTop :'20px' , marginBottom : '-20px ' }}
+                                />
+                            </div>
                         </Card> 
                     </Card>
                 </div>

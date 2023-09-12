@@ -12,15 +12,18 @@ namespace FitnessApp.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly ITrainingAndDietSchedule _daysOfDietAndExerciseService;
+        private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
+        private readonly IDietService _dietService;
 
         public AccountController(
             IUserService userService,
-            ITrainingAndDietSchedule daysOfDietAndExerciseService
+            ITrainingAndDietSchedule trainingAndDietSchedule,
+            IDietService dietService
             ) 
         { 
             _userService = userService;
-            _daysOfDietAndExerciseService = daysOfDietAndExerciseService;
+            _trainingAndDietSchedule = trainingAndDietSchedule;
+            _dietService=dietService;
         }
 
         // GET: api/<AccountController>
@@ -43,15 +46,19 @@ namespace FitnessApp.Controllers
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
             if (user != null)
-                return await _daysOfDietAndExerciseService.GetUserTodaysPlanAsync(user.Id);
+                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
             else return new List<FullModel>();   
         }
 
-        // POST: api/<AccountController>
-        [HttpPost]
+        // POST: api/<AccountController>/create-user
+        [HttpPost("create-user")]
         public async Task Register([FromBody] User user)
         {
-            await _userService.CreateUserAsync(user);
+             
+            User createdUser= await _userService.CreateUserAsync(user);
+            var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(createdUser.Id, createdUser.DateOFLastPayment);
+            var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
+
             Console.WriteLine($"user : {user.Id} - was saccesfully created");
         }
 

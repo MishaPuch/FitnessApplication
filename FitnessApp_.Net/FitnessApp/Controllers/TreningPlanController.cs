@@ -1,7 +1,9 @@
 ﻿using FitnessApp.BLL.Interface;
+using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.ViewModel;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +14,7 @@ namespace FitnessApp.Controllers
     public class TreningPlanController : ControllerBase
     {
         private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
+
         public TreningPlanController(ITrainingAndDietSchedule trainingAndDietSchedule)
         {
             _trainingAndDietSchedule = trainingAndDietSchedule;
@@ -21,11 +24,11 @@ namespace FitnessApp.Controllers
         [HttpGet("GetDalyPlan/{userId:int}/{day:DateTime}")]
         public async Task<List<FullModel>> GetDalyPlan(int userId, DateTime day)
         {
-            DateTime date = day.AddDays(1);
-            var fullModel = await _trainingAndDietSchedule.GetDalyPlanAsync(userId, date);
+            DateTime date = day.AddDays(1); // i made it because i got from front selected date -1 day
+            var fullModel = await _trainingAndDietSchedule.GetDalyPlanAsync(userId, date.Date);
             return fullModel;
         }
-
+    
 
         // GET: api/<TreningPlanController>/GetPlan/{userId:int}
         [HttpGet("GetUserTodaysPlan/{userId:int}")]
@@ -51,7 +54,7 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-
+           
         }
 
         // PUT api/<TreningPlanController>/5

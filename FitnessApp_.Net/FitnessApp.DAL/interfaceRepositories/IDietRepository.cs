@@ -11,7 +11,8 @@ namespace FitnessApp.DAL.interfaceRepositories
     {
         public Task<Diet> GetDietByIdAsync(int dietId);
         public Task<List<Diet>> GetDietByTreningScheduleIdAsync(int treningScheduleId);
-
-
+        public Task<List<Diet>> MakeDietForADayAsync(int treningAndDietScheduleId);
+        public Task<List<Diet>> MakeDietForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules);
+        public Task<List<Diet>> MakeDietForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules);
     }
 }

@@ -27,8 +27,8 @@ using Microsoft.EntityFrameworkCore;
 
     builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
 
-    builder.Services.AddTransient<IUserRepository, UserRepository>();
-    builder.Services.AddTransient<FitnessApp.DAL.interfaceRepositories.ITrainingAndDietSchedule, FitnessApp.DAL.DiRepositories.TrainingAndDietSchedule>();
+    builder.Services.AddTransient<IUserRepositoryRepository, UserRepository>();
+    builder.Services.AddTransient<FitnessApp.DAL.interfaceRepositories.ITrainingAndDietScheduleRepository, FitnessApp.DAL.DiRepositories.TrainingAndDietScheduleRepository>();
     builder.Services.AddTransient<ITypeOfMuscleGroupRepository, TypeOfMuscleGroupRepository>();
     builder.Services.AddTransient<ITreningRepository, TreningRepository>();
     builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
@@ -45,7 +45,7 @@ using Microsoft.EntityFrameworkCore;
     builder.Services.AddTransient<IDietService, DietService>();
     builder.Services.AddTransient<IMealService, MealService>();
     builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
-  //  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
+//  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
 
 
 

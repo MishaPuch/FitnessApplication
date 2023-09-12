@@ -14,5 +14,7 @@ namespace FitnessApp.BLL.Interface
         public Task<List<FullModel>> GetAllPlans();
         public Task<List<FullModel>> GetDalyPlanAsync(int userId, DateTime day);
         public  Task<List<FullModel>> GetAllUserPlansAsync(int userId);
+        public Task<TreningAndDietSchedule> MakeADayInTreningAndSchedulesAsync(int userId , DateTime date);
+        public Task<List<TreningAndDietSchedule>> MakeAMonthInTreningAndSchedulesAsync(int userId, DateTime date);
     }
 }

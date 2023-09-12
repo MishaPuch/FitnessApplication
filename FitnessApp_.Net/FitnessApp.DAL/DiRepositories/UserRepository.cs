@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepositoryRepository
     {
         private readonly FitnessAppContext _context;
         public UserRepository(FitnessAppContext context) 
@@ -17,10 +17,13 @@ namespace FitnessApp.DAL.repositories
             _context = context;
         }
         
-        public async Task AddUserAsync(User user)
+        public async Task<User> AddUserAsync(User user)
         {
+            user.DateOFLastPayment = DateTime.Now.Date;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            User createdUser=_context.Users.FirstOrDefault(u=>u.UserEmail==user.UserEmail);
+            return createdUser;    
         }
 
         public async Task DeleteUserAsync(int userId)

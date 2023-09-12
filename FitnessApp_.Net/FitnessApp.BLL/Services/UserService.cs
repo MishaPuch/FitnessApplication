@@ -11,38 +11,39 @@ namespace FitnessApp.BLL.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository userRepository;
-        public UserService(IUserRepository userRepository) 
+        private readonly IUserRepositoryRepository _userRepository;
+        public UserService(IUserRepositoryRepository userRepository) 
         {
-            this.userRepository = userRepository;
+            this._userRepository = userRepository;
         }
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            return await userRepository.GetAllUsersAsync();
+            return await _userRepository.GetAllUsersAsync();
         }
 
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            return await userRepository.GetByPasswordAndEmailAsync(email, password);
+            return await _userRepository.GetByPasswordAndEmailAsync(email, password);
         }
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await userRepository.GetUserByIdAsync(id);
+            return await _userRepository.GetUserByIdAsync(id);
         }
-        public async Task CreateUserAsync(User user)
+        public async Task<User> CreateUserAsync(User user)
         {
-            await userRepository.AddUserAsync(user);
+            User createdUser= await _userRepository.AddUserAsync(user);
+            return createdUser;
         }
 
         public async Task CangeUserDataAsync(User user)
         {
-            await userRepository.UpdateUserAsync(user); 
+            await _userRepository.UpdateUserAsync(user); 
         }
         public async Task DeleteUserAsync(int userId)
         {
-            await userRepository.DeleteUserAsync(userId);
+            await _userRepository.DeleteUserAsync(userId);
         }
 
     }

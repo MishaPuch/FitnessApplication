@@ -34,8 +34,13 @@ const HomePage=()=>{
                     exerciseDescription: exercise.exerciseDescription,
                     exerciseVideo: exercise.exerciseVideo,
                     nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                    typeOfTrening: exercise.typeOfTrening.typeOfTreningValue,
                 };
-                allTrening.push(treningObj);
+                if(treningObj.typeOfTrening=="Home"){
+                    allTrening.push(treningObj);
+                }
+                else if(treningObj.typeOfTrening == "Gym"){
+                }
             })
         });
 
@@ -52,10 +57,9 @@ const HomePage=()=>{
                 </div>
                 <div className="card-conteiner">
                     <div className="">
-                        
                         <Card style={{ width: '600px' , height : '500px'  }}>
                             <Card>
-                                <div>
+                                <div className="card">
                                 <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
                                     <Button
                                     icon="pi pi-arrow-circle-right"

@@ -27,5 +27,10 @@ namespace FitnessApp.BLL.Services
         {
             return await _dietRepository.GetDietByTreningScheduleIdAsync(treningScheduleId);
         }
+
+        public async Task<List<Diet>> MakeDietForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        {
+            return await _dietRepository.MakeDietForAMonthAsync(treningAndDietSchedules);
+        }
     }
 }

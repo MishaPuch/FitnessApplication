@@ -1,4 +1,5 @@
 ﻿using FitnessApp.BLL.DI_Service;
+using FitnessApp.BLL.Halpers;
 using FitnessApp.BLL.Interface;
 using FitnessApp.DAL.DiRepositories;
 using FitnessApp.DAL.interfaceRepositories;
@@ -17,21 +18,21 @@ namespace FitnessApp.BLL.Services
 {
     public class TrainingAndDietSchedule : Interface.ITrainingAndDietSchedule
     {
-        private readonly DAL.interfaceRepositories.ITrainingAndDietSchedule _daysOfDietAndExerciseeRepository;
+        private readonly DAL.interfaceRepositories.ITrainingAndDietScheduleRepository _trainingAndDietScheduleRepository;
         private readonly ITreningService _treningService;
         private readonly IDietService _dietService;
         private readonly IUserService _userService;
         private readonly ICalorificCoefficientRepository _calorificCoefficientService;
 
         public TrainingAndDietSchedule(
-            DAL.interfaceRepositories.ITrainingAndDietSchedule daysOfDietAndExerciseRepository,
+            DAL.interfaceRepositories.ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository,
             ITreningService treningService,
             IDietService dietService,
             IUserService userService,
             ICalorificCoefficientRepository calorificCoefficientService
             )
         {
-            _daysOfDietAndExerciseeRepository = daysOfDietAndExerciseRepository;
+            _trainingAndDietScheduleRepository = trainingAndDietScheduleRepository;
             _treningService = treningService;  
             _dietService= dietService;
             _userService = userService;
@@ -40,7 +41,7 @@ namespace FitnessApp.BLL.Services
 
         public async Task<List<FullModel>> GetAllPlans()
         {
-            List<Models.TrainingAndDietSchedule> allDaysPlans = await _daysOfDietAndExerciseeRepository.GetAllDaysPlansAsync();
+            List<Models.TreningAndDietSchedule> allDaysPlans = await _trainingAndDietScheduleRepository.GetAllDaysPlansAsync();
             List<FullModel> fullModel = await MakefullModel( allDaysPlans );
 
             return fullModel;
@@ -48,7 +49,7 @@ namespace FitnessApp.BLL.Services
 
         public async Task<List<FullModel>> GetAllUserPlansAsync(int userId)
         {
-            List<Models.TrainingAndDietSchedule> allUserPlans = await _daysOfDietAndExerciseeRepository.GetAllUserPlansAsync(userId);
+            List<Models.TreningAndDietSchedule> allUserPlans = await _trainingAndDietScheduleRepository.GetAllUserPlansAsync(userId);
             List<FullModel> fullModel= await MakefullModel(allUserPlans);
 
             return fullModel;
@@ -56,7 +57,7 @@ namespace FitnessApp.BLL.Services
 
         public async Task<List<FullModel>> GetDalyPlanAsync(int userId, DateTime day)
         {
-            List<Models.TrainingAndDietSchedule> dalyPlan = await _daysOfDietAndExerciseeRepository.GetDalyPlanAsync(userId, day);
+            List<Models.TreningAndDietSchedule> dalyPlan = await _trainingAndDietScheduleRepository.GetDalyPlanAsync(userId, day);
             List<FullModel> fullModel = await MakefullModel(dalyPlan);
 
             return fullModel;
@@ -64,18 +65,30 @@ namespace FitnessApp.BLL.Services
 
         public async Task<List<FullModel>> GetUserTodaysPlanAsync(int userId)
         {
-            List<Models.TrainingAndDietSchedule> todaysPlan = await _daysOfDietAndExerciseeRepository.GetTodaysPlanAsync(userId);
+            List<Models.TreningAndDietSchedule> todaysPlan = await _trainingAndDietScheduleRepository.GetTodaysPlanAsync(userId);
             List<FullModel> fullModel = await MakefullModel(todaysPlan);
 
             return fullModel;
         }
 
-        public async Task<List<FullModel>> MakefullModel(List<Models.TrainingAndDietSchedule> daysOfDietAndExercises)
+        public async Task<Models.TreningAndDietSchedule> MakeADayInTreningAndSchedulesAsync(int userId, DateTime date)
+        {
+            return await _trainingAndDietScheduleRepository.MakeADayInTreningAndSchedulesAsync(userId, date);
+        }
+
+        public async Task<List<Models.TreningAndDietSchedule>> MakeAMonthInTreningAndSchedulesAsync(int userId, DateTime date)
+        {   
+
+            return await _trainingAndDietScheduleRepository.MakeAMonthInTreningAndSchedulesAsync(userId,date);
+        }
+
+        public async Task<List<FullModel>> MakefullModel(List<Models.TreningAndDietSchedule> daysOfDietAndExercises)
         {
             List<FullModel> daysJSON = new List<FullModel>();
 
-            foreach (Models.TrainingAndDietSchedule day in daysOfDietAndExercises)
+            foreach (Models.TreningAndDietSchedule day in daysOfDietAndExercises)
             {
+
                 FullModel fullModel = new FullModel();
 
                 fullModel.Id = day.Id;
