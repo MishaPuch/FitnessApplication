@@ -1,5 +1,6 @@
 ﻿using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.Models;
+using FitnessApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,20 @@ namespace FitnessApp.BLL.Interface
             return await _treningRepository.GetTreningsByTreningScheduleIdAsync(treningAndDietSheduleId);
         }
 
+        public async Task<List<Trening>> MakeTreningForADayAsync(TreningAndDietSchedule treningAndDietSchedule)
+        {
+            return await _treningRepository.MakeTreningForADayAsync(treningAndDietSchedule);
 
+        }
+
+        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        {
+            return await _treningRepository.MakeTreningForAMonthAsync (treningAndDietSchedules);
+        }
+
+        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        {
+            return await _treningRepository.MakeTreningForAWeekAsync (treningAndDietSchedules);
+        }
     }
 }

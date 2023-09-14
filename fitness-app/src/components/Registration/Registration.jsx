@@ -12,7 +12,7 @@ import { Card } from 'primereact/card';
 
 function Registration(){
 
-const { setUser } = useContext(PlanDataContext);
+const {planData , setPlanData} = useContext(PlanDataContext);
 const navigate = useNavigate();
 const [isRegistrated , setIsRegistrated] = useState(false);
 
@@ -47,11 +47,12 @@ try {
 
   if (response.ok) {
     console.log("User registration successful!");
-    setUser(userData);
+    setPlanData(await response.json());
     setIsRegistrated(true)
     navigate('/account');
 
   } else {
+    console.log(response);
     alert("Error while registering user");
   }
 

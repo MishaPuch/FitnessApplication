@@ -14,16 +14,20 @@ namespace FitnessApp.Controllers
         private readonly IUserService _userService;
         private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
         private readonly IDietService _dietService;
+        private readonly ITreningService _treningService;
 
         public AccountController(
             IUserService userService,
             ITrainingAndDietSchedule trainingAndDietSchedule,
-            IDietService dietService
+            IDietService dietService,
+            ITreningService treningService
+
             ) 
         { 
             _userService = userService;
             _trainingAndDietSchedule = trainingAndDietSchedule;
             _dietService=dietService;
+            _treningService = treningService;
         }
 
         // GET: api/<AccountController>
@@ -52,14 +56,16 @@ namespace FitnessApp.Controllers
 
         // POST: api/<AccountController>/create-user
         [HttpPost("create-user")]
-        public async Task Register([FromBody] User user)
-        {
-             
+        public async Task<List<FullModel>> Register([FromBody] User user)
+        {    
             User createdUser= await _userService.CreateUserAsync(user);
             var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(createdUser.Id, createdUser.DateOFLastPayment);
             var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
+            var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
 
-            Console.WriteLine($"user : {user.Id} - was saccesfully created");
+            if (createdUser != null)
+                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+            else return new List<FullModel>();
         }
 
         // PUT: api/<AccountController>/changeData

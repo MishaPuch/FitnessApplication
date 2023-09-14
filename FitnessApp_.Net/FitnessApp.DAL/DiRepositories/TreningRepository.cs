@@ -27,19 +27,43 @@ namespace FitnessApp.DAL.DiRepositories
             return await _context.Trenings.Include(x => x.Exercise).ThenInclude(x => x.MuscleGroup).Include(x=>x.Exercise).ThenInclude(x=>x.TypeOfTrening).Where(x => x.TrainingAndDietSchedules.Id == TreningScheduleId).ToListAsync();
         }
 
-        public async Task<List<Trening>> MakeTreningForADayAsync(int treningAndDietScheduleId , int muscleGroupId)
+        public async Task<List<Trening>> MakeTreningForADayAsync(TreningAndDietSchedule treningAndDietSchedule)
         {
             List<Trening> trenings = new List<Trening>();
 
-            List<Exercise> exercises = await _context.Exercises.Where(x=>x.MuscleGroupId==muscleGroupId).ToListAsync();
-            
-            for (int i = 0; i < 7; i++)
+            List<TypeOfMuscleGroup> typeOfMuscleGroup = new List<TypeOfMuscleGroup>();
+            //можно будет вынести как план \/ и добавить разные планы 
+            // доработать чтобы составляло тренировки для зала и дома
+            if (treningAndDietSchedule.Day.DayOfWeek == DayOfWeek.Tuesday)// можно сюда добавить проверку в какой день юзер хочет тренироваться 
             {
-                Trening trening = GetRandomUniqueTreningInList(trenings, exercises,treningAndDietScheduleId);
-                trenings.Add(trening);
+                typeOfMuscleGroup = await _context.TypeOfMuscleGroups.Where(x => (x.FullBodyWorkoutProtogonistMuscleGroups == 1)//можно будет сюда добавить проверку какие мышцы юзер хочет тренеровать
+                || (x.FullBodyWorkoutProtogonistMuscleGroups == 0)).ToListAsync();
+            }
+            else if (treningAndDietSchedule.Day.DayOfWeek == DayOfWeek.Thursday)
+            {
+                typeOfMuscleGroup = await _context.TypeOfMuscleGroups.Where(x => x.FullBodyWorkoutProtogonistMuscleGroups == 2).ToListAsync();
+            }
+            else if (treningAndDietSchedule.Day.DayOfWeek == DayOfWeek.Saturday)
+            {
+                typeOfMuscleGroup = await _context.TypeOfMuscleGroups.Where(x => (x.FullBodyWorkoutProtogonistMuscleGroups == 3) 
+                || (x.FullBodyWorkoutProtogonistMuscleGroups == 0)).ToListAsync();
+            }
+
+            foreach (var muscleGroup in typeOfMuscleGroup)
+            {
+                List<TypeOfTrening> typesOfTrening = await _context.TypesOfTrening.ToListAsync();
+                foreach (var typeOfTrening in typesOfTrening)
+                {
+                    List<Exercise> exercises = await _context.Exercises.Where(x => (x.MuscleGroupId == muscleGroup.Id)&&(x.TypeOfTrening.Id==typeOfTrening.Id)).ToListAsync();
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Trening trening = GetRandomUniqueTreningInList(trenings, exercises, treningAndDietSchedule.Id);
+                        trenings.Add(trening);
+                    }
+                }
             }
             return trenings;
-            //добавить сюда больше упражнений и чтобы они не повторялись (7)
             //можнобудет добавить сюда проверку юзера и если у него стоит сколько-то упражнений,
                 //то зациклить выбор упражнений или что-от ещё , и выставвить повторы
 
@@ -65,11 +89,9 @@ namespace FitnessApp.DAL.DiRepositories
                 if (isExerciseUnique)
                 {
                     Trening trening = new Trening();
-
                     trening.TrainingAndDietSchedulesId = treningAndDietScheduleId;
                     trening.ExerciseId = exercise.Id;
-                    trening.Times = "3x12";
-                    
+                    trening.Times = "3x10";
 
                     return trening;
                 }
@@ -77,9 +99,55 @@ namespace FitnessApp.DAL.DiRepositories
         }
 
 
-        public Task<List<Trening>> MakeTreningForAWeekAsync(int treningAndDietScheduleId)
+        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
         {
-            throw new NotImplementedException();/////////////////////////////////////gngente
+            List<Trening> treningsForAWeek = new List<Trening>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                List<TreningAndDietSchedule> treningSchedulesCopy = new List<TreningAndDietSchedule>(treningAndDietSchedules);
+
+                List<Trening> treningsForOneDay = await MakeTreningForADayAsync(treningSchedulesCopy[i]);
+                treningsForAWeek.AddRange(treningsForOneDay);
+            }
+
+            return treningsForAWeek;
+        }
+
+
+
+        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        {
+            List<Trening> FullMonthTrening = new List<Trening>();
+
+            int quantityDaysInMonth = treningAndDietSchedules.Count;
+            int weeksInMonth = quantityDaysInMonth / 7;
+            int restDaysInMonth = quantityDaysInMonth % 7;
+
+            for (int i = 0; i < weeksInMonth; i++)
+            {
+                List<Trening> treningsForAWeek = await MakeTreningForAWeekAsync(treningAndDietSchedules.Take(7).ToList());
+                FullMonthTrening.AddRange(treningsForAWeek);
+                treningAndDietSchedules = treningAndDietSchedules.Skip(7).ToList(); 
+            }
+
+            if (restDaysInMonth > 0)
+            {
+                List<Trening> treningForRestDays = new List<Trening>();
+
+                foreach (TreningAndDietSchedule treningAndDietSchedule in treningAndDietSchedules)
+                {
+                    List<Trening> treningForOneDay = await MakeTreningForADayAsync( treningAndDietSchedule );
+                    treningForRestDays.AddRange(treningForOneDay);
+                }
+                FullMonthTrening.AddRange(treningForRestDays);
+            }
+
+            await _context.AddRangeAsync(FullMonthTrening);
+            await _context.SaveChangesAsync();
+
+            return FullMonthTrening;
+
         }
     }
 }

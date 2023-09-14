@@ -49,8 +49,6 @@ namespace FitnessApp.DAL.DiRepositories
             dietsForOneDay.Add(dinner);
             dietsForOneDay.Add(snak);
 
-            await _context.AddRangeAsync(dietsForOneDay);
-            await _context.SaveChangesAsync();
             return dietsForOneDay;
             //можнобудет добавить сюда проверку юзера и если у него стоит 5 приёмов пищи , то зациклить снэки или что-от ещё
             //добавить сюда больше приёмов пищи (4-5)
@@ -76,7 +74,6 @@ namespace FitnessApp.DAL.DiRepositories
                 if (isMealUnique)
                 {
                     Diet diet = new Diet();
-
                     diet.TrainingAndDietScheduleId = treningAndDietScheduleId;
                     diet.MealId = meal.Id;
                         
@@ -94,20 +91,19 @@ namespace FitnessApp.DAL.DiRepositories
             List<Meal> dinners = await _context.Meals.Where(x => x.TypeOfMealId == 3).ToListAsync();
             List<Meal> snaks = await _context.Meals.Where(x => x.TypeOfMealId == 4).ToListAsync();
 
-            for(int i=0; i<7;i++)
+            foreach (var treningSchedule in treningAndDietSchedules)
             {
-                Diet breakfast = GetRandomUniqueDietInList(dietsForOneWeek, breakfasts, treningAndDietSchedules[i].Id);
-                Diet lunch = GetRandomUniqueDietInList(dietsForOneWeek, lunchs, treningAndDietSchedules[i].Id);
-                Diet dinner = GetRandomUniqueDietInList(dietsForOneWeek, dinners, treningAndDietSchedules[i].Id);
-                Diet snak = GetRandomUniqueDietInList(dietsForOneWeek, snaks, treningAndDietSchedules[i].Id);
+                Diet breakfast = GetRandomUniqueDietInList(dietsForOneWeek, breakfasts, treningSchedule.Id);
+                Diet lunch = GetRandomUniqueDietInList(dietsForOneWeek, lunchs, treningSchedule.Id);
+                Diet dinner = GetRandomUniqueDietInList(dietsForOneWeek, dinners, treningSchedule.Id);
+                Diet snak = GetRandomUniqueDietInList(dietsForOneWeek, snaks, treningSchedule.Id);
 
                 dietsForOneWeek.Add(breakfast);
                 dietsForOneWeek.Add(lunch);
                 dietsForOneWeek.Add(dinner);
                 dietsForOneWeek.Add(snak);
             }
-            await _context.AddRangeAsync(dietsForOneWeek);
-            await _context.SaveChangesAsync();
+
             return dietsForOneWeek;
         }
 
@@ -121,9 +117,9 @@ namespace FitnessApp.DAL.DiRepositories
 
             for (int i = 0; i < weeksInMonth; i++)
             {
-                List<Diet> dietForAWeek = await MakeDietForAWeekAsync(treningAndDietSchedules.Take(7).ToList());
+                List<Diet> dietForAWeek = await MakeDietForAWeekAsync(treningAndDietSchedules.Take(7).ToList()); //Take(7) - первые 7 элементов списка
                 fullMonthDiet.AddRange(dietForAWeek);
-                treningAndDietSchedules.RemoveRange(0, 7); // Удаляем первую неделю из списка
+                treningAndDietSchedules= treningAndDietSchedules.Skip(7).ToList(); // RemoveRange(0, 7) - 0 - индекс с которого начать , 7 - сколько элементов  
             }
 
             if (restDaysInMonth > 0)
@@ -131,14 +127,15 @@ namespace FitnessApp.DAL.DiRepositories
                 List<Diet> dietForRestDays = new List<Diet>();
                 foreach (TreningAndDietSchedule treningAndDietSchedule in treningAndDietSchedules)
                 {
-                    List<Diet> dietForARestDay = await MakeDietForADayAsync(treningAndDietSchedule.Id);
-                    dietForRestDays.AddRange(dietForARestDay);
+                    List<Diet> dietForOnetDay = await MakeDietForADayAsync(treningAndDietSchedule.Id);
+                    dietForRestDays.AddRange(dietForOnetDay);
                 }
                 fullMonthDiet.AddRange(dietForRestDays);
             }
 
             await _context.AddRangeAsync(fullMonthDiet);
             await _context.SaveChangesAsync();
+
             return fullMonthDiet;
         }
         
