@@ -50,22 +50,31 @@ namespace FitnessApp.Controllers
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
             if (user != null)
+                
                 return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
             else return new List<FullModel>();   
         }
 
         // POST: api/<AccountController>/create-user
         [HttpPost("create-user")]
-        public async Task<List<FullModel>> Register([FromBody] User user)
-        {    
-            User createdUser= await _userService.CreateUserAsync(user);
-            var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(createdUser.Id, createdUser.DateOFLastPayment);
-            var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
-            var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
+        public async Task<List<FullModel>> Register([FromBody] User creatingUser)
+        {
+            User chekingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
 
-            if (createdUser != null)
+            if (chekingUser != null)
+            {
+                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(chekingUser.Id);
+            }
+            else
+            {
+                User user = await _userService.CreateUserAsync(creatingUser);
+
+                var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
+                var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
+                var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
+
                 return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
-            else return new List<FullModel>();
+            }
         }
 
         // PUT: api/<AccountController>/changeData

@@ -1,6 +1,5 @@
 import React, { useContext , useEffect, useState } from "react";
 import { PlanDataContext } from "../../../State/PlanDataState";
-import ScrollCardsTrening from "../../ScrollCards/ScrollCards";
 import { DataScroller } from 'primereact/datascroller';
 import itemTemplateTrening from "../../CardItem/CardItemTrening";
 import itemTemplateDiet from "../../CardItem/CardItemDiet";
@@ -36,6 +35,10 @@ const SelectedDate = (props) => {
         }
     };
 
+    const updateData=(value)=>{
+        console.log(value);
+    }
+
     const trenings = GetfullTrening();
 
     function GetfullTrening() {
@@ -54,6 +57,7 @@ const SelectedDate = (props) => {
                         exerciseDescription: exercise.exerciseDescription,
                         exerciseVideo: exercise.exerciseVideo,
                         nameMuscleGroup: exercise.muscleGroup.nameMuscleGroup,
+                        typeOfTrening: exercise.typeOfTrening.typeOfTreningValue,
                     };
                     allTrening.push(treningObj);
                     
@@ -75,10 +79,15 @@ const SelectedDate = (props) => {
                 diets.forEach(dietItem => {
                     const typeOfMeal = dietItem.meal.typeOfMeal;
                     const diet = {
-                        foodName: dietItem.meal.foodName,
-                        foodInstructions: dietItem.meal.foodInstructions,
-                        foto: dietItem.meal.foto,
-                        typeOfMeal: typeOfMeal.nameFoodType,
+                        foodName : dietItem.meal.foodName,
+                        foodInstructions : dietItem.meal.foodInstructions,
+                        foto : dietItem.meal.foto,
+                        typeOfMeal : typeOfMeal.nameFoodType,
+                        calorificOfMeal:dietItem.meal.calorificOfMeal,
+                        carbon:dietItem.meal.carbon,
+                        fat:dietItem.meal.fat,
+                        foodIngredients:dietItem.meal.foodIngredients,
+                        protein:dietItem.meal.protein
                     }
                     allDietProducts.push(diet);
                 })
@@ -87,6 +96,7 @@ const SelectedDate = (props) => {
       
         return allDietProducts;
     }
+    
     return(
         <div>          
             <p style={{ marginTop:'-20px' ,marginBottom:'-90px', padding:'20px'}} >
@@ -96,13 +106,13 @@ const SelectedDate = (props) => {
 >
                 <p style={{margin:'30px'}}>Trening</p>
                 <div className="card">
-                <DataScroller value={trenings} itemTemplate={itemTemplateTrening} rows={trenings.length} inline scrollHeight="330px"/>
+                <DataScroller value={trenings} itemTemplate={(data)=>itemTemplateTrening({data , updateData})}  rows={trenings.length} inline scrollHeight="330px"/>
                 </div>
             </Card>
             <Card style={{ marginTop:'-60px' ,marginBottom:'-90px', padding:'10px'}} >
                 <p style={{margin:'30px'}}>Diet</p>
                 <div className="card">
-                <DataScroller value={dietProducts} itemTemplate={itemTemplateDiet} rows={dietProducts.length} inline scrollHeight="330px"/>
+                <DataScroller value={dietProducts} itemTemplate={(data)=>itemTemplateDiet({data , updateData})}  rows={dietProducts.length} inline scrollHeight="330px"/>
                 </div>
             </Card>
         </div>

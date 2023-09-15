@@ -11,11 +11,15 @@ import { Card } from 'primereact/card';
 
 
 export default function UserPage(props){
-
+    
     const [date , setDate]=useState(new Date());
     const [hoveredTreningCard, setHoveredTreningCard] = useState(null);
     const [hoveredDietCard, setHoveredDietCard] = useState(null);
+    // const {planData } =useContext(PlanDataContext)    
 
+    // if (planData.length === 0) {
+    //     return <div></div>;
+    
     return(
     <div className="container">
         <div className="avatar">

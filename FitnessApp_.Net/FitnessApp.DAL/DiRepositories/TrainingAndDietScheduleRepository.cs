@@ -19,21 +19,40 @@ namespace FitnessApp.DAL.DiRepositories
         }
         public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetAllDaysPlansAsync()    
         {
-            return await _context.TrainingAndDietSchedule.Include(x=>x.Trainings).Include(x=>x.User).Include(x=>x.Diets).ToListAsync();
+            return await _context.TrainingAndDietSchedule
+                .Include(x=>x.Trainings)
+                .Include(x=>x.User)
+                .Include(x=>x.Diets)
+                .ToListAsync();
         }
 
         public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetDalyPlanAsync(int userId, DateTime day)
         {
-            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u=> (u.User.Id == userId)&&(u.Day==day)).ToListAsync();
+            return await _context.TrainingAndDietSchedule
+                .Include(x => x.Trainings)
+                .Include(x => x.User)
+                .Include(x => x.Diets)
+                .Where(u=> (u.User.Id == userId)&&(u.Day==day))
+                .ToListAsync();
         }
 
         public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetTodaysPlanAsync(int userId)
         {
-            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u => (u.User.Id == userId) && (u.Day == DateTime.Now.Date)).ToListAsync(); 
+            return await _context.TrainingAndDietSchedule
+                .Include(x => x.Trainings)
+                .Include(x => x.User)
+                .Include(x => x.Diets)
+                .Where(u => (u.User.Id == userId) && (u.Day == DateTime.Now.Date))
+                .ToListAsync(); 
         }
         public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetAllUserPlansAsync(int userId)
         {
-            return await _context.TrainingAndDietSchedule.Include(x => x.Trainings).Include(x => x.User).Include(x => x.Diets).Where(u => u.User.Id == userId).ToListAsync();
+            return await _context.TrainingAndDietSchedule
+                .Include(x => x.Trainings)
+                .Include(x => x.User)
+                .Include(x => x.Diets)
+                .Where(u => u.User.Id == userId)
+                .ToListAsync();
         }
 
         public async Task<FitnessApp.Models.TreningAndDietSchedule> MakeADayInTreningAndSchedulesAsync(int userId, DateTime date)

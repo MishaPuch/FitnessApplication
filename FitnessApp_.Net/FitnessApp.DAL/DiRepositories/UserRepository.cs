@@ -16,14 +16,15 @@ namespace FitnessApp.DAL.repositories
         {
             _context = context;
         }
-        
+
         public async Task<User> AddUserAsync(User user)
         {
             user.DateOFLastPayment = DateTime.Now.Date;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
-            User createdUser=_context.Users.FirstOrDefault(u=>u.UserEmail==user.UserEmail);
-            return createdUser;    
+            User? createdUser = _context.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
+            return createdUser;
+
         }
 
         public async Task DeleteUserAsync(int userId)
@@ -49,8 +50,14 @@ namespace FitnessApp.DAL.repositories
 
         public async Task UpdateUserAsync(User user)
         {
-            var changingUser = await _context.Users.FindAsync(user.Id);
-            changingUser = user;
+            var changingUser = await _context.Users.FirstOrDefaultAsync(u=>u.UserEmail==user.UserEmail);
+            
+            changingUser.UserName = user.UserName;
+            changingUser.Password = user.Password;
+            changingUser.Age = user.Age;
+            changingUser.RestTime = user.RestTime;
+            changingUser.CalorificValue = user.CalorificValue;
+
             await _context.SaveChangesAsync();
         }
 

@@ -6,7 +6,8 @@ import { PlanDataContext } from '../../../State/PlanDataState';
 export default function ScrollCards() {
     const { planData } = useContext(PlanDataContext);
     const trenings = GetfullTrening(); 
-
+    
+    
     function GetfullTrening() {
         const allTrening = [];
 
@@ -29,7 +30,11 @@ export default function ScrollCards() {
         return allTrening;
     }
     console.log(trenings);
-
+    
+    if (planData.length === 0) {
+        return <div>Loading...</div>;
+    }
+    
     return (
         <div className="card">
             <DataScroller value={trenings} itemTemplate={itemTemplate} rows={trenings.length} inline scrollHeight="160px" />

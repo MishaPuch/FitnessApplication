@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
-
+import React, { useContext, useState } from 'react';
+import { PlanDataContext } from '../../State/PlanDataState';
 import './Calendar.css';
 import '../UserInfoPage/UserAccount.css'
 
@@ -16,7 +15,7 @@ const CalendarPage = () => {
     const [date, setDate] = useState(new Date());
     const [dateToJson, setDateToJson] = useState(new Date());
     const [visible, setVisible] = useState();
-
+    const {planData}= useContext(PlanDataContext);
    
 const handleData = (e) => {
     const selectedDate = e.value;
@@ -24,7 +23,9 @@ const handleData = (e) => {
     setDateToJson(selectedDate);
     setVisible(true);
 }
-
+if (planData.length === 0) {
+    return <div>Loading...</div>;
+}
     return (
         <div className="container">
             <div className="avatar">

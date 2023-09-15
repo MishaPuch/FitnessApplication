@@ -47,7 +47,9 @@ try {
 
   if (response.ok) {
     console.log("User registration successful!");
-    setPlanData(await response.json());
+    const responseData=await response.json()
+    setPlanData(responseData);
+    console.log(planData);
     setIsRegistrated(true)
     navigate('/account');
 

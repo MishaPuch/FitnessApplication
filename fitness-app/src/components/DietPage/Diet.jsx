@@ -1,20 +1,37 @@
-import {React , useContext} from 'react';
+import {React , useContext, useState} from 'react';
 
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
 
 import '../UserInfoPage/UserAccount.css'
 import { Card } from 'primereact/card';
-import { Image } from 'primereact/image';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
 import { PlanDataContext } from '../../State/PlanDataState';
-import CardItemDiet from '../CardItem/CardItemDiet'
-
+import itemTemplateDiet from '../CardItem/CardItemDiet'
+import DescribeComponent from './DescribeDietComponent/DescribeDiet';
 
 export default function Diet() {
     
-    const {planData  }=useContext(PlanDataContext);
+    const {planData}=useContext(PlanDataContext);
+    const updateData = (value) => {
+        setMeal(value);
+    }
+    console.log(planData[0].diet[0]);
+
+    const diet={
+        foodName : planData[0].diet[0].meal.foodName,
+        foodInstructions : planData[0].diet[0].meal.foodInstructions,
+        foto : planData[0].diet[0].meal.foto,
+        typeOfMeal : planData[0].diet[0].nameFoodType,
+        calorificOfMeal:planData[0].diet[0].meal.calorificOfMeal,
+        carbon:planData[0].diet[0].meal.carbon,
+        fat:planData[0].diet[0].meal.fat,
+        foodIngredients:planData[0].diet[0].meal.foodIngredients,
+        protein:planData[0].diet[0].meal.protein
+    }
+
+    const [meal ,setMeal]= useState(diet);
 
     const dietProducts = GetfullDiet();
 
@@ -32,11 +49,20 @@ export default function Diet() {
                     foodInstructions : dietItem.meal.foodInstructions,
                     foto : dietItem.meal.foto,
                     typeOfMeal : typeOfMeal.nameFoodType,
+                    calorificOfMeal:dietItem.meal.calorificOfMeal,
+                    carbon:dietItem.meal.carbon,
+                    fat:dietItem.meal.fat,
+                    foodIngredients:dietItem.meal.foodIngredients,
+                    protein:dietItem.meal.protein
                 }
                 allDietProducts.push(diet);
             })
         });
         return allDietProducts;
+    }
+
+    if (planData.length === 0) {
+        return <div>Loading...</div>;
     }
     return (
     <div className="container">
@@ -53,7 +79,13 @@ export default function Diet() {
                 
                     <Card>
                     <div className="card">
-                        <DataScroller value={dietProducts} itemTemplate={CardItemDiet} rows={dietProducts.length} inline scrollHeight="330px"/>
+                    <DataScroller 
+                        value={dietProducts} 
+                        itemTemplate={(data) => itemTemplateDiet({ data, updateData })} 
+                        rows={dietProducts.length}  
+                        inline 
+                        scrollHeight="330px" 
+                    />
                         <Button
                             icon="pi pi-arrow-circle-right"
                             style={{ marginTop :'20px' , marginBottom : '-20px ' }}
@@ -64,20 +96,8 @@ export default function Diet() {
             </div>
         </div>
         <div className="calendar">
-            <Card style={{ width: '596px' , height : '500px'  }}>
-            <div>
-                <Image src="https://hips.hearstapps.com/hmg-prod/images/steak-grain-bowl-1-1654094751.jpeg?crop=0.784xw:0.587xh;0.136xw,0.188xh&resize=1200:*" indicatorIcon={'pi pi-check'}  preview width="500" />
-            </div>            
-            <div>
-                name of meal <br/>
-                ingridients of meal <br/>
-                instructions to cook <br/>
-                colorify of meal <br/>
-                protein/carbon of meal <br/>
 
-            </div>
-            </Card>
-            
+            <DescribeComponent meal={meal}/>
         </div>
     </div>
 </div> 

@@ -11,7 +11,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.9",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
-          "Microsoft.EntityFrameworkCore.Tools": "7.0.9"
+          "Microsoft.EntityFrameworkCore.Tools": "7.0.9",
+          "System.Text.Json": "7.0.0"
         },
         "runtime": {
           "FitnessApp.DAL.dll": {}

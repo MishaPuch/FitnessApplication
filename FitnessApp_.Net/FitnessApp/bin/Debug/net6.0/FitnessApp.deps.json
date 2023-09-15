@@ -16,7 +16,8 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.9",
           "Microsoft.Extensions.Http": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "System.Text.Json": "7.0.0"
         },
         "runtime": {
           "FitnessApp.dll": {}
@@ -815,7 +816,8 @@
       },
       "FitnessApp.BLL/1.0.0": {
         "dependencies": {
-          "FitnessApp.DAL": "1.0.0"
+          "FitnessApp.DAL": "1.0.0",
+          "System.Text.Json": "7.0.0"
         },
         "runtime": {
           "FitnessApp.BLL.dll": {}
@@ -825,7 +827,8 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.9",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.9",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "System.Text.Json": "7.0.0"
         },
         "runtime": {
           "FitnessApp.DAL.dll": {}

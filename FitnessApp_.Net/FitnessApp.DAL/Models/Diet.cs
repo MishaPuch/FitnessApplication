@@ -11,10 +11,10 @@ namespace FitnessApp.Models
        
         public int Id { get; set; }
         public int MealId { get; set; }
-        public virtual Meal Meal { get; set; }
+        public virtual Meal? Meal { get; set; }
         public int TrainingAndDietScheduleId { get; set; }
         [JsonIgnore]
-        public virtual TreningAndDietSchedule TrainingAndDietSchedule { get; set; }
+        public virtual TreningAndDietSchedule? TrainingAndDietSchedule { get; set; }
 
     }
 }

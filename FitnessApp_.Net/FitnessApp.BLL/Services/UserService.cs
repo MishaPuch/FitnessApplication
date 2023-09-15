@@ -46,5 +46,9 @@ namespace FitnessApp.BLL.Services
             await _userRepository.DeleteUserAsync(userId);
         }
 
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _userRepository.GetUserByEmailAsync(email);
+        }
     }
 }

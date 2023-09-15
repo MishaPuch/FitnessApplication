@@ -31,7 +31,10 @@ export default function ScrollCards() {
         return allDietProducts;
     }
     console.log(dietProducts );
-
+   
+    if (planData.length === 0) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className="card">
             

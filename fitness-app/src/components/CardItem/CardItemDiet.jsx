@@ -1,11 +1,12 @@
 import React from 'react';
 
-const itemTemplateDiet = (data) => {
+const itemTemplateDiet = ({ data, updateData }) => {
     
-    
-            
+    const handleClick=()=>{
+        updateData(data)
+    }
     return (
-        <div className="col-15">
+        <div className="col-15" onClick={handleClick}>
             <div className="flex flex-column xl:flex-row xl:align-items-start p-1 gap-3">
                 <img className="w-9 sm:w-16rem xl:w-10rem shadow-4 block xl:block mx-auto border-round" 
                     src={`https://hips.hearstapps.com/hmg-prod/images/steak-grain-bowl-1-1654094751.jpeg?crop=0.784xw:0.587xh;0.136xw,0.188xh&resize=1200:*`} alt={data.name} /> 
