@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PlanDataContext } from '../../State/PlanDataState';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
@@ -9,6 +9,7 @@ import TaskBar from '../TaskBar/TaskBar';
 
 import './Settings.css'
 import '../UserInfoPage/UserAccount.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Settings() {
     const { planData } = useContext(PlanDataContext);
@@ -20,6 +21,13 @@ export default function Settings() {
     const [password, setPassword] = useState(planData[0]?.user?.password || "");
     const [calory, setCalory] = useState(planData[0]?.user?.calorificValue || "");
     const [restTime, setRestTime] = useState(planData[0]?.user?.restTime || 0);
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        if (planData.length === 0) {
+            navigate('/');
+        }
+    }, []);
 
     const handleSave = async () => {
         const userData = {

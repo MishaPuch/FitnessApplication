@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PlanDataContext } from '../../State/PlanDataState';
 import './Calendar.css';
 import '../UserInfoPage/UserAccount.css'
@@ -10,19 +10,27 @@ import { Sidebar } from 'primereact/sidebar';
 import TaskBar from '../TaskBar/TaskBar';
 import Header from '../Header/Header';
 import SelectedDate from './SelectedDate/SelectedDate';
+import { useNavigate } from 'react-router-dom';
 
 const CalendarPage = () => {
     const [date, setDate] = useState(new Date());
     const [dateToJson, setDateToJson] = useState(new Date());
     const [visible, setVisible] = useState();
     const {planData}= useContext(PlanDataContext);
-   
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        if (planData.length === 0) {
+            navigate('/');
+        }
+    }, []);
 const handleData = (e) => {
     const selectedDate = e.value;
     setDate(selectedDate);
     setDateToJson(selectedDate);
     setVisible(true);
 }
+
 if (planData.length === 0) {
     return <div>Loading...</div>;
 }

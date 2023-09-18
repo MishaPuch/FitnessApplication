@@ -1,4 +1,4 @@
-import React ,{useContext, useState} from 'react';
+import React ,{useContext, useEffect, useState} from 'react';
 
 import TaskBar from '../../TaskBar/TaskBar';
 import Header from '../../Header/Header';
@@ -12,25 +12,34 @@ import '../../UserInfoPage/UserAccount.css'
 //import DataScroller from '../../ScrollCards/ScrollCards'
 import '../GymTrening/GymTrening.css'
 import DescribeTrening from '../TreningDescription/DescriptionTrebing';
-
+import { useNavigate } from 'react-router-dom';
 
 const HomePage=()=>{
 
     const {planData }=useContext(PlanDataContext);
-    const treningObj = {
-        times: planData[0].trening[0].times,
-        exerciseName: planData[0].trening[0].exerciseName,
-        exerciseDescription: planData[0].trening[0].exerciseDescription,
-        exerciseVideo: planData[0].trening[0].exerciseVideo,
-        //nameMuscleGroup: planData[0].trening[0].muscleGroup.nameMuscleGroup,
-        //typeOfTrening: planData[0].trening[0].typeOfTrening.typeOfTreningValue,
-    };
-
+    let treningObj={};
+    if(planData[0].trening[0]>0){
+        treningObj = {
+            times: planData[0].trening[0].times,
+            exerciseName: planData[0].trening[0].exerciseName,
+            exerciseDescription: planData[0].trening[0].exerciseDescription,
+            exerciseVideo: planData[0].trening[0].exerciseVideo,
+            //nameMuscleGroup: planData[0].trening[0].muscleGroup.nameMuscleGroup,
+            //typeOfTrening: planData[0].trening[0].typeOfTrening.typeOfTreningValue,
+        };
+    }
+   
     const [treningItem , setTreningItem]=useState(treningObj)
-
+    
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        if (planData.length === 0) {
+            navigate('/');
+        }
+    }, []);
     const updateData=(value)=>{
         setTreningItem(value);
-        console.log(treningItem);
     }
     const trenings = GetfullTrening();
 
@@ -44,7 +53,7 @@ const HomePage=()=>{
                 const exercise = treningItem.exercise;
 
                 const treningObj = {
-                    times: treningItem.times,
+                    times: exercise.times,
                     exerciseName: exercise.exerciseName,
                     exerciseDescription: exercise.exerciseDescription,
                     exerciseVideo: exercise.exerciseVideo,

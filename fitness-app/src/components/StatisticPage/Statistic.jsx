@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 
@@ -7,9 +7,20 @@ import TaskBar from '../TaskBar/TaskBar';
 
 import '../UserInfoPage/UserAccount.css'
 import './Statistic.css'
-
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { PlanDataContext } from '../../State/PlanDataState';
 
 const StatisticsPage = () => {
+
+  const {planData}=useContext(PlanDataContext);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+      if (planData.length === 0) {
+          navigate('/');
+      }
+  }, []);
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May' ,'lol' , 'aboba' ,'kobra' ],
     datasets: [

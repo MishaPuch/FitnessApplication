@@ -1,13 +1,14 @@
-import { useState  } from "react";
+import { useContext, useEffect, useState  } from "react";
 import TaskBar from "../TaskBar/TaskBar.jsx";
 import Header from "../Header/Header";
 import DataScroller from './ScrollCards/ScrollComponentTrening'
 import DataScrollerDiet from './ScrollCards/ScrollComponentDiet.jsx'
-
+import { useNavigate } from 'react-router-dom';
 import './UserAccount.css'
 
 import { Calendar } from 'primereact/calendar';
 import { Card } from 'primereact/card';
+import { PlanDataContext } from "../../State/PlanDataState.js";
 
 
 export default function UserPage(props){
@@ -15,11 +16,14 @@ export default function UserPage(props){
     const [date , setDate]=useState(new Date());
     const [hoveredTreningCard, setHoveredTreningCard] = useState(null);
     const [hoveredDietCard, setHoveredDietCard] = useState(null);
-    // const {planData } =useContext(PlanDataContext)    
-
-    // if (planData.length === 0) {
-    //     return <div></div>;
-    
+    const {planData }=useContext(PlanDataContext)
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        if (planData.length === 0) {
+            navigate('/');
+        }
+    }, []);
     return(
     <div className="container">
         <div className="avatar">

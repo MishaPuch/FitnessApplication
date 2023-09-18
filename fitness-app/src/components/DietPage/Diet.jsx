@@ -1,4 +1,4 @@
-import {React , useContext, useState} from 'react';
+import {React , useContext, useEffect, useState} from 'react';
 
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
@@ -10,10 +10,18 @@ import { Button } from 'primereact/button';
 import { PlanDataContext } from '../../State/PlanDataState';
 import itemTemplateDiet from '../CardItem/CardItemDiet'
 import DescribeComponent from './DescribeDietComponent/DescribeDiet';
+import { useNavigate } from 'react-router-dom';
 
 export default function Diet() {
     
     const {planData}=useContext(PlanDataContext);
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        if (planData.length === 0) {
+            navigate('/');
+        }
+    }, []);
     const updateData = (value) => {
         setMeal(value);
     }

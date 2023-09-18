@@ -63,7 +63,11 @@ namespace FitnessApp.DAL.repositories
 
         public async Task<User> GetByPasswordAndEmailAsync(string email, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u=>u.UserEmail==email && u.Password==password);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == email && u.Password == password);
+            if (user != null)
+                return user;
+            else
+                return null;
         }
     }
 }

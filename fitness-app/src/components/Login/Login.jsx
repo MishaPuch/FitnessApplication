@@ -29,15 +29,20 @@ const LoginForm = () => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                setPlanData(responseData);
-                setIsLogged(true);
+                if(responseData.length > 0){
+                    setPlanData(responseData);
+                    setIsLogged(true);
+                }
+                else{
+                    alert('You pass wrong email or password');
+                }
             } else {
                 alert('Error while fetching users');
             }
 
         } catch (error) {
             console.error('Error:', error);
-            alert('You pass wrong email or password');
+            alert('server is not turnd on or Error');
         }
     };
 

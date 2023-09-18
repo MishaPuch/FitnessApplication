@@ -1,11 +1,10 @@
-import {React, useContext, useState } from 'react';
+import {React, useContext, useEffect, useState } from 'react';
 
 import TaskBar from '../../TaskBar/TaskBar';
 import Header from '../../Header/Header';
+import { useNavigate } from 'react-router-dom';
 
 import { Card } from 'primereact/card';
-import { Image } from 'primereact/image';
-//import DataScroller from '../../ScrollCards/ScrollCards'
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
 import itemTemplateTrening from '../../CardItem/CardItemTrening';
@@ -16,17 +15,35 @@ import DescribeTrening from '../TreningDescription/DescriptionTrebing';
 
 const GymPage=()=>{
     const {planData  }=useContext(PlanDataContext);
-    const treningObj = {
-        times: planData[0].trening[0].times,
-        exerciseName: planData[0].trening[0].exerciseName,
-        exerciseDescription: planData[0].trening[0].exerciseDescription,
-        exerciseVideo: planData[0].trening[0].exerciseVideo,
-        //nameMuscleGroup: planData[0].trening[0].muscleGroup.nameMuscleGroup,
-        //typeOfTrening: planData[0].trening[0].typeOfTrening.typeOfTreningValue,
-    };
+    const navigate = useNavigate();
+
+        if (!planData || !planData[0] || !planData[0].trening) {
+            navigate('/');
+        }
+
+
+    
+    let treningObj={}
+    if(planData[0].trening > 0){
+        console.log(planData);
+        treningObj = {
+            times: planData[0].trening[0].times,
+            exerciseName: planData[0].trening[0].exerciseName,
+            exerciseDescription: planData[0].trening[0].exerciseDescription,
+            exerciseVideo: planData[0].trening[0].exerciseVideo,
+            //nameMuscleGroup: planData[0].trening[0].muscleGroup.nameMuscleGroup,
+            //typeOfTrening: planData[0].trening[0].typeOfTrening.typeOfTreningValue,
+        };
+    }
+    else{
+        if (!planData || !planData[0] || !planData[0].trening) {
+            navigate('/');
+        }
+    }
 
     const [treningItem , setTreningItem]=useState(treningObj)
-
+ 
+    
     const updateData=(value)=>{
         setTreningItem(value);
         console.log(treningItem);
@@ -43,7 +60,7 @@ const GymPage=()=>{
                 const exercise = treningItem.exercise;
 
                 const treningObj = {
-                    times: treningItem.times,
+                    times: exercise.times,
                     exerciseName: exercise.exerciseName,
                     exerciseDescription: exercise.exerciseDescription,
                     exerciseVideo: exercise.exerciseVideo,
@@ -56,6 +73,7 @@ const GymPage=()=>{
                 else if(treningObj.typeOfTrening === "Gym"){
                     allTrening.push(treningObj);
                 }
+                console.log(treningObj);
             })
         });
 
