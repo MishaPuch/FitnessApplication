@@ -1,50 +1,53 @@
-    using FitnessApp.BLL.DI_Service;
+using FitnessApp.BLL.DI_Service;
 using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
-    using FitnessApp.DAL;
+using FitnessApp.BLL.Services.FileServices;
+using FitnessApp.DAL;
 using FitnessApp.DAL.DiRepositories;
 using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.InterfaceRepositories;
-    using FitnessApp.DAL.repositories;
+using FitnessApp.DAL.repositories;
 using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 
 
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
-    var AppConfig = builder.Configuration;
+var AppConfig = builder.Configuration;
 
 
-    IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
-    string connectionString = configuration.GetSection("Data").Value;
+IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
+string connectionString = configuration.GetSection("Data").Value;
 
-    builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddSingleton<MealFileService>();
+builder.Services.AddSingleton<UserFileService>();
 
-    builder.Services.AddTransient<IUserRepositoryRepository, UserRepository>();
-    builder.Services.AddTransient<FitnessApp.DAL.interfaceRepositories.ITrainingAndDietScheduleRepository, FitnessApp.DAL.DiRepositories.TrainingAndDietScheduleRepository>();
-    builder.Services.AddTransient<ITypeOfMuscleGroupRepository, TypeOfMuscleGroupRepository>();
-    builder.Services.AddTransient<ITreningRepository, TreningRepository>();
-    builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
-    builder.Services.AddTransient<IDietRepository, DietRepository>();
-    builder.Services.AddTransient<IMealRepository, MealRepository>();
-    builder.Services.AddTransient<ITypeOfMealRepository, TypeOfMealRepository>();
-    builder.Services.AddTransient<ICalorificCoefficientRepository, CalorificCoefficientRepository>();
+builder.Services.AddTransient<IUserRepositoryRepository, UserRepository>();
+builder.Services.AddTransient<FitnessApp.DAL.interfaceRepositories.ITrainingAndDietScheduleRepository, FitnessApp.DAL.DiRepositories.TrainingAndDietScheduleRepository>();
+builder.Services.AddTransient<ITypeOfMuscleGroupRepository, TypeOfMuscleGroupRepository>();
+builder.Services.AddTransient<ITreningRepository, TreningRepository>();
+builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddTransient<IDietRepository, DietRepository>();
+builder.Services.AddTransient<IMealRepository, MealRepository>();
+builder.Services.AddTransient<ITypeOfMealRepository, TypeOfMealRepository>();
+builder.Services.AddTransient<ICalorificCoefficientRepository, CalorificCoefficientRepository>();
 
-    builder.Services.AddTransient<IUserService, UserService>();   
-    builder.Services.AddTransient<FitnessApp.BLL.Interface.ITrainingAndDietSchedule, FitnessApp.BLL.Services.TrainingAndDietSchedule>();
-    builder.Services.AddTransient<IExerciseService, ExerciseService>();
-    builder.Services.AddTransient<ITreningService, TreningService>();
-    builder.Services.AddTransient<ITypeOfMuscleGroupService, TypeOfMuscleGroupService>();
-    builder.Services.AddTransient<IDietService, DietService>();
-    builder.Services.AddTransient<IMealService, MealService>();
-    builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
+builder.Services.AddTransient<IUserService, UserService>();   
+builder.Services.AddTransient<FitnessApp.BLL.Interface.ITrainingAndDietSchedule, FitnessApp.BLL.Services.TrainingAndDietSchedule>();
+builder.Services.AddTransient<IExerciseService, ExerciseService>();
+builder.Services.AddTransient<ITreningService, TreningService>();
+builder.Services.AddTransient<ITypeOfMuscleGroupService, TypeOfMuscleGroupService>();
+builder.Services.AddTransient<IDietService, DietService>();
+builder.Services.AddTransient<IMealService, MealService>();
+builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
 //  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
 
 

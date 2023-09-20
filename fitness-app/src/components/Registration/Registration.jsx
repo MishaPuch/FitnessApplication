@@ -1,12 +1,12 @@
-import React, { Fragment  , useContext, useState} from "react";
+import React, { Fragment  , useContext, useRef, useState} from "react";
 import { PlanDataContext } from '../../State/PlanDataState';
-
 import { useNavigate } from 'react-router-dom';
-
+import { FileUpload } from 'primereact/fileupload';
 import { Link } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 // import { Dropdown } from 'primereact/dropdown';
 
 
@@ -15,7 +15,7 @@ function Registration(){
 const {planData , setPlanData} = useContext(PlanDataContext);
 const navigate = useNavigate();
 const [isRegistrated , setIsRegistrated] = useState(false);
-
+const [selectedFile , setSelectedFile]=useState(null);
 const [name, setName] = useState("");
 const [email, setEmail] = useState("");
 const [sex, setSex] = useState("man");
@@ -23,27 +23,39 @@ const [age, setAge] = useState("");
 const [password, setPassword] = useState("");
 const [calory, setCalory] = useState(1500 );
 
+const toast = useRef(null);
+
+const onUpload = (e) => {
+  const uploadedFile = e.originalEvent.body[0]; // Получаем загруженный файл из события
+  setSelectedFile(uploadedFile);
+  console.log(uploadedFile);
+  toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+};
+
+
+
 const handleSave = async () => {
-  
-
-const userData = {
-  userName: name,
-  userEmail: email,
-  sex: sex,
-  age: age,
-  password: password,
-  restTime: 30,
-  calorificValue: calory  
+  const userData = {
+    userName: name,
+    userEmail: email,
+    sex: sex,
+    age: age,
+    password: password,
+    restTime: 30,
+    calorificValue: calory  
 };    
-
+  const formData= new FormData();
+  formData.append("creatingUser" , JSON.stringify(userData));
+  formData.append("file" , selectedFile);
 try {
   const response = await fetch("https://localhost:7060/api/Account/create-user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+  method: "POST",
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+  
+  body: formData,
+});
 
   if (response.ok) {
     console.log("User registration successful!");
@@ -64,8 +76,7 @@ try {
 } catch (error) {
   console.error("Error:", error);
 }
-};    
-
+}; 
 
 const handleNameChange =(value) =>{
     setName(value)
@@ -94,10 +105,14 @@ return(
       <Fragment>
 
         <h1>Registration</h1>
+
         <InputText type="text" id="txtName" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="How i can call you" onChange={(e)=> handleNameChange(e.target.value)}/> <br/>
         <InputText type="text" id="txtEmail" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Your Email" onChange={(e)=> handleEmailChange(e.target.value)}/> <br/>
-        <InputText type="text" id="txtAge" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Your Age" onChange={(e)=> handleAgeChange(e.target.value)}/> <br/>
-        
+        choose your avatar <br/>
+        <Toast ref={toast}></Toast>
+        <FileUpload mode="basic" name="demo[]" accept="image/*" maxFileSize={1000000} onChange={onUpload} />
+
+        <InputText type="text" id="txtAge" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Your Age" onChange={(e) => handleAgeChange(e.target.value)}/> <br/>
         
         <div className="p-2" style={{ color: 'var(--surface-600)' }}>
             <label> Your Sex </label>

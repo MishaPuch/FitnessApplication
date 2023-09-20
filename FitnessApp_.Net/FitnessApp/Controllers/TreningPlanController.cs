@@ -26,6 +26,7 @@ namespace FitnessApp.Controllers
         {
             DateTime date = day.AddDays(1); // i made it because i got from front selected date -1 day
             var fullModel = await _trainingAndDietSchedule.GetDalyPlanAsync(userId, date.Date);
+
             return fullModel;
         }
     
@@ -50,25 +51,6 @@ namespace FitnessApp.Controllers
         {
             return await _trainingAndDietSchedule.GetAllUserPlansAsync(userId);
         }
-        // POST api/<TreningPlanController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-           
-        }
-
-        // PUT api/<TreningPlanController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-
-        }
-
-        // DELETE api/<TreningPlanController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-
-        }
+       
     }
 }

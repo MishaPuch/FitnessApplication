@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zRkQBelkQNCxmNnxuPPQLXnhek6jPeilfOdb93msXCvdVZ0Aj1Kv79H3Tkj19qUkmd60+HqkN9z52HyG2PkL4g==",
+  "dgSpecHash": "fGsQgov9RmY9rdX2xMvSWWIjNU503seYiZRKjyNy4cPAtw/XgODhLVbqWzNZwtZX7XmuwQecfHFcX5kGJsep4w==",
   "success": true,
   "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\misha\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.storage.blobs\\12.18.0\\azure.storage.blobs.12.18.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.storage.common\\12.17.0\\azure.storage.common.12.17.0.nupkg.sha512",
+    "C:\\Users\\misha\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

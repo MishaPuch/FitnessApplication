@@ -218,3 +218,7 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\obj\Debug\n
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\obj\Debug\net6.0\FitnessApp.pdb
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\obj\Debug\net6.0\FitnessApp.genruntimeconfig.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\obj\Debug\net6.0\ref\FitnessApp.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\Azure.Storage.Blobs.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\Azure.Storage.Common.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.IO.Hashing.dll

@@ -4,7 +4,7 @@ import { Image } from "primereact/image";
 
 const DescribeTrening =(props)=>{
     console.log(props);
-    if(props.length>0){
+    if(props !==  0){
         return(
             <div>
                 <Card style={{ width: '596px' , height : '500px'  }}>
