@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xmuqSeq5PwfsV7g7IqoLOQTq3gAIjoFsDty+5ZKmvJlNDgI3Di4vzgD+uPqz3h5BLl8/XDkcYnqFQsucecbSJQ==",
+  "dgSpecHash": "BfrDfmzdpwnZYzrBsCiir+Am+7XGbJM3Q4jfJUKJ4FK6dNYSF4zXyQ5Zw9p881jkOstMPAHqdoQYUEnuhtm6Hw==",
   "success": true,
   "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\misha\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",

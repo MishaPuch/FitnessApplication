@@ -6,6 +6,7 @@ using FitnessApp.DAL.ViewModel;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace FitnessApp.Controllers
 {
@@ -19,6 +20,8 @@ namespace FitnessApp.Controllers
         private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
         private readonly IDietService _dietService;
         private readonly ITreningService _treningService;
+        private readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 
         public AccountController(
             IUserService userService,
@@ -48,6 +51,8 @@ namespace FitnessApp.Controllers
         [HttpGet("user/{userId:int}")]
         public async Task<User> GetUser(int userId)
         {
+            Logger.Info($"user was not found or not ");
+
             return await _userService.GetUserByIdAsync(userId);
         }
 
@@ -59,9 +64,11 @@ namespace FitnessApp.Controllers
             if (user != null)
             {
                 return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+                Logger.Info($"user was found : { user }");
             }
             else
             {
+                Logger.Info($"user was not found : {user}");
                 return new List<FullModel>();
             }
         }
