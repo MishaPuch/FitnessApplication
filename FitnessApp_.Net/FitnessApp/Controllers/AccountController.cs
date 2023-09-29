@@ -7,6 +7,8 @@ using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using System.Globalization;
+using System.IO;
 
 namespace FitnessApp.Controllers
 {
@@ -44,15 +46,15 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public async Task<List<User>> GetUsers()
         {
+            
             return await _userService.GetAllUsersAsync();
+
         }
 
         // GET: api/<AccountController>/GetUsers/user/{userId}
         [HttpGet("user/{userId:int}")]
         public async Task<User> GetUser(int userId)
         {
-            Logger.Info($"user was not found or not ");
-
             return await _userService.GetUserByIdAsync(userId);
         }
 
@@ -73,37 +75,44 @@ namespace FitnessApp.Controllers
             }
         }
 
-        // POST: api/<AccountController>/create-user    
         [HttpPost("create-user")]
-        public async Task<List<FullModel>> Register([FromBody] User creatingUser, IFormFile file)
+        public async Task<IActionResult> Register([FromBody] User creatingUser/*, [FromForm] IFormFile file*/)
         {
-            User chekingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
-            if (chekingUser != null)
+            try
             {
-                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(chekingUser.Id);
-            }
-            else
-            {
-                
-                User user = await _userService.CreateUserAsync(creatingUser);
-                if (file != null)
+                User checkingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
+                if (checkingUser != null)
                 {
-                   var result = await _userFileService.UploadFile(file, user);
+                    return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(checkingUser.Id));
                 }
-                var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
-                var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
-                var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
+                else
+                {
+                    User user = await _userService.CreateUserAsync(creatingUser);
+                    /*if (file != null)
+                    {
+                        var result = await _uxserFileService.UploadFile(file, user);
+                    }*/
+                    var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
+                    var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
+                    var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
 
-                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+                    return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
+                }
+            }
+            catch (Exception ex)
+            {
+                // Здесь вы можете записать сообщение об ошибке в логи или вернуть его как часть ответа для отладки
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
+
 
         // PUT: api/<AccountController>/changeData
         [HttpPut("changeData")]
         public async Task ChangeUserData([FromBody] User user)
         {
             await _userService.CangeUserDataAsync(user);
-            Console.WriteLine($"user : {user.Id} - was saccesfully changed");
+            Logger.Info($"user : {user.Id} - was saccesfully changed");
         }
 
         // DELETE: api/<AccountController>/DeleteUser/{userId}
@@ -111,7 +120,7 @@ namespace FitnessApp.Controllers
         public async Task DeleteUser(int userId)
         {
             await _userService.DeleteUserAsync(userId);
-            Console.WriteLine($"user :id {userId} - was saccesfully deleted");
+            Logger.Info($"user :id {userId} - was saccesfully deleted");
 
         }
         [HttpGet("GetAllFotos")]

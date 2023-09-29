@@ -25,7 +25,6 @@ export default function Diet() {
     const updateData = (value) => {
         setMeal(value);
     }
-    console.log(planData[0].diet[0]);
 
     const diet={
         foodName : planData[0].diet[0].meal.foodName,

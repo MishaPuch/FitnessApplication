@@ -39,7 +39,6 @@ export default function Settings() {
             restTime: restTime,
             calorificValue: calory,
         };
-        console.log(userData);
         try {
             const response = await fetch("https://localhost:7060/api/Account/changeData", {
               method: "PUT",

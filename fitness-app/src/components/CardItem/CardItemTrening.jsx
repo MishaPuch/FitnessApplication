@@ -10,7 +10,7 @@ const itemTemplateTrening = ({data , updateData}) => {
     return (
         <div className="col-15" onClick={handleClick}>
             <div className="flex flex-column xl:flex-row xl:align-items-start p-1 gap-3">
-                <img className="w-9 sm:w-16rem xl:w-10rem shadow-4 block xl:block mx-auto border-round" src={`https://donsport.ru/upload/iblock/2bd/h3rar0myqfv3pw6rty7r02cawhk3erwq.jpg`} alt={data.name} /> 
+                <img className="w-9 sm:w-16rem xl:w-10rem shadow-4 block xl:block mx-auto border-round" src={data.exerciseVideo} alt={data.name} /> 
                 <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
                     <div className="flex flex-column align-items-center lg:align-items-start gap-3">
                         <div className="flex flex-column gap-1">

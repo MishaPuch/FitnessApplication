@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState  } from "react";
 import TaskBar from "../TaskBar/TaskBar.jsx";
 import Header from "../Header/Header";
-import DataScroller from './ScrollCards/ScrollComponentTrening'
+import DataScrollerTrening from './ScrollCards/ScrollComponentTrening'
 import DataScrollerDiet from './ScrollCards/ScrollComponentDiet.jsx'
 import { useNavigate } from 'react-router-dom';
 import './UserAccount.css'
@@ -51,8 +51,8 @@ export default function UserPage(props){
                         onMouseLeave={() => setHoveredTreningCard(null)}
                         style={{ width: '550px' , height : '239px'  }}     
                     >
-                        <DataScroller />
-                        {hoveredTreningCard === 'diet' && <div className="card-overlay">Trening</div>}
+                        <DataScrollerTrening />
+                        {hoveredTreningCard === 'trening' && <div className="card-overlay">Trening</div>}
 
                     </Card>
                 </div>

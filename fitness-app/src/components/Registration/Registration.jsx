@@ -1,4 +1,4 @@
-import React, { Fragment  , useContext, useRef, useState} from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { PlanDataContext } from '../../State/PlanDataState';
 import { useNavigate } from 'react-router-dom';
 import { FileUpload } from 'primereact/fileupload';
@@ -6,144 +6,157 @@ import { Link } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import { Toast } from 'primereact/toast';
-// import { Dropdown } from 'primereact/dropdown';
 
+function Registration() {
+    const { planData, setPlanData } = useContext(PlanDataContext);
+    const navigate = useNavigate();
+    const [isRegistrated, setIsRegistrated] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [sex, setSex] = useState("man");
+    const [age, setAge] = useState("");
+    const [password, setPassword] = useState("");
+    const [calory, setCalory] = useState(1500);
+    //const [imagePreview, setImagePreview] = useState(null); // Define imagePreview state
 
-function Registration(){
+    const handleSave = async () => {
+        const userData = {
+            userName: name,
+            userEmail: email,
+            sex: sex,
+            age: age,
+            password: password,
+            restTime: 30,
+            calorificValue: calory,
+        };
+       
+        console.log(JSON.stringify(userData));
+        try {
+            const response = await fetch("https://localhost:7060/api/Account/create-user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
 
-const {planData , setPlanData} = useContext(PlanDataContext);
-const navigate = useNavigate();
-const [isRegistrated , setIsRegistrated] = useState(false);
-const [selectedFile , setSelectedFile]=useState(null);
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [sex, setSex] = useState("man");
-const [age, setAge] = useState("");
-const [password, setPassword] = useState("");
-const [calory, setCalory] = useState(1500 );
+                body: JSON.stringify(userData),
+            });
 
-const toast = useRef(null);
+            // Переберите итератор и выведите содержимое на консоль
+            
+            if (response.ok) {
+                console.log("User registration successful!");
+                const responseData = await response.json()
+                setPlanData(responseData);
+                console.log(planData);
+                setIsRegistrated(true)
+                navigate('/account');
 
-const onUpload = (e) => {
-  const uploadedFile = e.originalEvent.body[0]; // Получаем загруженный файл из события
-  setSelectedFile(uploadedFile);
-  console.log(uploadedFile);
-  toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-};
+            } else {
+                console.log(response);
+                alert("Error while registering user");
+            }
 
+            if (isRegistrated) {
+                navigate('/account')
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
+    // Function to handle image selection
+    // const handleImageChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setSelectedImage(file);
+    //     // Create a preview for the selected image
+    //     const reader = new FileReader();
+    //     reader.onload = (e) => {
+    //         setImagePreview(e.target.result);
+    //     };
+    //     reader.readAsDataURL(file);
+    // };
 
-const handleSave = async () => {
-  const userData = {
-    userName: name,
-    userEmail: email,
-    sex: sex,
-    age: age,
-    password: password,
-    restTime: 30,
-    calorificValue: calory  
-};    
-  const formData= new FormData();
-  formData.append("creatingUser" , JSON.stringify(userData));
-  formData.append("file" , selectedFile);
-try {
-  const response = await fetch("https://localhost:7060/api/Account/create-user", {
-  method: "POST",
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-  
-  body: formData,
-});
+    const handleNameChange = (value) => {
+        setName(value)
+    }
+    const handleEmailChange = (value) => {
+        setEmail(value)
+    }
+    const handleAgeChange = (value) => {
+        setAge(value)
+    }
+    const handlePasswordChange = (value) => {
+        setPassword(value)
+    }
+    const handleCalorySelect = (value) => {
+        console.log("calory value: " + value);
+        setCalory(value);
+    }
+    const handleSexSelect = (value) => {
+        console.log("Sex is " + value);
+        setSex(value)
+    }
 
-  if (response.ok) {
-    console.log("User registration successful!");
-    const responseData=await response.json()
-    setPlanData(responseData);
-    console.log(planData);
-    setIsRegistrated(true)
-    navigate('/account');
+    return (
+        <div>
+            <Card className='m-2 p-3 pt-0 '>
+                <Fragment>
 
-  } else {
-    console.log(response);
-    alert("Error while registering user");
-  }
+                    <h1>Registration</h1>
 
-  if(isRegistrated){
-    navigate('/account')
-  }
-} catch (error) {
-  console.error("Error:", error);
-}
-}; 
+                    <InputText type="text" id="txtName" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="How i can call you" onChange={(e) => handleNameChange(e.target.value)} /> <br />
+                    <InputText type="text" id="txtEmail" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Your Email" onChange={(e) => handleEmailChange(e.target.value)} /> <br />
+                    <input
+                        type="file"
+                        name="myImage"
+                       // onChange={handleImageChange} // Attach the image selection handler
+                    />
+                    {/* {imagePreview && (
+                        <div>
+                            <img
+                                alt="Selected"
+                                width={"250px"}
+                                src={imagePreview}
+                            />
+                            <br />
+                        </div>
+                    )} */}
 
-const handleNameChange =(value) =>{
-    setName(value)
-}
-const handleEmailChange =(value) =>{
-    setEmail(value)
-}      
-const handleAgeChange =(value) =>{
-    setAge(value)
-}
-const handlePasswordChange =(value) =>{
-    setPassword(value)
-}
-const handleCalorySelect = (value) => {
-    console.log("calory value: " + value);
-    setCalory(value);
-}     
-const handleSexSelect = (value) => {
-  console.log("Sex is " + value);
-  setSex(value)
-}         
+                    <br />
+                    <br />
 
-return(
-  <div>
-    <Card className='m-2 p-3 pt-0 '>
-      <Fragment>
+                    <InputText type="text" id="txtAge" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Your Age" onChange={(e) => handleAgeChange(e.target.value)} /> <br />
 
-        <h1>Registration</h1>
+                    <div className="p-2" style={{ color: 'var(--surface-600)' }}>
+                        <label> Your Sex </label>
+                        <select id="selectCalory" onChange={(e) => handleSexSelect(e.target.selectedOptions[0].value)}>
+                            <option value={"man"}>man</option>
+                            <option value={"woman"}>woman</option>
+                        </select> <br />
+                    </div>
 
-        <InputText type="text" id="txtName" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="How i can call you" onChange={(e)=> handleNameChange(e.target.value)}/> <br/>
-        <InputText type="text" id="txtEmail" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Your Email" onChange={(e)=> handleEmailChange(e.target.value)}/> <br/>
-        choose your avatar <br/>
-        <Toast ref={toast}></Toast>
-        <FileUpload mode="basic" name="demo[]" accept="image/*" maxFileSize={1000000} onChange={onUpload} />
+                    <div className="p-2" style={{ color: 'var(--surface-600)' }}>
+                        <label> Calory per Day </label>
+                        <select id="selectSex" onChange={(e) => handleCalorySelect(e.target.selectedOptions[0].value)}>
+                            <option value={1500}>1500</option>
+                            <option value={1800}>1800</option>
+                            <option value={2000}>2000</option>
+                            <option value={2200}>2200</option>
+                        </select> <br />
+                    </div>
+                    <InputText type="password" id="txtPassword" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Create a Password" onChange={(e) => handlePasswordChange(e.target.value)} /> <br />
 
-        <InputText type="text" id="txtAge" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Your Age" onChange={(e) => handleAgeChange(e.target.value)}/> <br/>
-        
-        <div className="p-2" style={{ color: 'var(--surface-600)' }}>
-            <label> Your Sex </label>
-            <select id="selectCalory" onChange={(e) => handleSexSelect(e.target.selectedOptions[0].value)}>
-                <option value={"man"}>man</option>
-                <option value={"woman"}>woman</option>
-            </select> <br/>
+                    <Button label='Sign up' className="m-3" onClick={handleSave} /> <br />
+
+                    <Link to="/">
+                        <Button label='Login' link />
+                    </Link>
+
+                </Fragment>
+            </Card>
         </div>
-
-        <div className="p-2" style={{ color: 'var(--surface-600)' }}>
-            <label> Calory per Day </label>
-            <select id="selectSex" onChange={(e) => handleCalorySelect(e.target.selectedOptions[0].value)}>
-                <option value={1500}>1500</option>
-                <option value={1800}>1800</option>
-                <option value={2000}>2000</option>
-                <option value={2200}>2200</option>
-            </select> <br/>
-        </div>          
-        <InputText type="password" id="txtPassword" className="p-inputtext-sm m-2 ml-5 mr-5"  placeholder="Create a Password" onChange={(e)=> handlePasswordChange(e.target.value)}/> <br/>
-        
-        <Button label='Sign up' className="m-3" onClick={handleSave}/> <br/>
-
-        <Link to="/">
-          <Button label='Login' link/>
-        </Link>
-          
-      </Fragment>
-    </Card>  
-  </div>
-)
+    )
 };
 
-
-export default Registration
+export default Registration;

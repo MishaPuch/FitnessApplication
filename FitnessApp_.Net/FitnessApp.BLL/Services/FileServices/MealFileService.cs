@@ -1,10 +1,13 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using FitnessApp.DAL.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +18,7 @@ namespace FitnessApp.BLL.Services.FileServices
         private readonly string _storageAccount = "fitnessapp";
         private readonly string _key = "V4tLrHmmwyI/npR8wIzqs6g23spab0EiKy0QoHrfbe8mcjo05VJrskggVMrPS1EkKAQYbMpY08Xv+AStZEaLXg==";
         private readonly BlobContainerClient _fileMealsConteiner;
+        
 
 
         public MealFileService()
@@ -93,5 +97,7 @@ namespace FitnessApp.BLL.Services.FileServices
 
             return new BlobResponseDto { Error = false, Status = $"File {file.Name} - was seccessfully deleted" };
         }
+            
+
     }
 }

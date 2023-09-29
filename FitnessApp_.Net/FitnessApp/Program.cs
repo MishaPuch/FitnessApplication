@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog.Config;
 using NLog.Targets;
 using NLog;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
+    
 var AppConfig = builder.Configuration;
-
 
 IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
 string connectionString = configuration.GetSection("Data").Value;

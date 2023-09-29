@@ -96,7 +96,10 @@ namespace FitnessApp.BLL.Services
                 fullModel.Trening = await _treningService.GetTreningsByTreningScheduleIdAsync(day.Id);
                 fullModel.User = await _userService.GetUserByIdAsync(day.UserId);
                 fullModel.Diet = await _dietService.GetDietByTreningScheduleIdAsync(day.Id);
-
+                foreach(var trening in fullModel.Trening)
+                {
+                    trening.Exercise.ExerciseVideo = "https://fitnessapp.blob.core.windows.net/exercisevideos/" + trening.Exercise.ExerciseVideo + ".jpg";
+                }
                 foreach (var diet in fullModel.Diet)
                 {
                     CalorificCoefficientValue coefficientValue = await _calorificCoefficientService.GetCoefficientValueByCaloryAndTypeOfMealAsync(fullModel.User.CalorificValue, diet.Meal.TypeOfMeal.Id);
