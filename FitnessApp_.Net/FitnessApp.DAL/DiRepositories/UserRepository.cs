@@ -1,4 +1,7 @@
-﻿using FitnessApp.DAL.InterfaceRepositories;
+﻿using FitnessApp.DAL.DiRepositories;
+using FitnessApp.DAL.interfaceRepositories;
+using FitnessApp.DAL.InterfaceRepositories;
+using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,17 +15,19 @@ namespace FitnessApp.DAL.repositories
     public class UserRepository : IUserRepositoryRepository
     {
         private readonly FitnessAppContext _context;
-        public UserRepository(FitnessAppContext context) 
+        private readonly ITreningPlanRepository _treningPlan;
+        public UserRepository(FitnessAppContext context , ITreningPlanRepository treningPlan) 
         {
             _context = context;
+            _treningPlan = treningPlan;
         }
 
         public async Task<User> AddUserAsync(User user)
         {
             user.DateOFLastPayment = DateTime.Now.Date;
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            User? createdUser = _context.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
+            await _context.SaveChangesAsync(); 
+            User createdUser = _context.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
             return createdUser;
 
         }
@@ -45,7 +50,7 @@ namespace FitnessApp.DAL.repositories
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.Users.FindAsync(userId);
+            return await _context.Users.FirstOrDefaultAsync(u=>u.Id == userId);
         }
 
         public async Task UpdateUserAsync(User user)
@@ -65,9 +70,13 @@ namespace FitnessApp.DAL.repositories
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == email && u.Password == password);
             if (user != null)
+            {
                 return user;
+            }
             else
+            {
                 return null;
+            }
         }
     }
 }

@@ -41,6 +41,7 @@ builder.Services.AddTransient<IDietRepository, DietRepository>();
 builder.Services.AddTransient<IMealRepository, MealRepository>();
 builder.Services.AddTransient<ITypeOfMealRepository, TypeOfMealRepository>();
 builder.Services.AddTransient<ICalorificCoefficientRepository, CalorificCoefficientRepository>();
+builder.Services.AddTransient<ITreningPlanRepository,TreningPlanRepository>();
 
 builder.Services.AddTransient<IUserService, UserService>();   
 builder.Services.AddTransient<ITrainingAndDietSchedule, TrainingAndDietSchedule>();

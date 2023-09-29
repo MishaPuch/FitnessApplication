@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import { set } from "date-fns";
 
 function Registration() {
     const { planData, setPlanData } = useContext(PlanDataContext);
@@ -18,6 +19,7 @@ function Registration() {
     const [age, setAge] = useState("");
     const [password, setPassword] = useState("");
     const [calory, setCalory] = useState(1500);
+    const [treningPlanId , setTreningPlanId]=useState(1);
     //const [imagePreview, setImagePreview] = useState(null); // Define imagePreview state
 
     const handleSave = async () => {
@@ -29,6 +31,7 @@ function Registration() {
             password: password,
             restTime: 30,
             calorificValue: calory,
+            treningPlanId:treningPlanId
         };
        
         console.log(JSON.stringify(userData));
@@ -53,7 +56,7 @@ function Registration() {
                 navigate('/account');
 
             } else {
-                console.log(response);
+                console.log(response.json());
                 alert("Error while registering user");
             }
 
@@ -76,7 +79,9 @@ function Registration() {
     //     };
     //     reader.readAsDataURL(file);
     // };
-
+    const handleTreningPlan=(value)=>{
+        setTreningPlanId(value)
+    }
     const handleNameChange = (value) => {
         setName(value)
     }
@@ -135,7 +140,14 @@ function Registration() {
                             <option value={"woman"}>woman</option>
                         </select> <br />
                     </div>
-
+                    <div className="p-2" style={{ color: 'var(--surface-600)' }}>
+                        <label> How Many trenings do you want per week </label>
+                        <select id="selectSex" onChange={(e) => handleTreningPlan(e.target.selectedOptions[0].value)}>
+                            <option value={1}>3</option>
+                            <option value={2}>4</option>
+                           
+                        </select> <br />
+                    </div>
                     <div className="p-2" style={{ color: 'var(--surface-600)' }}>
                         <label> Calory per Day </label>
                         <select id="selectSex" onChange={(e) => handleCalorySelect(e.target.selectedOptions[0].value)}>

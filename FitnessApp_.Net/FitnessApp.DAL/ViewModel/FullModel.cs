@@ -10,6 +10,7 @@ namespace FitnessApp.DAL.ViewModel
         public ICollection<Trening> Trening { get; set; }
         public User User { get; set; }
         public ICollection<Diet> Diet { get; set; }
+        public TreningPlan TreningPlan { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FitnessApp.DAL.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FitnessApp.Models
 {
@@ -19,5 +21,7 @@ namespace FitnessApp.Models
         public int RestTime { get; set; }
         public int CalorificValue { get; set; }
         public DateTime DateOFLastPayment { get; set; }
+        public int TreningPlanId { get; set; }
+        
     }
 }

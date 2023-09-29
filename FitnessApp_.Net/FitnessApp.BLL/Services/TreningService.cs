@@ -26,10 +26,15 @@ namespace FitnessApp.BLL.Interface
             return await _treningRepository.GetTreningsByTreningScheduleIdAsync(treningAndDietSheduleId);
         }
 
-        public async Task<List<Trening>> MakeTreningForADayAsync(TreningAndDietSchedule treningAndDietSchedule)
+        public async Task<List<Trening>> MakeTreningForADayPushPullLegsAsync(TreningAndDietSchedule treningAndDietSchedule)
         {
-            return await _treningRepository.MakeTreningForADayAsync(treningAndDietSchedule);
 
+            return await _treningRepository.MakeTreningForADayPushPullLegsAsync(treningAndDietSchedule);                      
+        }
+        public async Task<List<Trening>> MakeTreningForADayUpperLowerAsync(TreningAndDietSchedule treningAndDietSchedule)
+        {
+
+            return await _treningRepository.MakeTreningForADayUpperLowerAsync(treningAndDietSchedule);
         }
 
         public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)

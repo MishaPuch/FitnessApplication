@@ -26,11 +26,14 @@ namespace FitnessApp.DAL
         public DbSet<TypeOfMeal> TypesOfMeal { get; set; }
         public DbSet<TypeOfMuscleGroup> TypeOfMuscleGroups { get; set; }
         public DbSet<TypeOfTrening> TypesOfTrening { get; set; }
+        public DbSet<TreningPlan> TreningPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Diet>().HasKey(d => d.Id);
+
+
         }
         
     }
