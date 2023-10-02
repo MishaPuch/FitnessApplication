@@ -143,7 +143,7 @@ function Registration() {
                     <div className="p-2" style={{ color: 'var(--surface-600)' }}>
                         <label> How Many trenings do you want per week </label>
                         <select id="selectSex" onChange={(e) => handleTreningPlan(e.target.selectedOptions[0].value)}>
-                            <option value={1}>3</option>
+                            <option value={1}>3</option>e71fa5c189f3e3c3b05fcb0137d11ea9df0f1c84d7f3af3741d1160ceb0c74f0
                             <option value={2}>4</option>
                            
                         </select> <br />
