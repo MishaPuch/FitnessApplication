@@ -12,6 +12,8 @@ import Settings from './components/SettingsPage/Settings';
 import HomePage from './components/Trenings/HomeTrening/HomeTrening';
 import GymPage from './components/Trenings/GymTrening/GymTrening';
 import Diet from './components/DietPage/Diet';
+import WorkerPage from './components/WorkerPage/WorkerPage';
+import WorkerSettings from './components/WorkerSettings/WorkerSettings'
 
 function App() {
   return (
@@ -30,6 +32,9 @@ function App() {
               <Route path="/gym-trening" element={<GymPage/>}/>
               <Route path="/home-trening" element={<HomePage/>}/>
               <Route path="/diet" element={<Diet/>}/>
+              <Route path="/WorkerPage" element={<WorkerPage/>}/>
+              <Route path="/WorkerSettings" element={<WorkerSettings/>}/>
+
               
           </Routes>
         </BrowserRouter>

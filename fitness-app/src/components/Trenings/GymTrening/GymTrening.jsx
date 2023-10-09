@@ -27,7 +27,6 @@ const HomePage = () => {
 
         if (allTrening.length > 0) {
             setTreningItem(allTrening[0]);
-            console.log(treningItem);
         }            
     }, [planData, navigate]);
 

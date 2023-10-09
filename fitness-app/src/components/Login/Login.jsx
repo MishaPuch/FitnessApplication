@@ -18,7 +18,7 @@ const LoginForm = () => {
         e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-
+        //58682
         try {
             const response = await fetch(`https://localhost:7060/api/Account/user/${email}/${password}`, {
                 method: 'GET',
@@ -48,7 +48,14 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (isLogged) {
-            navigate('/account');
+            console.log(planData[0].role.id);
+            if(planData[0].role.id===1){
+                navigate('/account');
+             }
+            else if(planData[0].role.id===2){
+                navigate('/WorkerPage');
+            }
+
         }
     }, [isLogged]);
 
