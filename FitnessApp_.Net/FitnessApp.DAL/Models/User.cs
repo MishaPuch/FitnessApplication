@@ -6,6 +6,7 @@ namespace FitnessApp.Models
 {
     public class User
     {
+        
         public int Id { get; set; }
         [StringLength(100)]
         public string UserName { get; set; }
@@ -22,6 +23,7 @@ namespace FitnessApp.Models
         public int CalorificValue { get; set; }
         public DateTime DateOFLastPayment { get; set; }
         public int TreningPlanId { get; set; }
-        
+        public int RoleId { get; set; }
+
     }
 }

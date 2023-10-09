@@ -46,9 +46,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public async Task<List<User>> GetUsers()
         {
-            
             return await _userService.GetAllUsersAsync();
-
         }
 
         // GET: api/<AccountController>/GetUsers/user/{userId}
@@ -121,7 +119,6 @@ namespace FitnessApp.Controllers
         {
             await _userService.DeleteUserAsync(userId);
             Logger.Info($"user :id {userId} - was saccesfully deleted");
-
         }
         [HttpGet("GetAllFotos")]
         public async Task<IActionResult> ListOfBlobs()

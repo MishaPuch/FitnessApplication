@@ -23,13 +23,15 @@ namespace FitnessApp.BLL.Services
         private readonly IDietService _dietService;
         private readonly IUserService _userService;
         private readonly ICalorificCoefficientRepository _calorificCoefficientService;
+        private readonly IRoleService _roleService;
 
         public TrainingAndDietSchedule(
             DAL.interfaceRepositories.ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository,
             ITreningService treningService,
             IDietService dietService,
             IUserService userService,
-            ICalorificCoefficientRepository calorificCoefficientService
+            ICalorificCoefficientRepository calorificCoefficientService,
+            IRoleService roleService
             )
         {
             _trainingAndDietScheduleRepository = trainingAndDietScheduleRepository;
@@ -37,6 +39,7 @@ namespace FitnessApp.BLL.Services
             _dietService= dietService;
             _userService = userService;
             _calorificCoefficientService = calorificCoefficientService;
+            _roleService = roleService;
         }
 
         public async Task<List<FullModel>> GetAllPlans()
@@ -96,6 +99,7 @@ namespace FitnessApp.BLL.Services
                 fullModel.Trening = await _treningService.GetTreningsByTreningScheduleIdAsync(day.Id);
                 fullModel.User = await _userService.GetUserByIdAsync(day.UserId);
                 fullModel.Diet = await _dietService.GetDietByTreningScheduleIdAsync(day.Id);
+                fullModel.Role=await _roleService.GetByUserIdAsync(day.User.RoleId);
                 foreach(var trening in fullModel.Trening)
                 {
                     trening.Exercise.ExerciseVideo = "https://fitnessapp.blob.core.windows.net/exercisevideos/" + trening.Exercise.ExerciseVideo + ".jpg";

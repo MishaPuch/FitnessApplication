@@ -11,6 +11,7 @@ namespace FitnessApp.DAL.ViewModel
         public User User { get; set; }
         public ICollection<Diet> Diet { get; set; }
         public TreningPlan TreningPlan { get; set; }
+        public Role Role { get; set; }
 
     }
 }

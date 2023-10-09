@@ -27,6 +27,7 @@ namespace FitnessApp.DAL
         public DbSet<TypeOfMuscleGroup> TypeOfMuscleGroups { get; set; }
         public DbSet<TypeOfTrening> TypesOfTrening { get; set; }
         public DbSet<TreningPlan> TreningPlans { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

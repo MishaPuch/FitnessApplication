@@ -29,7 +29,6 @@ namespace FitnessApp.DAL.repositories
             await _context.SaveChangesAsync(); 
             User createdUser = _context.Users.FirstOrDefault(u => u.UserEmail == user.UserEmail);
             return createdUser;
-
         }
 
         public async Task DeleteUserAsync(int userId)
