@@ -10,9 +10,11 @@ import TaskBar from '../TaskBar/TaskBar';
 import './Settings.css'
 import '../UserInfoPage/UserAccount.css'
 import { useNavigate } from 'react-router-dom';
+import useChangeUserApi from '../../hooks/useChangeUserApi';
 
 export default function Settings() {
     const { planData } = useContext(PlanDataContext);
+    const changeUser=useChangeUserApi();
 
     const [name, setName] = useState(planData[0]?.user?.userName || "");
     const [email] = useState(planData[0]?.user?.userEmail || "");
@@ -40,23 +42,7 @@ export default function Settings() {
             calorificValue: calory,
         };
         try {
-            const response = await fetch("https://localhost:7060/api/Account/changeData", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            });
-          
-            if (response.ok) {
-              console.log("Users data changed successful");
-              alert("To see your changes , you have to login👍");
-              
-            } else {
-              console.log(response);
-              alert("Error while changing data");
-            }
-          
+            changeUser(userData);
         } catch (error) {
         console.error("Error:", error);
         }

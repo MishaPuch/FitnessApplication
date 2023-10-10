@@ -54,15 +54,28 @@ namespace FitnessApp.DAL.repositories
 
         public async Task UpdateUserAsync(User user)
         {
-            var changingUser = await _context.Users.FirstOrDefaultAsync(u=>u.UserEmail==user.UserEmail);
-            
+            User changingUser;
+            if (user.Id == 0)
+            {
+                changingUser = await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
+            }
+            else
+            {
+                changingUser = await _context.Users.FindAsync(user.Id);
+            }
             changingUser.UserName = user.UserName;
+            changingUser.UserEmail=user.UserEmail;
             changingUser.Password = user.Password;
+            changingUser.Sex= user.Sex;
             changingUser.Age = user.Age;
             changingUser.RestTime = user.RestTime;
             changingUser.CalorificValue = user.CalorificValue;
-
+            changingUser.RoleId = user.RoleId;
+            
+            
+            
             await _context.SaveChangesAsync();
+
         }
 
         public async Task<User> GetByPasswordAndEmailAsync(string email, string password)

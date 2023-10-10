@@ -13,8 +13,8 @@ import HomePage from './components/Trenings/HomeTrening/HomeTrening';
 import GymPage from './components/Trenings/GymTrening/GymTrening';
 import Diet from './components/DietPage/Diet';
 import WorkerPage from './components/WorkerPage/WorkerPage';
-import WorkerSettings from './components/WorkerSettings/WorkerSettings'
-
+import WorkerSettings from './components/WorkerPage/WorkerSettings/WorkerSettings';
+import AdminPage from './components/AdminPage/AdminPage';
 function App() {
   return (
      <div className="App">
@@ -34,8 +34,7 @@ function App() {
               <Route path="/diet" element={<Diet/>}/>
               <Route path="/WorkerPage" element={<WorkerPage/>}/>
               <Route path="/WorkerSettings" element={<WorkerSettings/>}/>
-
-              
+              <Route path="/AdminPage" element={<AdminPage/>}/>              
           </Routes>
         </BrowserRouter>
       </PlanDataProvider>

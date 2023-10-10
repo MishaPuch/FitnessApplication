@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import LoginApi from '../../hooks/LoginApi'; 
 
 const LoginForm = () => {
     const { planData, setPlanData } = useContext(PlanDataContext);
@@ -18,31 +19,14 @@ const LoginForm = () => {
         e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        //58682
+
         try {
-            const response = await fetch(`https://localhost:7060/api/Account/user/${email}/${password}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                const responseData = await response.json();
-                if(responseData.length > 0){
-                    setPlanData(responseData);
-                    setIsLogged(true);
-                }
-                else{
-                    alert('You pass wrong email or password');
-                }
-            } else {
-                alert('Error while fetching users');
-            }
-
+            const { user, isLogged } = await LoginApi(email, password); 
+            setPlanData(user);
+            setIsLogged(isLogged);
         } catch (error) {
             console.error('Error:', error);
-            alert('server is not turnd on or Error');
+            alert("maby u forgot to up the server")
         }
     };
 
@@ -54,6 +38,9 @@ const LoginForm = () => {
              }
             else if(planData[0].role.id===2){
                 navigate('/WorkerPage');
+            }
+            else if(planData[0].role.id===3){
+                navigate('/AdminPage');
             }
 
         }

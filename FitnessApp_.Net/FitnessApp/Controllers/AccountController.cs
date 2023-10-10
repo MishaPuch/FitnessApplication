@@ -109,8 +109,10 @@ namespace FitnessApp.Controllers
         [HttpPut("changeData")]
         public async Task ChangeUserData([FromBody] User user)
         {
-            await _userService.CangeUserDataAsync(user);
-            Logger.Info($"user : {user.Id} - was saccesfully changed");
+            
+                await _userService.CangeUserDataAsync(user);
+                Logger.Info($"user : {user.Id} - was saccesfully changed");
+            
         }
 
         // DELETE: api/<AccountController>/DeleteUser/{userId}
