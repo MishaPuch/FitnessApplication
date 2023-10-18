@@ -18,6 +18,16 @@ namespace FitnessApp.BLL.Services
             _dietRepository = dietRepository;
         }
 
+        public Task DeleteDietAsync(int dietId)
+        {
+            return _dietRepository.DeleteDietAsync(dietId);
+        }
+
+        public Task<List<Diet>> GetAllDietsAsync()
+        {
+            return _dietRepository.GetAllDietsAsync();
+        }
+
         public async Task<Diet> GetDietByIdAsync(int dietId)
         {
             return await _dietRepository.GetDietByIdAsync(dietId);

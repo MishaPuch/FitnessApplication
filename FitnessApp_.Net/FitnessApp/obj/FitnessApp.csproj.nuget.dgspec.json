@@ -135,6 +135,10 @@
               "target": "Package",
               "version": "[7.0.9, )"
             },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.4, )"
+            },
             "System.Text.Json": {
               "target": "Package",
               "version": "[7.0.0, )"

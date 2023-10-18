@@ -10,7 +10,12 @@ namespace FitnessApp.DAL.interfaceRepositories
 {
     public interface IMealRepository
     {
-        public Task<Meal> GetMealByIdAsync(int Mealid);
+        public Task<Meal> GetMealByIdAsync(int mealId);
+        public Task<List<Meal>> GetAllMealsAsync();
+        public Task CreateMealAsync(Meal meal);
+        public Task<Meal> UpdateMealAsync(Meal meal);
+        public Task DeleteMealAsync(int mealId);
+
 
     }
 }

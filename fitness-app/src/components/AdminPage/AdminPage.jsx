@@ -2,8 +2,16 @@
 import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import AdminMain from './AdminMain/AdminMain';
+import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminPage() {
+    const navigate = useNavigate();
+
+    const handleLogout=()=>{
+    navigate("/")
+        
+    }
     return (
         <div className="card">
             <TabView>
@@ -22,10 +30,7 @@ export default function AdminPage() {
                 </TabPanel>
                 <TabPanel header="Header III">
                     <p className="m-0">
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
-                        quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
-                        culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
-                        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                        <Button onClick={handleLogout}>logout</Button>
                     </p>
                 </TabPanel>
             </TabView>

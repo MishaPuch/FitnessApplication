@@ -1,0 +1,54 @@
+﻿using FitnessApp.BLL.Interface;
+using FitnessApp.Models;
+using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace FitnessApp.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ExerciseController : ControllerBase
+    {
+        private readonly IExerciseService _exerciseService;
+        public ExerciseController(IExerciseService exerciseService)
+        {
+            _exerciseService = exerciseService;
+        }
+
+        // GET: api/<TreningController>
+        [HttpGet("getAllExercises")]
+        public async Task<List<Exercise>> GetAllExercises()
+        {
+            return await _exerciseService.GetAllExercisesAsync();
+        }
+
+        // GET api/<TreningController>/5
+        [HttpGet("getExerciseById/{id:int}")]
+        public async Task<Exercise> GetExerciseById(int id)
+        {
+            return await _exerciseService.GetExerciseByIdAsync(id);
+        }
+
+        // POST api/<TreningController>
+        [HttpPost("createExercise")]
+        public async Task CreateExercise([FromBody] Exercise exercise)
+        {
+            await _exerciseService.CreateExerciseAsync(exercise);
+        }
+
+        // PUT api/<TreningController>/5
+        [HttpPut("update-exercise")]
+        public Task<Exercise> UpdateExercise([FromBody] Exercise exercise)
+        {
+            return _exerciseService.UpdateExerciseAsync(exercise);
+        }
+
+        // DELETE api/<TreningController>/5
+        [HttpDelete("delete-exercise/{id:int}")]
+        public async Task DeleteExercise(int id)
+        {
+            await _exerciseService.DeleteExerciseAsync(id);
+        }
+    }
+}

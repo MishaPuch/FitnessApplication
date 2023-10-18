@@ -43,7 +43,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("TypeOfMealId");
 
-                    b.ToTable("CalorificCoefficientValues");
+                    b.ToTable("CalorificCoefficientValues", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
@@ -89,7 +89,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("TypeOfMealId");
 
-                    b.ToTable("Meals");
+                    b.ToTable("Meals", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.Role", b =>
@@ -106,7 +106,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.Trening", b =>
@@ -133,7 +133,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("TrainingAndDietSchedulesId");
 
-                    b.ToTable("Trenings");
+                    b.ToTable("Trenings", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.TreningPlan", b =>
@@ -150,7 +150,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TreningPlans");
+                    b.ToTable("TreningPlans", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMeal", b =>
@@ -167,7 +167,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypesOfMeal");
+                    b.ToTable("TypesOfMeal", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfMuscleGroup", b =>
@@ -187,7 +187,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeOfMuscleGroups");
+                    b.ToTable("TypeOfMuscleGroups", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.TypeOfTrening", b =>
@@ -204,7 +204,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypesOfTrening");
+                    b.ToTable("TypesOfTrening", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Diet", b =>
@@ -227,7 +227,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("TrainingAndDietScheduleId");
 
-                    b.ToTable("Diet");
+                    b.ToTable("Diet", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Exercise", b =>
@@ -262,7 +262,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("TypeOfTreningId");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("Exercises", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Models.TreningAndDietSchedule", b =>
@@ -283,7 +283,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TrainingAndDietSchedule");
+                    b.ToTable("TrainingAndDietSchedule", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Models.User", b =>
@@ -332,7 +332,7 @@ namespace FitnessApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.CalorificCoefficientValue", b =>

@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { useNavigate } from 'react-router-dom';
 import useChangeUserApi from '../../../hooks/useChangeUserApi';
+import { PlanDataContext } from '../../../State/PlanDataState';
 
-export default function AdminMain(){
-    
+export default function AdminMain() {
+    const { planData, setPlanData } = useContext(PlanDataContext);
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate();
-    const changeData=useChangeUserApi()
+    const changeData = useChangeUserApi();
 
     useEffect(() => {
         async function fetchData() {
@@ -61,39 +60,69 @@ export default function AdminMain(){
         };
 
         const handleChangeUser = (data) => {
-            data.roleId=1;
+            data.roleId = 1;
             changeData(data);
         };
         const handleChangeWorker = (data) => {
-            data.roleId=2;
+            data.roleId = 2;
             changeData(data);
-        }; 
-        const handleChangeAdmin = (data) => {
-            data.roleId=3;
-            changeData(data)
         };
+        const handleChangeAdmin = (data) => {
+            data.roleId = 3;
+            changeData(data);
+        };
+        if(planData[0].user.userEmail!==data.userEmail){
 
-        return (
-            <div className="card">
-                <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
-                    <Column field="userName" header="Name" body={nameBodyTemplate}></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="calorificValue" header="Price" body={emailBodyTemplate}></Column>
-                    <Column field="treningPlanId" header="Plan"></Column>
-                    <Column field="dateOFLastPayment" header="Days Left" body={dateOFLastPaymentBodyTemplate}></Column>
-                    <Column body={(rowData) => (
-                        <div>
-                            <Button label="Revoke" onClick={() => handleChangeUser(rowData)} />
-                            <Button label="Grant Worker" onClick={() => handleChangeWorker(rowData)} />
-                            <Button label="Grant Admin" onClick={() => handleChangeAdmin(rowData)} />
-                        </div>
-                        )}>
-                        </Column>
+            return (
+                <div className="card">
+                    <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
+                        {data.roleId === 1 && (
+                            <div style={{ backgroundColor: 'var(--green-400)' }}>U</div>
+                        )}
+                        {data.roleId === 2 && (
+                            <div style={{ backgroundColor: 'var(--bluegray-400)' }}>W</div>
+                        )}
+                        {data.roleId === 3 && (
+                            <div style={{ backgroundColor: 'var(--primary-400)' }}>A</div>
+                        )}
+                        <Column field="userName" header="Name" body={nameBodyTemplate} />
+                        <Column field="image" header="Image" body={imageBodyTemplate} />
+                        <Column field="calorificValue" header="Price" body={emailBodyTemplate} />
+                        <Column field="treningPlanId" header="Plan" />
+                        <Column field="dateOFLastPayment" header="Days Left" body={(rowData) => (
+                            <div>
+                                <Button label="Grant Worker" onClick={() => handleChangeWorker(rowData)} severity="secondary" text raised  />
+                                <Button label="Grant Admin" onClick={() => handleChangeAdmin(rowData)}  />
+                                <Button label="Grant User" severity="success" onClick={() => handleChangeUser(rowData)} raised  />
+                            </div>
+                        )} />
+                    </DataTable>
+                </div>
+            );
+        }
+        else{
+            return (
+                <div className="card">
+                    <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
+                        <div style={{ backgroundColor: 'var(--primary-400)' }}></div>
+                        
+                        <Column field="userName" header="Name" body={nameBodyTemplate} />
+                        <Column field="image" header="Image" body={imageBodyTemplate} />
+                        <Column field="calorificValue" header="Price" body={emailBodyTemplate} />
+                        <Column field="treningPlanId" header="Plan" />
+                        <Column field="dateOFLastPayment" header="Days Left" body={(rowData) => (
+                            <div>
+                                <Button label="Grant Worker" onClick={() => handleChangeWorker(rowData)} severity="secondary" text raised disabled />
+                                <Button label="Grant Admin" onClick={() => handleChangeAdmin(rowData)} disabled />
+                                <Button label="Grant User" severity="success" onClick={() => handleChangeUser(rowData)} raised disabled />
+                            </div>
+                        )} />
+                    </DataTable>
+                </div>
+            );
+        }
 
-                </DataTable>
-            </div>
-        );
-    };
+}
 
     return (
         <div className="card">
@@ -101,3 +130,4 @@ export default function AdminMain(){
         </div>
     );
 }
+

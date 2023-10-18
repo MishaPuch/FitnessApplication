@@ -19,7 +19,16 @@ namespace FitnessApp.DAL.DiRepositories
         {
             _context = context;
         }
-
+        public async Task<List<Diet>> GetAllDietsAsync()
+        {
+            return await _context.Diet.Include(x => x.Meal).ThenInclude(x => x.TypeOfMeal).ToListAsync();
+        }
+        public async Task DeleteDietAsync(int dietId)
+        {
+            var diet = await _context.Diet.FindAsync(dietId);
+            _context.Diet.Remove(diet);
+            await _context.SaveChangesAsync();
+        }
         public async Task<Diet> GetDietByIdAsync(int dietId)
         {
             return await _context.Diet.Include(x=>x.Meal).ThenInclude(x=>x.TypeOfMeal).FirstOrDefaultAsync(d=>d.Id== dietId);

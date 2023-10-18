@@ -20,7 +20,7 @@ namespace FitnessApp.Models
         [Range(0, 110)]
         public int Age { get; set; }
         public int RestTime { get; set; }
-        public int CalorificValue { get; set; }
+        public int CalorificValue { get; set; } 
         public DateTime DateOFLastPayment { get; set; }
         public int TreningPlanId { get; set; }
         public int RoleId { get; set; }

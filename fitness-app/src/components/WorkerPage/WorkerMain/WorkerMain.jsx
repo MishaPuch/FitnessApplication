@@ -63,7 +63,18 @@ export default function WorkerMain(){
 
         return (
             <div className="card">
+                 
+                        
                 <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
+                {data.roleId === 1 && (
+                    <div style={{ backgroundColor: 'var(--green-400)' }}>U</div>
+                )}
+                {data.roleId === 2 && (
+                    <div style={{ backgroundColor: 'var(--bluegray-400)' }}>W</div>
+                )}
+                {data.roleId === 3 && (
+                    <div style={{ backgroundColor: 'var(--primary-400)' }}>A</div>
+                )}
                     <Column field="userName" header="Name" body={nameBodyTemplate}></Column>
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     <Column field="calorificValue" header="Price" body={emailBodyTemplate}></Column>

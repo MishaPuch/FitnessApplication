@@ -901,6 +901,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.9",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "NLog": "5.2.4",
           "System.Text.Json": "7.0.0"
         },
         "runtime": {

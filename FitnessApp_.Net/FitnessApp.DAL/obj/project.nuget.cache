@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eIaB7iTcZKKyNMUHn9J32c0fwlEIlj4ckJIfkylTAqTqFAMua0Xqw01qN36XTyYpe+SCZaWqGt0oQTvG9+4dmw==",
+  "dgSpecHash": "Zghzu1lk6pPsvd5+XGN6vL0tKZ6j2JhyS5pYsSZHOnclAV/AkzRG7hVCGQsEpH9rAAw5hqTVks7+acO0FBwIcA==",
   "success": true,
   "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj",
   "expectedPackageFiles": [
@@ -42,6 +42,7 @@
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\misha\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",

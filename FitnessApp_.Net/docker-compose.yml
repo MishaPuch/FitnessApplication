@@ -1,32 +1,33 @@
-version: '3'
-services:
-  sqldata:
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    environment:
-       ACCEPT_EULA: Y
-       MSSQL_SA_PASSWORD: YourStrong@Passw0rd
-    ports:
-      - "5434:1433"
-    networks:
-      - mynetwork
-    volumes:
-      - type: volume
-        source: sql-data
-        target: /var/opt/mssql/data/MyDatabase.mdf
+    version: '3'
+    services:
+      sqldata:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        user: root
+        environment:
+           ACCEPT_EULA: Y
+           MSSQL_SA_PASSWORD: YourStrong@Passw0rd
+        ports:
+          - "5434:1433"
+        networks:
+          - mynetwork
+        volumes:
+          - type: volume
+            source: sql-data
+            target: /FitnessApp.mdf
 
-  fitnessapp:
-    image: ${DOCKER_REGISTRY-}fitnessapp
-    build:
-      context: .
-      dockerfile: FitnessApp/Dockerfile
-    depends_on:
-      - sqldata
-    networks:
-      - mynetwork
+      fitnessapp:
+        image: ${DOCKER_REGISTRY-}fitnessapp
+        build:
+          context: .
+          dockerfile: FitnessApp/Dockerfile
+        depends_on:
+          - sqldata
+        networks:
+          - mynetwork
 
  
-networks:
-  mynetwork:
+    networks:
+      mynetwork:
 
-volumes:
-  sql-data:
+    volumes:
+      sql-data:

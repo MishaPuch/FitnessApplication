@@ -15,6 +15,8 @@ import Diet from './components/DietPage/Diet';
 import WorkerPage from './components/WorkerPage/WorkerPage';
 import WorkerSettings from './components/WorkerPage/WorkerSettings/WorkerSettings';
 import AdminPage from './components/AdminPage/AdminPage';
+import WorkingMeal from './components/WorkerPage/WorkingMeal/WorkingMeal';
+import WorkingExercise from './components/WorkerPage/WorkingExercise/WorkingMeal/WorkingExercise';
 function App() {
   return (
      <div className="App">
@@ -34,7 +36,10 @@ function App() {
               <Route path="/diet" element={<Diet/>}/>
               <Route path="/WorkerPage" element={<WorkerPage/>}/>
               <Route path="/WorkerSettings" element={<WorkerSettings/>}/>
-              <Route path="/AdminPage" element={<AdminPage/>}/>              
+              <Route path="/AdminPage" element={<AdminPage/>}/>    
+              <Route path="/WorkerMeal" element={<WorkingMeal/>}/>
+              <Route path="/WorkerExercise" element={<WorkingExercise/>}/>
+
           </Routes>
         </BrowserRouter>
       </PlanDataProvider>

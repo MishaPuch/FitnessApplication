@@ -24,6 +24,7 @@ namespace FitnessApp.BLL.Services
         private readonly IUserService _userService;
         private readonly ICalorificCoefficientRepository _calorificCoefficientService;
         private readonly IRoleService _roleService;
+        private readonly ITreningPlanService _treningPlanService;
 
         public TrainingAndDietSchedule(
             DAL.interfaceRepositories.ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository,
@@ -31,7 +32,8 @@ namespace FitnessApp.BLL.Services
             IDietService dietService,
             IUserService userService,
             ICalorificCoefficientRepository calorificCoefficientService,
-            IRoleService roleService
+            IRoleService roleService, 
+            ITreningPlanService treningPlanService
             )
         {
             _trainingAndDietScheduleRepository = trainingAndDietScheduleRepository;
@@ -40,6 +42,7 @@ namespace FitnessApp.BLL.Services
             _userService = userService;
             _calorificCoefficientService = calorificCoefficientService;
             _roleService = roleService;
+            _treningPlanService= treningPlanService;
         }
 
         public async Task<List<FullModel>> GetAllPlans()
@@ -100,6 +103,7 @@ namespace FitnessApp.BLL.Services
                 fullModel.User = await _userService.GetUserByIdAsync(day.UserId);
                 fullModel.Diet = await _dietService.GetDietByTreningScheduleIdAsync(day.Id);
                 fullModel.Role=await _roleService.GetByUserIdAsync(day.User.RoleId);
+                fullModel.TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(day.User.TreningPlanId);
                 foreach(var trening in fullModel.Trening)
                 {
                     trening.Exercise.ExerciseVideo = "https://fitnessapp.blob.core.windows.net/exercisevideos/" + trening.Exercise.ExerciseVideo + ".jpg";
@@ -113,6 +117,7 @@ namespace FitnessApp.BLL.Services
                     diet.Meal.Protein = diet.Meal.Protein * coefficientValue.CalorificCoefficient;
                     diet.Meal.CalorificOfMeal = diet.Meal.CalorificOfMeal * coefficientValue.CalorificCoefficient;
                 }
+
                 daysJSON.Add(fullModel);
 
             }
