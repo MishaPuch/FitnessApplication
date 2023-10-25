@@ -71,8 +71,10 @@ namespace FitnessApp.DAL.DiRepositories
         public Trening GetRandomUniqueTreningInList(List<Trening> trenings, List<Exercise> exercises, int treningAndDietScheduleId)
         {
             Random randomNumber = new Random();
+            int maxAttempts = 100; // Максимальное количество попыток для поиска уникального упражнения
+            int attempts = 0; // Счетчик попыток
 
-            while (true)
+            while (attempts < maxAttempts)
             {
                 Exercise exercise = exercises[randomNumber.Next(0, exercises.Count)];
 
@@ -95,8 +97,21 @@ namespace FitnessApp.DAL.DiRepositories
 
                     return trening;
                 }
+
+                attempts++;
+
+                // Если не удается найти уникальное упражнение после maxAttempts попыток, выходим из цикла
+                if (attempts >= maxAttempts)
+                {
+                    // Вернуть значение по умолчанию, чтобы обозначить, что уникальное упражнение не было найдено
+                    return null;
+                }
             }
+
+            // Вернуть null, если не удается найти уникальное упражнение
+            return null;
         }
+
 
 
         public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules)

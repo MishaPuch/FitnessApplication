@@ -1,4 +1,5 @@
 ﻿using FitnessApp.BLL.DI_Service;
+using FitnessApp.BLL.GetModels;
 using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
 using FitnessApp.BLL.Services.FileServices;
@@ -22,6 +23,8 @@ namespace FitnessApp.Controllers
         private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
         private readonly IDietService _dietService;
         private readonly ITreningService _treningService;
+        private readonly IRoleService _roleService;
+        private readonly ITreningPlanService _treningPlanService;
         private readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
@@ -31,7 +34,9 @@ namespace FitnessApp.Controllers
             IDietService dietService,
             ITreningService treningService,
             MealFileService mealFileService,
-            UserFileService userFileService
+            UserFileService userFileService,
+            IRoleService roleService,
+            ITreningPlanService treningPlanService
             )
         {
             _userService = userService;
@@ -40,6 +45,8 @@ namespace FitnessApp.Controllers
             _treningService = treningService;
             _mealFileService = mealFileService;
             _userFileService = userFileService;
+            _roleService = roleService;
+            _treningPlanService = treningPlanService;
         }
 
         // GET: api/<AccountController>
@@ -74,10 +81,26 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost("create-user")]
-        public async Task<IActionResult> Register([FromBody] User creatingUser/*, [FromForm] IFormFile file*/)
+        public async Task<IActionResult> Register([FromBody] GetUser getCreatingUser/*, [FromForm] IFormFile file*/)
         {
             try
             {
+                User creatingUser = new User()
+                {
+                    UserName = getCreatingUser.UserName,
+                    UserEmail = getCreatingUser.UserEmail,
+                    Password = getCreatingUser.Password,
+                    Sex = getCreatingUser.Sex,
+                    Age = getCreatingUser.Age,
+                    RestTime = getCreatingUser.RestTime,
+                    CalorificValue = getCreatingUser.CalorificValue,
+                    DateOFLastPayment = getCreatingUser.DateOFLastPayment,
+                    TreningPlanId = getCreatingUser.TreningPlanId,
+                    TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
+                    RoleId = getCreatingUser.RoleId,
+                    Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
+
+                };
                 User checkingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
                 if (checkingUser != null)
                 {
@@ -107,10 +130,25 @@ namespace FitnessApp.Controllers
 
         // PUT: api/<AccountController>/changeData
         [HttpPut("changeData")]
-        public async Task ChangeUserData([FromBody] User user)
+        public async Task ChangeUserData([FromBody] GetUser getCreatingUser)
         {
-            
-                await _userService.CangeUserDataAsync(user);
+            User user    = new User()
+            {
+                UserName = getCreatingUser.UserName,
+                UserEmail = getCreatingUser.UserEmail,
+                Password = getCreatingUser.Password,
+                Sex = getCreatingUser.Sex,
+                Age = getCreatingUser.Age,
+                RestTime = getCreatingUser.RestTime,
+                CalorificValue = getCreatingUser.CalorificValue,
+                DateOFLastPayment = getCreatingUser.DateOFLastPayment,
+                TreningPlanId = getCreatingUser.TreningPlanId,
+                TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
+                RoleId = getCreatingUser.RoleId,
+                Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
+
+            };
+            await _userService.CangeUserDataAsync(user);
                 Logger.Info($"user : {user.Id} - was saccesfully changed");
             
         }

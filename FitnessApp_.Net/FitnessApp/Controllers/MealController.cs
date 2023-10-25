@@ -1,4 +1,5 @@
-﻿using FitnessApp.BLL.Interface;
+﻿using FitnessApp.BLL.GetModels;
+using FitnessApp.BLL.Interface;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,11 @@ namespace FitnessApp.Controllers
     public class MealController : ControllerBase
     {
         private readonly IMealService _mealService;
-        public MealController(IMealService mealService)
+        private readonly ITypeOfMealService _typeOfMealService;
+        public MealController(IMealService mealService, ITypeOfMealService typeOfMealService)
         {
             _mealService = mealService;
+            _typeOfMealService = typeOfMealService;
         }
 
         // GET: api/<DietsController>
@@ -34,8 +37,22 @@ namespace FitnessApp.Controllers
 
         // POST api/<DietsController>
         [HttpPost("createMealAsync")]
-        public async Task<ActionResult> CreateMealAsync([FromBody] Meal meal)
+        public async Task<ActionResult> CreateMealAsync([FromBody] GetMeal getMeal)
         {
+            Meal meal = new Meal()
+            {
+                FoodName = getMeal.FoodName,
+                FoodIngredients = getMeal.FoodIngredients,
+                FoodInstructions = getMeal.FoodInstructions,
+                Foto = getMeal.Foto,
+                Protein = getMeal.Protein,
+                Fat = getMeal.Fat,
+                Carbon = getMeal.Carbon,
+                CalorificOfMeal = getMeal.CalorificOfMeal,
+                TypeOfMealId = getMeal.TypeOfMealId,
+                TypeOfMeal = await _typeOfMealService.GetTypeOfMealByIdAsync(getMeal.TypeOfMealId)
+
+            };
             await _mealService.CreateMealAsync(meal);
             return Ok(meal);
         }

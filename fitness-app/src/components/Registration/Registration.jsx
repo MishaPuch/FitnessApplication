@@ -26,12 +26,13 @@ function Registration() {
         const userData = {
             userName: name,
             userEmail: email,
+            password: password,
             sex: sex,
             age: age,
-            password: password,
             restTime: 30,
             calorificValue: calory,
-            treningPlanId:treningPlanId
+            treningPlanId:treningPlanId,
+            roleId:1
         };
        
         console.log(JSON.stringify(userData));

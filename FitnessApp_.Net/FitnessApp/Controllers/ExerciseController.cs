@@ -1,4 +1,5 @@
-﻿using FitnessApp.BLL.Interface;
+﻿using FitnessApp.BLL.GetModels;
+using FitnessApp.BLL.Interface;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,17 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class ExerciseController : ControllerBase
     {
+        private readonly ITypeOfMuscleGroupService _typeOfMuscleGroupService;
+        private readonly ITypeOfTreningService _typeOfTreningService;
         private readonly IExerciseService _exerciseService;
-        public ExerciseController(IExerciseService exerciseService)
+        public ExerciseController(IExerciseService exerciseService,
+            ITypeOfMuscleGroupService typeOfMuscleGroupService, 
+            ITypeOfTreningService typeOfTreningService
+            )
         {
             _exerciseService = exerciseService;
+            _typeOfMuscleGroupService = typeOfMuscleGroupService;
+            _typeOfTreningService= typeOfTreningService;
         }
 
         // GET: api/<TreningController>
@@ -32,8 +40,19 @@ namespace FitnessApp.Controllers
 
         // POST api/<TreningController>
         [HttpPost("createExercise")]
-        public async Task CreateExercise([FromBody] Exercise exercise)
+        public async Task CreateExercise([FromBody] GetExercise getExercise)
         {
+            Exercise exercise = new Exercise()
+            {
+                ExerciseName = getExercise.ExerciseName,
+                ExerciseDescription = getExercise.ExerciseDescription,
+                ExerciseVideo = getExercise.ExerciseVideo,
+                MuscleGroupId = getExercise.MuscleGroupId,
+                MuscleGroup = await _typeOfMuscleGroupService.GetTypeOfMuscleGroupByIdAsync(getExercise.MuscleGroupId),
+                TypeOfTreningId=getExercise.TypeOfTreningId,
+                TypeOfTrening=await _typeOfTreningService.GetTypeOfTreningByIdAsync(getExercise.TypeOfTreningId)
+                
+            };
             await _exerciseService.CreateExerciseAsync(exercise);
         }
 

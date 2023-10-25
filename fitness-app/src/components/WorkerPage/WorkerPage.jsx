@@ -5,7 +5,7 @@ import WorkerMain from './WorkerMain/WorkerMain';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import ListMeal from './WorkingMeal/ListMeal'; 
-import ListExercise from './WorkingExercise/WorkingMeal/ListExercise';
+import ListExercise from './WorkingExercise/WorkingExercise/ListExercise';
 
 export default function WorkerPage() {
     const navigate = useNavigate();

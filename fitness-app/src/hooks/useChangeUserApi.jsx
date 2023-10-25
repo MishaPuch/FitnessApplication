@@ -3,6 +3,7 @@ import React from "react";
 async function ChangeUserApi(user){
     
     try {
+      console.log(user);
         const response = await fetch("https://localhost:7060/api/Account/changeData", {
           method: "PUT",
           headers: {
