@@ -4,12 +4,14 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
-import WorkingMeal from './WorkingMeal';
+import CreateMeal from './CreateMeal';
 
 export default function ListMeal(){
     const [meal, setMeal] = useState([]);
     const navigate = useNavigate();
-
+    const handleCreateMeal= () => {
+            navigate("/WorkerMeal")
+        };
     useEffect(() => {
         async function fetchData() {
             try {
@@ -64,13 +66,13 @@ export default function ListMeal(){
         };
 
         const handleChangeMeal = (data) => {
-            navigate("/WorkerMeal")
-        };
+            navigate('/UpdateMeal', { state: { mealData: data } });
+          };
+        
 
         return (
             <div className="card">
                  
-                        
                 <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
                     <Column field="Food" header="Food" body={nameBodyTemplate}></Column>
                     <Column field="Ingredients" header="Ingredients" body={ingredientsBodyTemplate}></Column>
@@ -87,6 +89,7 @@ export default function ListMeal(){
 
     return (
         <div className="card">
+            <Button label="Create Meal" onClick={() => handleCreateMeal()}></Button>
             <DataScroller value={meal} itemTemplate={itemTemplate} rows={meal.length} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     );

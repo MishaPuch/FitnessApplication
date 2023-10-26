@@ -31,7 +31,7 @@ namespace FitnessApp.DAL.DiRepositories
                 user.DateOFLastPayment = DateTime.Now.Date;
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-                User createdUser = await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
+                User createdUser = await _context.Users.Include(x=>x.Role).Include(x=>x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
                 return createdUser;
             }
             catch (Exception ex)
@@ -53,18 +53,21 @@ namespace FitnessApp.DAL.DiRepositories
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _context.Users
+                .Include(x => x.Role).Include(x => x.TreningPlan)
                 .ToListAsync();
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
             return await _context.Users
+                .Include(x => x.Role).Include(x => x.TreningPlan)
                 .FirstOrDefaultAsync(u => u.UserEmail == email);
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
             return await _context.Users
+                .Include(x => x.Role).Include(x => x.TreningPlan)
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
 
@@ -74,11 +77,13 @@ namespace FitnessApp.DAL.DiRepositories
             if (user.Id == 0)
             {
                 changingUser = await _context.Users
+                    .Include(x => x.Role).Include(x => x.TreningPlan)
                     .FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
             }
             else
             {
                 changingUser = await _context.Users
+                    .Include(x => x.Role).Include(x => x.TreningPlan)
                     .FirstOrDefaultAsync(u=>u.Id == user.Id);
             }
             changingUser.UserName = user.UserName;
@@ -97,6 +102,7 @@ namespace FitnessApp.DAL.DiRepositories
         public async Task<User> GetByPasswordAndEmailAsync(string email, string password)
         {
             var user = await _context.Users
+                .Include(x => x.Role).Include(x => x.TreningPlan)
                 .FirstOrDefaultAsync(u => u.UserEmail == email && u.Password == password);
             if (user != null)
             {

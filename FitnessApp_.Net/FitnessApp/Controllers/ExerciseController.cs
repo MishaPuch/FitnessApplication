@@ -58,9 +58,20 @@ namespace FitnessApp.Controllers
 
         // PUT api/<TreningController>/5
         [HttpPut("update-exercise")]
-        public Task<Exercise> UpdateExercise([FromBody] Exercise exercise)
+        public async Task<Exercise> UpdateExercise([FromBody] GetExercise getExercise)
         {
-            return _exerciseService.UpdateExerciseAsync(exercise);
+            Exercise exercise = new Exercise()
+            {
+                ExerciseName = getExercise.ExerciseName,
+                ExerciseDescription = getExercise.ExerciseDescription,
+                ExerciseVideo = getExercise.ExerciseVideo,
+                MuscleGroupId = getExercise.MuscleGroupId,
+                MuscleGroup = await _typeOfMuscleGroupService.GetTypeOfMuscleGroupByIdAsync(getExercise.MuscleGroupId),
+                TypeOfTreningId = getExercise.TypeOfTreningId,
+                TypeOfTrening = await _typeOfTreningService.GetTypeOfTreningByIdAsync(getExercise.TypeOfTreningId)
+
+            };
+            return await _exerciseService.UpdateExerciseAsync(exercise);
         }
 
         // DELETE api/<TreningController>/5

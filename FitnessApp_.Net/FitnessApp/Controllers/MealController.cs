@@ -59,8 +59,22 @@ namespace FitnessApp.Controllers
 
         // PUT api/<DietsController>/5
         [HttpPut("updateMealAsync")]
-        public async Task<Meal> UpdateMealAsync ([FromBody] Meal meal)
+        public async Task<Meal> UpdateMealAsync ([FromBody] GetMeal getMeal)
         {
+            Meal meal = new Meal()
+            {
+                FoodName = getMeal.FoodName,
+                FoodIngredients = getMeal.FoodIngredients,
+                FoodInstructions = getMeal.FoodInstructions,
+                Foto = getMeal.Foto,
+                Protein = getMeal.Protein,
+                Fat = getMeal.Fat,
+                Carbon = getMeal.Carbon,
+                CalorificOfMeal = getMeal.CalorificOfMeal,
+                TypeOfMealId = getMeal.TypeOfMealId,
+                TypeOfMeal = await _typeOfMealService.GetTypeOfMealByIdAsync(getMeal.TypeOfMealId)
+
+            };
             return await _mealService.UpdateMealAsync(meal);
         }
 

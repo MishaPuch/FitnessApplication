@@ -15,8 +15,10 @@ import Diet from './components/DietPage/Diet';
 import WorkerPage from './components/WorkerPage/WorkerPage';
 import WorkerSettings from './components/WorkerPage/WorkerSettings/WorkerSettings';
 import AdminPage from './components/AdminPage/AdminPage';
-import WorkingMeal from './components/WorkerPage/WorkingMeal/WorkingMeal';
-import WorkingExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/WorkingExercise';
+import CreateMeal from './components/WorkerPage/WorkingMeal/CreateMeal';
+import CreateExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/CreateExercise';
+import UpdateMeal from './components/WorkerPage/WorkingMeal/UpdateMeal';
+import UpdateExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/UpdateExercise';
 
 function App() {
   return (
@@ -37,8 +39,12 @@ function App() {
               <Route path="/WorkerPage" element={<WorkerPage />} />
               <Route path="/WorkerSettings" element={<WorkerSettings />} />
               <Route path="/AdminPage" element={<AdminPage />} />
-              <Route path="/WorkerMeal" element={<WorkingMeal />} />
-              <Route path="/WorkerExercise" element={<WorkingExercise />} />
+              <Route path="/WorkerMeal" element={<CreateMeal />} />
+              <Route path="/WorkerExercise" element={<CreateExercise />} />
+              <Route path="/UpdateMeal" element={<UpdateMeal />} />
+              <Route path="/UpdateExercise" element={<UpdateExercise />} />
+
+
             </Routes>
           </Router>
         </PlanDataProvider>

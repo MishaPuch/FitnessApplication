@@ -5,9 +5,13 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 
-export default function ListExercise(){
-    const [exercise, setExercise] = useState([]);
+export default function ListExercise() {
+    const [exercises, setExercises] = useState([]);
     const navigate = useNavigate();
+
+    const handleCreateExercise = () => {
+        navigate("/WorkerExercise");
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -21,11 +25,9 @@ export default function ListExercise(){
 
                 if (response.ok) {
                     const responseData = await response.json();
-                    if (responseData.length > 0) {
-                        setExercise(responseData);
-                    }
+                    setExercises(responseData);
                 } else {
-                    alert('Error while fetching users');
+                    alert('Error while fetching exercises');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -36,50 +38,24 @@ export default function ListExercise(){
         fetchData();
     }, []);
 
-    const itemTemplate = (data) => {
-        
-        console.log(exercise);
-        const nameBodyTemplate = (data) => {
-            return data.exerciseName.toString();
-        };
-       
-        
-        const ingredientsBodyTemplate = (data) => {
-            return data.exerciseDescription.toString();
-        };
-        const instructionsBodyTemplate = (data) => {
-            return data.muscleGroup.nameMuscleGroup.toString();
-        };
-        
-
-        const calorificValueBodyTemplate = (data) => {
-            return data.typeOfTrening.typeOfTreningValue.toString();
-        };
-
-        
-        const handleChangeMeal = (data) => {
-            navigate("/WorkerExercise")
-        };
-        
-
-        return (
-            <div className="card">     
-                <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
-                    
-                    <Column field="Food" header="Food" body={nameBodyTemplate}></Column>
-                    <Column field="Ingredients" header="Ingredients" body={ingredientsBodyTemplate}></Column>
-                    <Column field="Instructions" header="Instructions" body={instructionsBodyTemplate}></Column>
-                    <Column field="CalorificValue" header="CalorificValue" body={calorificValueBodyTemplate}></Column>
-                    <Column body={<Button label="Change Info" onClick={() => handleChangeMeal(data)} />}></Column>
-
-                </DataTable>
-            </div>
-        );
+    const handleUpdateExercise = (data) => {
+        navigate("/UpdateExercise", { state: { exerciseData: data } });
     };
 
     return (
         <div className="card">
-            <DataScroller value={exercise} itemTemplate={itemTemplate} rows={exercise.length} inline scrollHeight="500px" header="Scroll Down to Load More" />
+            <Button label="Create Exercise" onClick={handleCreateExercise} />
+            <DataTable value={exercises} tableStyle={{ minWidth: '60rem' }}>
+                <Column field="exerciseName" header="Exercise Name" />
+                <Column field="exerciseDescription" header="Exercise Description" />
+                <Column field="muscleGroup.nameMuscleGroup" header="Muscle Group" />
+                <Column field="typeOfTrening.typeOfTreningValue" header="Type of Training" />
+                <Column
+                    body={(data) => (
+                        <Button label="Change Info" onClick={() => handleUpdateExercise(data)} />
+                    )}
+                />
+            </DataTable>
         </div>
     );
 }

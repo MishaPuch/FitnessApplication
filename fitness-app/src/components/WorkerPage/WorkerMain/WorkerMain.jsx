@@ -37,7 +37,7 @@ function WorkerMain() {
   }, []);
 
   const handleChangeUser = (data) => {
-    navigate('/WorkerSettings', { state: data });
+    navigate('/WorkerSettings', { state: { userData: data } });
   };
 
   const itemTemplate = (data) => {
