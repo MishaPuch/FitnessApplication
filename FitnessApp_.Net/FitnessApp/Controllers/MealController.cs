@@ -61,8 +61,8 @@ namespace FitnessApp.Controllers
         [HttpPut("updateMealAsync")]
         public async Task<Meal> UpdateMealAsync ([FromBody] GetMeal getMeal)
         {
-            Meal meal = new Meal()
-            {
+            Meal meal = new Meal() { 
+         
                 FoodName = getMeal.FoodName,
                 FoodIngredients = getMeal.FoodIngredients,
                 FoodInstructions = getMeal.FoodInstructions,

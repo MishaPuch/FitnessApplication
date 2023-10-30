@@ -31,7 +31,7 @@ builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer
 builder.Services.AddSingleton<MealFileService>();
 builder.Services.AddSingleton<UserFileService>();
 
-builder.Services.AddTransient<IUserRepositoryRepository, UserRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITrainingAndDietScheduleRepository, TrainingAndDietScheduleRepository>();
 builder.Services.AddTransient<ITypeOfMuscleGroupRepository, TypeOfMuscleGroupRepository>();
 builder.Services.AddTransient<ITreningRepository, TreningRepository>();

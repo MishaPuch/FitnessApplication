@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.DiRepositories
 {
-    public class UserRepository : IUserRepositoryRepository
+    public class UserRepository : IUserRepository
     {
         private readonly FitnessAppContext _context;
         private readonly ITreningPlanRepository _treningPlan;
@@ -94,6 +94,7 @@ namespace FitnessApp.DAL.DiRepositories
             changingUser.RestTime = user.RestTime;
             changingUser.CalorificValue = user.CalorificValue;
             changingUser.RoleId = user.RoleId;
+            changingUser.Avatar=user.Avatar;
 
             await _context.SaveChangesAsync();
 

@@ -26,6 +26,7 @@ namespace FitnessApp.Models
         public TreningPlan TreningPlan { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
+        public string Avatar { get; set; }
 
     }
 }

@@ -3,10 +3,9 @@ import { PlanDataContext } from '../../State/PlanDataState';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-
+import { FileUpload } from 'primereact/fileupload';
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
-
 import './Settings.css'
 import '../UserInfoPage/UserAccount.css'
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +14,8 @@ import useChangeUserApi from '../../hooks/useChangeUserApi';
 export default function Settings() {
     const { planData } = useContext(PlanDataContext);
     const changeUser=useChangeUserApi();
+
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const [name, setName] = useState(planData[0]?.user?.userName || "");
     const [email] = useState(planData[0]?.user?.userEmail || "");
@@ -31,6 +32,7 @@ export default function Settings() {
         }
     }, []);
 
+    
     const handleSave = async () => {
         const userData = {
             userName: name,
@@ -52,12 +54,9 @@ export default function Settings() {
         setName(value);
     }
 
-    // const handleEmailChange = (value) => {
-    //     setEmail(value);
-    // }
+    
 
     const handleAgeChange = (value) => {
-        // Ensure that the input is a positive number
         if (!isNaN(value) && value >= 0) {
             setAge(value);
         }
@@ -72,18 +71,58 @@ export default function Settings() {
         setCalory(value);
     }
 
-    // const handleSexSelect = (value) => {
-    //     console.log("Sex is " + value);
-    //     setSex(value);
-    // }
+    
 
     const handleRestTimeChange = (value) => {
-        // Ensure that the input is a positive number
-        if (!isNaN(value) && value >= 0) {
+            if (!isNaN(value) && value >= 0) {
             setRestTime(value);
         }
     }
-
+    async function onUpload(event) {
+        console.log("lkdmvdfm");
+        
+        if (event.files && event.files.length > 0) {
+            // event.files содержит информацию о загруженных файлах
+            const uploadedFile = event.files[0]; // Получите первый загруженный файл
+            
+            console.log("Uploaded file name:", uploadedFile.name);
+            console.log("Uploaded file type:", uploadedFile.type);
+            console.log("Uploaded file size:", uploadedFile.size);
+            
+            // Вы можете выполнить дополнительную обработку или отправку этого файла на сервер
+        }
+    }
+      
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file); // Используйте 'file' в качестве ключа
+    
+            try {
+                fetch(`https://localhost:7060/api/Images/PostTheAvatarFoto/${planData[0].user.id}`, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then((response) => response.arrayBuffer()) // Измените на arrayBuffer()
+                .then((data) => {
+                    console.log(data); // 'data' теперь представляет собой массив байтов
+                })
+                .catch((error) => {
+                    console.error('Ошибка:', error);
+                });
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        } else {
+            console.error("Файл не выбран.");
+        }
+    };
+    
+    
+    
     return (
         <div className="container">
             <div className="avatar">
@@ -123,6 +162,17 @@ export default function Settings() {
                             </span>
                         </div>
                         <div className="grid-item">
+                            <span className="p-float-label grid-item">  
+                            <div>
+                                <input type="file" accept="image/*" onChange={handleFileChange} />
+                                {selectedFile && (
+                                    <div>
+                                    <p>Selected file: {selectedFile.name}</p>
+                                    <img src={URL.createObjectURL(selectedFile)} alt="Selected" />
+                                    </div>
+                                )}
+                                </div>          
+                            </span>
                             <span className="p-float-label grid-item">
                                 <p>Gender</p>
                                 <InputText id="sex" value={sex} className="p-invalid" />

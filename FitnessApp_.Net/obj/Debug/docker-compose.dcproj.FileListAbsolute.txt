@@ -41,3 +41,4 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\FitnessApp.B
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\SixLabors.ImageSharp.dll

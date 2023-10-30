@@ -1,5 +1,6 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
+using FitnessApp.DAL.DiRepositories;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FitnessApp.BLL.Services
 {
@@ -16,6 +18,7 @@ namespace FitnessApp.BLL.Services
         private readonly string _storageAccount = "fitnessapp";
         private readonly string _key = "V4tLrHmmwyI/npR8wIzqs6g23spab0EiKy0QoHrfbe8mcjo05VJrskggVMrPS1EkKAQYbMpY08Xv+AStZEaLXg==";
         private readonly BlobContainerClient _fileAvatarsConteiner;
+        private readonly UserRepository _userRepository;
 
         public UserFileService()
         {
@@ -23,6 +26,10 @@ namespace FitnessApp.BLL.Services
             var blobUri = $"https://{_storageAccount}.blob.core.windows.net";
             var blobServiceClient = new BlobServiceClient(new Uri(blobUri), credential);
             _fileAvatarsConteiner = blobServiceClient.GetBlobContainerClient("avatars");
+        }
+        public UserFileService(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
         }
 
         public async Task<List<BlobDto>> ListAsync()
@@ -47,9 +54,10 @@ namespace FitnessApp.BLL.Services
         }
         public async Task<BlobResponseDto> UploadFile(IFormFile blob , User user)
         {
+            await DeleteFileAsync(user);
             BlobResponseDto response = new BlobResponseDto();
-            BlobClient client = _fileAvatarsConteiner.GetBlobClient(blob.FileName);
-
+            BlobClient client = _fileAvatarsConteiner.GetBlobClient(user.UserEmail+Path.GetExtension(blob.FileName));
+            
             await using (Stream? data = blob.OpenReadStream())
             {
                 await client.UploadAsync(data);
@@ -57,8 +65,12 @@ namespace FitnessApp.BLL.Services
 
             response.Status = $"File {blob.FileName} Uploaded Seccessfuly";
             response.Error = false;
-            response.Blob.Uri = client.Uri.AbsoluteUri;
+
             response.Blob.Name = user.UserEmail;
+            response.Blob.Uri = client.Uri.AbsoluteUri;
+
+            user.Avatar = user.UserEmail + Path.GetExtension(blob.FileName);
+            await _userRepository.UpdateUserAsync(user);
 
             return response;
 
@@ -66,7 +78,7 @@ namespace FitnessApp.BLL.Services
 
         public async Task<BlobResponseDto> DeleteFileAsync(User user)
         {
-            BlobClient file = _fileAvatarsConteiner.GetBlobClient(user.UserEmail);
+            BlobClient file = _fileAvatarsConteiner.GetBlobClient(user.Avatar);
             if (await file.ExistsAsync())
             {
                 await file.DeleteAsync();

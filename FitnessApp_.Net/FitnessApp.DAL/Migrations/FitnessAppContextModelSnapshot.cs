@@ -297,6 +297,10 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CalorificValue")
                         .HasColumnType("int");
 

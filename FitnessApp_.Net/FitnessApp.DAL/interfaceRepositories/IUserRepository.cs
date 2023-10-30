@@ -2,7 +2,7 @@
 
 namespace FitnessApp.DAL.InterfaceRepositories
 {
-    public interface IUserRepositoryRepository
+    public interface IUserRepository
     {
         public Task<User> GetByPasswordAndEmailAsync(string email, string password);
         public Task<List<User>> GetAllUsersAsync();

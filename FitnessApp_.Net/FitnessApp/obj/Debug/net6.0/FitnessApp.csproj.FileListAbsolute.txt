@@ -223,3 +223,4 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\n
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.IO.Hashing.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\NLog.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\SixLabors.ImageSharp.dll

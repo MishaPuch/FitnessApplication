@@ -10,7 +10,6 @@ const Header = () => {
     if (planData.length === 0) {
         return <div>Loading...</div>;
     }
-
     return (
         <div className="header">           
             <div className="header-text">    
@@ -21,6 +20,23 @@ const Header = () => {
             <div>
                 <Avatar 
                     image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRavIqQYivR75p5gMVUiR_tZqoGzmqIVGbXRw&usqp=CAU" 
+                    size="small" 
+                    className="m-1" 
+                    shape="circle" 
+                />
+            </div>
+        </div>
+    );
+    return (
+        <div className="header">           
+            <div className="header-text">    
+                 {
+                    planData[0].user.userName
+                 }
+            </div>
+            <div>
+                <Avatar 
+                    image="https://fitnessapp.blob.core.windows.net/avatars/misha2004@gmail.com.jpg"
                     size="small" 
                     className="m-1" 
                     shape="circle" 

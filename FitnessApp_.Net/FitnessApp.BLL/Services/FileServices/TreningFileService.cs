@@ -37,7 +37,7 @@ namespace FitnessApp.BLL.Services
                 files.Add(new BlobDto
                 {
                     Name = name,
-                    Uri = uri,
+                    Uri = fullUri,
                     ContentType = file.Properties.ContentType
                 });
             }

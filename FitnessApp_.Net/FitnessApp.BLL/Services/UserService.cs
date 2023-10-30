@@ -12,9 +12,9 @@ namespace FitnessApp.BLL.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepositoryRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepositoryRepository userRepository) 
+        public UserService(IUserRepository userRepository) 
         {
             this._userRepository = userRepository;
         }

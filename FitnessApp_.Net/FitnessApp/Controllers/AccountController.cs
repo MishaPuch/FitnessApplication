@@ -33,8 +33,6 @@ namespace FitnessApp.Controllers
             ITrainingAndDietSchedule trainingAndDietSchedule,
             IDietService dietService,
             ITreningService treningService,
-            MealFileService mealFileService,
-            UserFileService userFileService,
             IRoleService roleService,
             ITreningPlanService treningPlanService
             )
@@ -43,8 +41,6 @@ namespace FitnessApp.Controllers
             _trainingAndDietSchedule = trainingAndDietSchedule;
             _dietService = dietService;
             _treningService = treningService;
-            _mealFileService = mealFileService;
-            _userFileService = userFileService;
             _roleService = roleService;
             _treningPlanService = treningPlanService;
         }
@@ -160,41 +156,7 @@ namespace FitnessApp.Controllers
             await _userService.DeleteUserAsync(userId);
             Logger.Info($"user :id {userId} - was saccesfully deleted");
         }
-        [HttpGet("GetAllFotos")]
-        public async Task<IActionResult> ListOfBlobs()
-        {
-            var result = await _mealFileService.ListOfMealBlobsAsync();
-
-            return Ok(result);
-        }
-        [HttpPost("PostTheMealFoto")]
-        public async Task<IActionResult> UploadMealBlob(IFormFile file)
-        {
-            var result = await _mealFileService.UploadFile(file);
-
-            return Ok(result);
-        }
-        [HttpPost("PostTheAvatarFoto")]
-        public async Task<IActionResult> UploadAvatarBlob(IFormFile file)
-        {
-            var result = await _userFileService.UploadFile(file , await _userService.GetUserByIdAsync(96));
-            
-            return Ok(result);
-        }
-        [HttpGet("DownloadTheFoto")]
-        public async Task<IActionResult> DownloadTheBlob(string fileName)
-        {
-            var result = await _mealFileService.DownloadFileAsync(fileName);
-
-            return Ok(result);
-        }
-        [HttpDelete("DeleteTheFoto")]
-        public async Task<IActionResult> DeleteTheBlob(string fileName)
-        {
-            var result = await _mealFileService.DeleteFileAsync(fileName);
-
-            return Ok(result);
-        }
+     
 
     }
 }
