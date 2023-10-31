@@ -76,16 +76,13 @@ namespace FitnessApp.DAL.DiRepositories
             User changingUser;
             if (user.Id == 0)
             {
-                changingUser = await _context.Users
-                    .Include(x => x.Role).Include(x => x.TreningPlan)
-                    .FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
+                changingUser = await _context.Users.Include(x => x.Role).Include(x => x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
             }
             else
             {
-                changingUser = await _context.Users
-                    .Include(x => x.Role).Include(x => x.TreningPlan)
-                    .FirstOrDefaultAsync(u=>u.Id == user.Id);
+                changingUser = await _context.Users.Include(x => x.Role).Include(x => x.TreningPlan).FirstOrDefaultAsync(u=>u.Id == user.Id);
             }
+
             changingUser.UserName = user.UserName;
             changingUser.UserEmail = user.UserEmail;
             changingUser.Password = user.Password;

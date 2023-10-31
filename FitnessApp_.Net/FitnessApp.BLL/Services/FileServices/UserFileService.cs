@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using FitnessApp.DAL.InterfaceRepositories;
+using FitnessApp.BLL.DI_Service;
+using FitnessApp.DAL;
 
 namespace FitnessApp.BLL.Services
 {
@@ -18,8 +21,6 @@ namespace FitnessApp.BLL.Services
         private readonly string _storageAccount = "fitnessapp";
         private readonly string _key = "V4tLrHmmwyI/npR8wIzqs6g23spab0EiKy0QoHrfbe8mcjo05VJrskggVMrPS1EkKAQYbMpY08Xv+AStZEaLXg==";
         private readonly BlobContainerClient _fileAvatarsConteiner;
-        private readonly UserRepository _userRepository;
-
         public UserFileService()
         {
             var credential = new StorageSharedKeyCredential(_storageAccount, _key);
@@ -27,10 +28,8 @@ namespace FitnessApp.BLL.Services
             var blobServiceClient = new BlobServiceClient(new Uri(blobUri), credential);
             _fileAvatarsConteiner = blobServiceClient.GetBlobContainerClient("avatars");
         }
-        public UserFileService(UserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+
+        
 
         public async Task<List<BlobDto>> ListAsync()
         {
@@ -56,7 +55,7 @@ namespace FitnessApp.BLL.Services
         {
             await DeleteFileAsync(user);
             BlobResponseDto response = new BlobResponseDto();
-            BlobClient client = _fileAvatarsConteiner.GetBlobClient(user.UserEmail+Path.GetExtension(blob.FileName));
+            BlobClient client = _fileAvatarsConteiner.GetBlobClient(MakeAvatarFileName(blob, user));
             
             await using (Stream? data = blob.OpenReadStream())
             {
@@ -65,12 +64,9 @@ namespace FitnessApp.BLL.Services
 
             response.Status = $"File {blob.FileName} Uploaded Seccessfuly";
             response.Error = false;
-
             response.Blob.Name = user.UserEmail;
             response.Blob.Uri = client.Uri.AbsoluteUri;
 
-            user.Avatar = user.UserEmail + Path.GetExtension(blob.FileName);
-            await _userRepository.UpdateUserAsync(user);
 
             return response;
 
@@ -85,6 +81,10 @@ namespace FitnessApp.BLL.Services
             }
 
             return new BlobResponseDto { Error = false, Status = $"File {file.Name} - was seccessfully deleted" };
+        }
+        public string MakeAvatarFileName(IFormFile blob, User user)
+        {
+            return user.UserEmail + Path.GetExtension(blob.FileName);
         }
     }
 }

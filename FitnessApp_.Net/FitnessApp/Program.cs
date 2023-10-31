@@ -30,6 +30,7 @@ string connectionString = configuration.GetSection("Data").Value;
 builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<MealFileService>();
 builder.Services.AddSingleton<UserFileService>();
+builder.Services.AddSingleton<TreningFileService>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITrainingAndDietScheduleRepository, TrainingAndDietScheduleRepository>();

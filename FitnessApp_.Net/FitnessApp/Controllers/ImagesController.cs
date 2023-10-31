@@ -1,10 +1,13 @@
 ﻿using FitnessApp.BLL.DI_Service;
+using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
 using FitnessApp.BLL.Services.FileServices;
 using FitnessApp.DAL.Models;
+using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using System.Reflection.Metadata;
 using static System.Net.Mime.MediaTypeNames;
 using Image = SixLabors.ImageSharp.Image;
 
@@ -16,17 +19,23 @@ namespace FitnessApp.Controllers
     {
         private readonly MealFileService _mealFileService;
         private readonly UserFileService _userFileService;
+        private readonly TreningFileService _treningFileService;
         private readonly IUserService _userService;
+        private readonly IExerciseService _exerciseService;
 
         public ImagesController(
             MealFileService mealFileService,
             UserFileService userFileService,
-            IUserService userService
+            TreningFileService treningFileService,
+            IUserService userService,
+            IExerciseService exerciseService
             )
         {
             _mealFileService = mealFileService;
             _userFileService = userFileService;
             _userService = userService;
+            _treningFileService = treningFileService;
+            _exerciseService = exerciseService;
         }
 
         [HttpGet("GetAllFotos")]
@@ -54,24 +63,25 @@ namespace FitnessApp.Controllers
 
             var user = await _userService.GetUserByIdAsync(userId);
             var result = await _userFileService.UploadFile(file, user);
-/*
-            using (var imageStream = new MemoryStream())
+
+            user.Avatar = _userFileService.MakeAvatarFileName(file,user);
+            await _userService.CangeUserDataAsync(user);
+
+            return Ok("Image uploaded and processed.");
+
+        }
+        [HttpPost("PostTheExercise/{exerciseId:int}")]
+        public async Task<IActionResult> UploadExerciseBlob(int exerciseId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
             {
-                await file.CopyToAsync(imageStream);
-                imageStream.Seek(0, SeekOrigin.Begin);
+                return BadRequest("No file was uploaded.");
+            }
+            Exercise exercise =await _exerciseService.GetExerciseByIdAsync(exerciseId);
+            var result = await _treningFileService.UploadFile(file , exercise);
 
-                using (var image = Image.Load(imageStream))
-                {
-                    using (var formattedImageStream = new MemoryStream())
-                    {
-                        image.SaveAsJpeg(formattedImageStream, new JpegEncoder()); // Сохранить как JPEG
-                        formattedImageStream.Seek(0, SeekOrigin.Begin);
-
-                        // Теперь загрузите форматированный поток данных в хранилище
-                        var result = await _userFileService.UploadFile(formattedImageStream, user);
-                    }
-                }
-            }*/
+            exercise.ExerciseVideo = _treningFileService.MakeExerciseFileName(file, exercise);
+            await _exerciseService.UpdateExerciseAsync(exercise);
 
             return Ok("Image uploaded and processed.");
         }

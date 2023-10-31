@@ -50,11 +50,8 @@ export default function ListExercise() {
                 <Column field="exerciseDescription" header="Exercise Description" />
                 <Column field="muscleGroup.nameMuscleGroup" header="Muscle Group" />
                 <Column field="typeOfTrening.typeOfTreningValue" header="Type of Training" />
-                <Column
-                    body={(data) => (
-                        <Button label="Change Info" onClick={() => handleUpdateExercise(data)} />
-                    )}
-                />
+                <Column body={(data) => (<Button label="Change Info" onClick={() => handleUpdateExercise(data)} />)}/>
+                
             </DataTable>
         </div>
     );

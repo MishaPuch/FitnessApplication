@@ -1,6 +1,7 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
 using FitnessApp.DAL.Models;
+using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -44,10 +45,11 @@ namespace FitnessApp.BLL.Services
 
             return files;
         }
-        public async Task<BlobResponseDto> UploadFile(IFormFile blob)
+        public async Task<BlobResponseDto> UploadFile(IFormFile blob , Exercise exercise)
         {
+            await DeleteFileAsync(exercise);
             BlobResponseDto response = new BlobResponseDto();
-            BlobClient client = _fileTreningsConteiner.GetBlobClient(blob.FileName);
+            BlobClient client = _fileTreningsConteiner.GetBlobClient(MakeExerciseFileName(blob,exercise));
 
             await using (Stream? data = blob.OpenReadStream())
             {
@@ -82,15 +84,19 @@ namespace FitnessApp.BLL.Services
             return null;
         }
 
-        public async Task<BlobResponseDto> DeleteFileAsync(string blobFileName)
+        public async Task<BlobResponseDto> DeleteFileAsync(Exercise exercise)
         {
-            BlobClient file = _fileTreningsConteiner.GetBlobClient(blobFileName);
+            BlobClient file = _fileTreningsConteiner.GetBlobClient(exercise.ExerciseVideo);
             if (await file.ExistsAsync())
             {
                 await file.DeleteAsync();
             }
 
             return new BlobResponseDto { Error = false, Status = $"File {file.Name} - was seccessfully deleted" };
+        }
+        public string MakeExerciseFileName(IFormFile blob, Exercise exercise)
+        {
+            return exercise.ExerciseName + Path.GetExtension(blob.FileName);
         }
     }
 }

@@ -66,8 +66,26 @@ namespace FitnessApp.Controllers
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
             if (user != null)
             {
-                return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
-                Logger.Info($"user was found : { user }");
+                if (user.Role.ID == 2 || user.Role.ID == 3)
+                {
+                    List<FullModel> result = new List<FullModel>();
+                    FullModel fullModel = new FullModel()
+                    {
+                        Day = DateTime.Now,
+                        User = user,
+                        Trening = null,
+                        Diet = null,
+                        TreningPlan = null,
+                        Role = user.Role
+                    };
+                    result.Add(fullModel);
+                    return result;
+                }
+                else
+                {
+                    return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+                    Logger.Info($"user was found : {user}");
+                }
             }
             else
             {

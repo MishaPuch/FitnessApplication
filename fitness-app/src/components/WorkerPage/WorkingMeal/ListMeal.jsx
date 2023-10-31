@@ -73,7 +73,7 @@ export default function ListMeal(){
         return (
             <div className="card">
                  
-                <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
+                <DataTable value={meal} tableStyle={{ minWidth: '60rem' }}>
                     <Column field="Food" header="Food" body={nameBodyTemplate}></Column>
                     <Column field="Ingredients" header="Ingredients" body={ingredientsBodyTemplate}></Column>
                     <Column field="Instructions" header="Instructions" body={instructionsBodyTemplate}></Column>
@@ -89,7 +89,7 @@ export default function ListMeal(){
 
     return (
         <div className="card">
-            <Button label="Create Meal" onClick={() => handleCreateMeal()}></Button>
+            <Button label=" Create Meal " onClick={() => handleCreateMeal()}></Button>
             <DataScroller value={meal} itemTemplate={itemTemplate} rows={meal.length} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     );

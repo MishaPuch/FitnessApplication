@@ -46,13 +46,24 @@ function WorkerMain() {
     };
 
     const imageBodyTemplate = (data) => {
+      if(data.avatar!=""){
       return (
         <img
-          src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`}
+          src={`https://fitnessapp.blob.core.windows.net/avatars/${data.avatar}`}
           alt={data.image}
           className="w-6rem shadow-2 border-round"
         />
       );
+      }
+      else{
+        return (
+          <img
+            src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRavIqQYivR75p5gMVUiR_tZqoGzmqIVGbXRw&usqp=CAU`}
+            alt={data.image}
+            className="w-6rem shadow-2 border-round"
+          />
+        );
+      }
     };
 
     const nameBodyTemplate = (data) => {

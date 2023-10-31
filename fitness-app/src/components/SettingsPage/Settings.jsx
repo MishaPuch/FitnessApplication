@@ -78,37 +78,22 @@ export default function Settings() {
             setRestTime(value);
         }
     }
-    async function onUpload(event) {
-        console.log("lkdmvdfm");
-        
-        if (event.files && event.files.length > 0) {
-            // event.files содержит информацию о загруженных файлах
-            const uploadedFile = event.files[0]; // Получите первый загруженный файл
-            
-            console.log("Uploaded file name:", uploadedFile.name);
-            console.log("Uploaded file type:", uploadedFile.type);
-            console.log("Uploaded file size:", uploadedFile.size);
-            
-            // Вы можете выполнить дополнительную обработку или отправку этого файла на сервер
-        }
-    }
-      
+    
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
     
         if (file) {
             const formData = new FormData();
-            formData.append('file', file); // Используйте 'file' в качестве ключа
+            formData.append('file', file); 
     
             try {
                 fetch(`https://localhost:7060/api/Images/PostTheAvatarFoto/${planData[0].user.id}`, {
                     method: 'POST',
                     body: formData,
                 })
-                .then((response) => response.arrayBuffer()) // Измените на arrayBuffer()
+                .then((response) => response.arrayBuffer()) 
                 .then((data) => {
-                    console.log(data); // 'data' теперь представляет собой массив байтов
                 })
                 .catch((error) => {
                     console.error('Ошибка:', error);

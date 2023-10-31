@@ -18,6 +18,8 @@ namespace FitnessApp.BLL.Services
         {
             this._userRepository = userRepository;
         }
+        
+        
 
         public async Task<List<User>> GetAllUsersAsync()
         {

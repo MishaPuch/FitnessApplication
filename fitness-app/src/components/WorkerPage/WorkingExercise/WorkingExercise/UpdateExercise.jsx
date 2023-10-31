@@ -65,7 +65,7 @@ export default function UpdateExercise() {
     }
 
     const handleBack = () => {
-        navigate('/ListExercise');
+        navigate('/WorkerPage');
     };
 
     return (

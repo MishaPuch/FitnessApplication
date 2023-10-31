@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function WorkingExercise() {
     const navigate = useNavigate();
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const muscleGroupOptions = [
         { label: 'Triceps', value: 1 },
@@ -39,6 +40,32 @@ export default function WorkingExercise() {
             ...exerciseData,
             [name]: value
         });
+    };
+    const handleFileChange = (event, Id) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file); 
+    
+            try {
+                fetch(`https://localhost:7060/api/Images/PostTheExercise/${Id}`, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then((response) => response.arrayBuffer()) 
+                .then((data) => {
+                })
+                .catch((error) => {
+                    console.error('Ошибка:', error);
+                });
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        } else {
+            console.error("Файл не выбран.");
+        }
     };
 
     async function handleSave ()
@@ -90,9 +117,16 @@ export default function WorkingExercise() {
                                 <p>Exercise Description</p>
                                 <InputText id="exerciseDescription" name="exerciseDescription" value={exerciseData.exerciseDescription} onChange={handleChange} />
                             </span>
-                            <span className="p-float-label grid-item">
-                                <p>Exercise Video</p>
-                                <InputText id="exerciseVideo" name="exerciseVideo" value={exerciseData.exerciseVideo} onChange={handleChange} />
+                            <span className="p-float-label grid-item">  
+                            <div>
+                            <input type="file" accept="image/*" onChange={(event) => handleFileChange(event, exerciseData.id)} />
+                                {selectedFile && (
+                                    <div>
+                                    <p>Selected file: {selectedFile.name}</p>
+                                    <img src={URL.createObjectURL(selectedFile)} alt="Selected" />
+                                    </div>
+                                )}
+                                </div>          
                             </span>
                         </div>
                         <div className="grid-item">
