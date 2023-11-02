@@ -42,3 +42,9 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compo
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\obj\Debug\docker-compose.dcproj.CopyComplete
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\SixLabors.ImageSharp.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\EmailVerefication.deps.json
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\EmailVerefication.runtimeconfig.json
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\EmailVerefication.exe
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Newtonsoft.Json.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\RabbitMQ.Client.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\System.Threading.Channels.dll

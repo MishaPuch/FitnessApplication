@@ -307,6 +307,9 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<DateTime>("DateOFLastPayment")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsEmailConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)

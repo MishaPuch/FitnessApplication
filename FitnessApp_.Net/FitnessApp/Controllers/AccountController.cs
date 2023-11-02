@@ -3,6 +3,7 @@ using FitnessApp.BLL.GetModels;
 using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
 using FitnessApp.BLL.Services.FileServices;
+using FitnessApp.DAL.Helpers;
 using FitnessApp.DAL.ViewModel;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -113,6 +114,7 @@ namespace FitnessApp.Controllers
                     TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
                     RoleId = getCreatingUser.RoleId,
                     Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
+                    IsEmailConfirmed = false,
 
                 };
                 User checkingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
@@ -130,8 +132,10 @@ namespace FitnessApp.Controllers
                     var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
                     var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
+                    
 
                     return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
+                    
                 }
             }
             catch (Exception ex)

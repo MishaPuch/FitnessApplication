@@ -33,16 +33,23 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (isLogged) {
-            console.log(planData[0].role.id);
-            if(planData[0].role.id===1){
-                navigate('/account');
-             }
-            else if(planData[0].role.id===2){
-                navigate('/WorkerPage');
+            console.log(planData[0]);
+            if(planData[0].user.isEmailConfirmed===true){
+                if(planData[0].role.id===1){
+                    navigate('/account');
+                }
+                else if(planData[0].role.id===2){
+                    navigate('/WorkerPage');
+                }
+                else if(planData[0].role.id===3){
+                    navigate('/AdminPage');
+                }
             }
-            else if(planData[0].role.id===3){
-                navigate('/AdminPage');
+            else{
+                navigate('/VerifyUser');
+
             }
+        
 
         }
     }, [isLogged]);

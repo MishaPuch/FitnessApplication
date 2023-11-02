@@ -19,6 +19,7 @@ import CreateMeal from './components/WorkerPage/WorkingMeal/CreateMeal';
 import CreateExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/CreateExercise';
 import UpdateMeal from './components/WorkerPage/WorkingMeal/UpdateMeal';
 import UpdateExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/UpdateExercise';
+import NotVerifiedUser from './components/AlertPages/NotVerifiedUser';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
               <Route path="/WorkerExercise" element={<CreateExercise />} />
               <Route path="/UpdateMeal" element={<UpdateMeal />} />
               <Route path="/UpdateExercise" element={<UpdateExercise />} />
+              <Route path="/VerifyUser" element={<NotVerifiedUser/>} />
 
 
             </Routes>

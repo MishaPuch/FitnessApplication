@@ -224,3 +224,10 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\n
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.IO.Hashing.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\NLog.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\SixLabors.ImageSharp.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\EmailVerefication.deps.json
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\EmailVerefication.runtimeconfig.json
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\EmailVerefication.exe
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Threading.Channels.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\EmailVerefication.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\EmailVerefication.pdb

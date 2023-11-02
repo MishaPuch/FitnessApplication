@@ -1,4 +1,5 @@
-﻿using FitnessApp.DAL.interfaceRepositories;
+﻿using FitnessApp.DAL.Helpers;
+using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.InterfaceRepositories;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
@@ -29,9 +30,14 @@ namespace FitnessApp.DAL.DiRepositories
             try
             {
                 user.DateOFLastPayment = DateTime.Now.Date;
+                user.IsEmailConfirmed = false;
+                user.Avatar = "";
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 User createdUser = await _context.Users.Include(x=>x.Role).Include(x=>x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
+
+                await QueueHelper.EmailVereficationAsync(user);
+
                 return createdUser;
             }
             catch (Exception ex)
@@ -92,6 +98,7 @@ namespace FitnessApp.DAL.DiRepositories
             changingUser.CalorificValue = user.CalorificValue;
             changingUser.RoleId = user.RoleId;
             changingUser.Avatar=user.Avatar;
+            changingUser.IsEmailConfirmed = user.IsEmailConfirmed;
 
             await _context.SaveChangesAsync();
 
