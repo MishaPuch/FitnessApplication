@@ -70,3 +70,8 @@ C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\obj\Debug\net6.0\ref
 C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\obj\Debug\net6.0\EmailVerefication.pdb
 C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\obj\Debug\net6.0\EmailVerefication.genruntimeconfig.cache
 C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\obj\Debug\net6.0\ref\EmailVerefication.dll
+C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\bin\Debug\net6.0\Humanizer.dll
+C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\misha\Desktop\FitnessApplication\EmailVerefication\bin\Debug\net6.0\System.CodeDom.dll

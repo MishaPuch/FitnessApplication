@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EmailVerefication\EmailVerefication.csproj" />
     <ProjectReference Include="..\FitnessApp.DAL\FitnessApp.DAL.csproj" />
   </ItemGroup>
 

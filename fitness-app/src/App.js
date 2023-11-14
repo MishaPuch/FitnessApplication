@@ -44,7 +44,7 @@ function App() {
               <Route path="/WorkerExercise" element={<CreateExercise />} />
               <Route path="/UpdateMeal" element={<UpdateMeal />} />
               <Route path="/UpdateExercise" element={<UpdateExercise />} />
-              <Route path="/VerifyUser" element={<NotVerifiedUser/>} />
+              <Route path="/VerifyUser/:email" element={<NotVerifiedUser />} />
 
 
             </Routes>

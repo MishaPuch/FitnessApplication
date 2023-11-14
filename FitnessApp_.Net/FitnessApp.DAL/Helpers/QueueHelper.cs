@@ -32,6 +32,8 @@ namespace FitnessApp.DAL.Helpers
                                      routingKey: "EmailVarefication",
                                      basicProperties: null,
                                      body: body);
+
+
                 Console.WriteLine($" User with email {user.UserEmail} was sant to verefication ");
             }
         }

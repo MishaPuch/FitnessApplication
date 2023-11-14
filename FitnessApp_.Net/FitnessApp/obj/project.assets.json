@@ -1558,27 +1558,11 @@
           }
         }
       },
-      "EmailVerefication/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "FitnessApp.DAL": "1.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "RabbitMQ.Client": "6.6.0"
-        },
-        "compile": {
-          "bin/placeholder/EmailVerefication.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/EmailVerefication.dll": {}
-        }
-      },
       "FitnessApp.BLL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Azure.Storage.Blobs": "12.18.0",
-          "EmailVerefication": "1.0.0",
           "FitnessApp.DAL": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Http.Features": "2.2.0",
@@ -4697,11 +4681,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "EmailVerefication/1.0.0": {
-      "type": "project",
-      "path": "../../EmailVerefication/EmailVerefication.csproj",
-      "msbuildProject": "../../EmailVerefication/EmailVerefication.csproj"
     },
     "FitnessApp.BLL/1.0.0": {
       "type": "project",

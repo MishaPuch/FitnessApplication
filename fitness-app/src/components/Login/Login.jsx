@@ -27,7 +27,7 @@ const LoginForm = () => {
             setIsLogged(isLogged);
         } catch (error) {
             console.error('Error:', error);
-            alert("maby u forgot to up the server")
+            alert("maby u pass wrong password or login ");
         }
     };
 
@@ -46,8 +46,8 @@ const LoginForm = () => {
                 }
             }
             else{
-                navigate('/VerifyUser');
-
+                console.log(planData[0].user);
+                navigate(`/VerifyUser/${planData[0].user.userEmail}`);
             }
         
 

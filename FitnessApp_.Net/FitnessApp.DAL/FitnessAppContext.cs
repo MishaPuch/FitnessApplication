@@ -28,6 +28,7 @@ namespace FitnessApp.DAL
         public DbSet<TypeOfTrening> TypesOfTrening { get; set; }
         public DbSet<TreningPlan> TreningPlans { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<VereficationUser> VereficationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

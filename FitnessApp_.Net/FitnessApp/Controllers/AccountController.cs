@@ -20,6 +20,7 @@ namespace FitnessApp.Controllers
     {
         private readonly UserFileService _userFileService;
         private readonly MealFileService _mealFileService;
+        private readonly IVereficationUserService _vereficationUserService;
         private readonly IUserService _userService;
         private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
         private readonly IDietService _dietService;
@@ -35,7 +36,8 @@ namespace FitnessApp.Controllers
             IDietService dietService,
             ITreningService treningService,
             IRoleService roleService,
-            ITreningPlanService treningPlanService
+            ITreningPlanService treningPlanService,
+            IVereficationUserService vereficationUserService
             )
         {
             _userService = userService;
@@ -44,6 +46,7 @@ namespace FitnessApp.Controllers
             _treningService = treningService;
             _roleService = roleService;
             _treningPlanService = treningPlanService;
+            _vereficationUserService = vereficationUserService;
         }
 
         // GET: api/<AccountController>
@@ -65,6 +68,9 @@ namespace FitnessApp.Controllers
         public async Task<List<FullModel>> GetUserVerification(string userEmail, string password)
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
+
+            await QueueHelper.EmailVereficationAsync(user);
+
             if (user != null)
             {
                 if (user.Role.ID == 2 || user.Role.ID == 3)
@@ -125,14 +131,12 @@ namespace FitnessApp.Controllers
                 else
                 {
                     User user = await _userService.CreateUserAsync(creatingUser);
-                    /*if (file != null)
-                    {
-                        var result = await _uxserFileService.UploadFile(file, user);
-                    }*/
+              
                     var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
                     var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
-                    
+
+                    await QueueHelper.EmailVereficationAsync(user);
 
                     return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
                     
@@ -178,7 +182,12 @@ namespace FitnessApp.Controllers
             await _userService.DeleteUserAsync(userId);
             Logger.Info($"user :id {userId} - was saccesfully deleted");
         }
-     
 
+        // PUT: api/<AccountController>/confirmationEmail/{email}/{vereficationCode}
+        [HttpPut("confirmationEmail/{email}/{vereficationCode:int}")]
+        public async Task ConfirmationEmail( string email , int vereficationCode)
+        {
+            await _vereficationUserService.CheckThePassword(email, vereficationCode);
+        }
     }
 }

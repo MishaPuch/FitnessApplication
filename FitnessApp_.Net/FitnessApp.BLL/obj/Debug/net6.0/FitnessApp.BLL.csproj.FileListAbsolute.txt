@@ -28,8 +28,3 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\obj\Deb
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\obj\Debug\net6.0\refint\FitnessApp.BLL.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\obj\Debug\net6.0\FitnessApp.BLL.pdb
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\obj\Debug\net6.0\ref\FitnessApp.BLL.dll
-C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\bin\Debug\net6.0\EmailVerefication.deps.json
-C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\bin\Debug\net6.0\EmailVerefication.runtimeconfig.json
-C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\bin\Debug\net6.0\EmailVerefication.exe
-C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\bin\Debug\net6.0\EmailVerefication.dll
-C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\bin\Debug\net6.0\EmailVerefication.pdb

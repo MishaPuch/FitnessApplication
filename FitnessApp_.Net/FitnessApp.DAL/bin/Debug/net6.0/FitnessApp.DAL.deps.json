@@ -9,6 +9,7 @@
       "FitnessApp.DAL/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.9",
+          "Microsoft.EntityFrameworkCore.Design": "7.0.9",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.9",

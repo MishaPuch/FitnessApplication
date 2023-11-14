@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("766d1195-50e6-423f-bf8a-a694262ccd4e")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("FitnessApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

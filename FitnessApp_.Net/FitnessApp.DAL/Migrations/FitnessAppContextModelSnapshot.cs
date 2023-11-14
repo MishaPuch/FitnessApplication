@@ -207,6 +207,26 @@ namespace FitnessApp.DAL.Migrations
                     b.ToTable("TypesOfTrening");
                 });
 
+            modelBuilder.Entity("FitnessApp.DAL.Models.VereficationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VereficationCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VereficationUsers");
+                });
+
             modelBuilder.Entity("FitnessApp.Models.Diet", b =>
                 {
                     b.Property<int>("Id")

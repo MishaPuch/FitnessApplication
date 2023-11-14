@@ -9,7 +9,6 @@
       "FitnessApp.BLL/1.0.0": {
         "dependencies": {
           "Azure.Storage.Blobs": "12.18.0",
-          "EmailVerefication": "1.0.0",
           "FitnessApp.DAL": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Http.Features": "2.2.0",
@@ -794,16 +793,6 @@
           }
         }
       },
-      "EmailVerefication/1.0.0": {
-        "dependencies": {
-          "FitnessApp.DAL": "1.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "RabbitMQ.Client": "6.6.0"
-        },
-        "runtime": {
-          "EmailVerefication.dll": {}
-        }
-      },
       "FitnessApp.DAL/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.9",
@@ -1350,11 +1339,6 @@
       "sha512": "sha512-c1ho9WU9ZxMZawML+ssPKZfdnrg/OjR3pe0m9v8230z3acqphwvPJqzAkH54xRYm5ntZHGG1EPP3sux9H3qSPg==",
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
-    },
-    "EmailVerefication/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "FitnessApp.DAL/1.0.0": {
       "type": "project",

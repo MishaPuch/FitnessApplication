@@ -1281,21 +1281,6 @@
           }
         }
       },
-      "EmailVerefication/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "FitnessApp.DAL": "1.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "RabbitMQ.Client": "6.6.0"
-        },
-        "compile": {
-          "bin/placeholder/EmailVerefication.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/EmailVerefication.dll": {}
-        }
-      },
       "FitnessApp.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3780,11 +3765,6 @@
         "version.txt"
       ]
     },
-    "EmailVerefication/1.0.0": {
-      "type": "project",
-      "path": "../../EmailVerefication/EmailVerefication.csproj",
-      "msbuildProject": "../../EmailVerefication/EmailVerefication.csproj"
-    },
     "FitnessApp.DAL/1.0.0": {
       "type": "project",
       "path": "../FitnessApp.DAL/FitnessApp.DAL.csproj",
@@ -3794,7 +3774,6 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Azure.Storage.Blobs >= 12.18.0",
-      "EmailVerefication >= 1.0.0",
       "FitnessApp.DAL >= 1.0.0",
       "Microsoft.AspNetCore.Http >= 2.2.2",
       "Microsoft.AspNetCore.Http.Features >= 2.2.0",
@@ -3830,9 +3809,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\misha\\Desktop\\FitnessApplication\\EmailVerefication\\EmailVerefication.csproj": {
-              "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\EmailVerefication\\EmailVerefication.csproj"
-            },
             "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
               "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj"
             }

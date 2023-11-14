@@ -15,8 +15,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -27,7 +25,8 @@ var AppConfig = builder.Configuration;
 IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
 string connectionString = configuration.GetSection("Data").Value;
 
-builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<MealFileService>();
 builder.Services.AddSingleton<UserFileService>();
 builder.Services.AddSingleton<TreningFileService>();
@@ -44,6 +43,7 @@ builder.Services.AddTransient<ICalorificCoefficientRepository, CalorificCoeffici
 builder.Services.AddTransient<ITreningPlanRepository,TreningPlanRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ITypeOfTreningRepository, TypeOfTreningRepository>();
+builder.Services.AddTransient<IVereficationUserRepository, VereficationUserRepository>();
 
 builder.Services.AddTransient<IUserService, UserService>();   
 builder.Services.AddTransient<ITrainingAndDietSchedule, TrainingAndDietSchedule>();
@@ -56,6 +56,7 @@ builder.Services.AddTransient<ITreningPlanService, TreningPlanService>();
 builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<ITypeOfTreningService, TypeOfTreningService>();
+builder.Services.AddTransient<IVereficationUserService, VereficationUserService>();
 //  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
 
 #region NLog Initializator

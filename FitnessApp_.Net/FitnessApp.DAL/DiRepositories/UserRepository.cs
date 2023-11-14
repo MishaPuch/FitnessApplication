@@ -1,4 +1,5 @@
-﻿using FitnessApp.DAL.Helpers;
+﻿using Azure;
+using FitnessApp.DAL.Helpers;
 using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.InterfaceRepositories;
 using FitnessApp.DAL.Models;
@@ -79,30 +80,38 @@ namespace FitnessApp.DAL.DiRepositories
 
         public async Task UpdateUserAsync(User user)
         {
-            User changingUser;
-            if (user.Id == 0)
+            try
             {
-                changingUser = await _context.Users.Include(x => x.Role).Include(x => x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
+                User changingUser = await _context.Users.FindAsync(user.Id);
+
+                if (changingUser != null)
+                {
+                    changingUser.UserName = user.UserName;
+                    changingUser.UserEmail = user.UserEmail;
+                    changingUser.Password = user.Password;
+                    changingUser.Sex = user.Sex;
+                    changingUser.Age = user.Age;
+                    changingUser.IsEmailConfirmed = user.IsEmailConfirmed;
+                    changingUser.RestTime = user.RestTime;
+                    changingUser.CalorificValue = user.CalorificValue;
+                    changingUser.DateOFLastPayment = user.DateOFLastPayment;
+                    changingUser.TreningPlanId = user.TreningPlanId;
+                    changingUser.TreningPlan = user.TreningPlan;
+                    changingUser.RoleId = user.RoleId;
+                    changingUser.Role = user.Role;
+                    changingUser.Avatar = user.Avatar;
+
+                    await _context.SaveChangesAsync();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                changingUser = await _context.Users.Include(x => x.Role).Include(x => x.TreningPlan).FirstOrDefaultAsync(u=>u.Id == user.Id);
+                // Обработка ошибки
+                Logger.Error(ex);
+                // Возможно, следует выбросить исключение или выполнить другие действия по обработке ошибки
             }
-
-            changingUser.UserName = user.UserName;
-            changingUser.UserEmail = user.UserEmail;
-            changingUser.Password = user.Password;
-            changingUser.Sex = user.Sex;
-            changingUser.Age = user.Age;
-            changingUser.RestTime = user.RestTime;
-            changingUser.CalorificValue = user.CalorificValue;
-            changingUser.RoleId = user.RoleId;
-            changingUser.Avatar=user.Avatar;
-            changingUser.IsEmailConfirmed = user.IsEmailConfirmed;
-
-            await _context.SaveChangesAsync();
-
         }
+
 
         public async Task<User> GetByPasswordAndEmailAsync(string email, string password)
         {
