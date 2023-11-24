@@ -12,6 +12,7 @@ using NLog.Config;
 using NLog.Targets;
 using NLog;
 using Microsoft.AspNetCore.Http.Features;
+using FitnessApp.DAL.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +58,8 @@ builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<ITypeOfTreningService, TypeOfTreningService>();
 builder.Services.AddTransient<IVereficationUserService, VereficationUserService>();
+
+builder.Services.AddTransient<QueueHelper>();
 //  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
 
 #region NLog Initializator

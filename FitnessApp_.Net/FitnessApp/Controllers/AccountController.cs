@@ -26,7 +26,9 @@ namespace FitnessApp.Controllers
         private readonly IDietService _dietService;
         private readonly ITreningService _treningService;
         private readonly IRoleService _roleService;
+        private readonly QueueHelper _queueHelper;  
         private readonly ITreningPlanService _treningPlanService;
+        
         private readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
@@ -37,7 +39,8 @@ namespace FitnessApp.Controllers
             ITreningService treningService,
             IRoleService roleService,
             ITreningPlanService treningPlanService,
-            IVereficationUserService vereficationUserService
+            IVereficationUserService vereficationUserService,
+            QueueHelper queueHelper
             )
         {
             _userService = userService;
@@ -47,6 +50,7 @@ namespace FitnessApp.Controllers
             _roleService = roleService;
             _treningPlanService = treningPlanService;
             _vereficationUserService = vereficationUserService;
+            _queueHelper = queueHelper;
         }
 
         // GET: api/<AccountController>
@@ -63,46 +67,56 @@ namespace FitnessApp.Controllers
             return await _userService.GetUserByIdAsync(userId);
         }
 
-        // GET: api/<AccountController>/user/{userEmail}/{password}
         [HttpGet("user/{userEmail}/{password}")]
         public async Task<List<FullModel>> GetUserVerification(string userEmail, string password)
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
 
-            await QueueHelper.EmailVereficationAsync(user);
-
             if (user != null)
             {
-                if (user.Role.ID == 2 || user.Role.ID == 3)
+                await _queueHelper.EmailVereficationAsync(user);
+
+                if (user.Role != null)  
                 {
-                    List<FullModel> result = new List<FullModel>();
-                    FullModel fullModel = new FullModel()
+                    if (user.Role.ID == 2 || user.Role.ID == 3)
                     {
-                        Day = DateTime.Now,
-                        User = user,
-                        Trening = null,
-                        Diet = null,
-                        TreningPlan = null,
-                        Role = user.Role
-                    };
-                    result.Add(fullModel);
-                    return result;
+                        List<FullModel> result = new List<FullModel>
+                        {
+                            new FullModel
+                            {
+                                Day = DateTime.Now,
+                                User = user,
+                                Trening = null,
+                                Diet = null,
+                                TreningPlan = null,
+                                Role = user.Role
+                            }
+                        };
+                        return result;
+                    }
+                    else
+                    {
+                        var todaysPlan = await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+                        Logger.Info($"User was found: {user}");
+                        return todaysPlan;
+                    }
                 }
                 else
                 {
-                    return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
-                    Logger.Info($"user was found : {user}");
+                    // Возвращаем значение по умолчанию, если у пользователя нет роли
+                    return new List<FullModel>();
                 }
             }
             else
             {
-                Logger.Info($"user was not found : {user}");
+                Logger.Info($"User was not found");
                 return new List<FullModel>();
             }
         }
 
+
         [HttpPost("create-user")]
-        public async Task<IActionResult> Register([FromBody] GetUser getCreatingUser/*, [FromForm] IFormFile file*/)
+        public async Task<List<FullModel>> Register([FromBody] GetUser getCreatingUser)
         {
             try
             {
@@ -120,34 +134,38 @@ namespace FitnessApp.Controllers
                     TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
                     RoleId = getCreatingUser.RoleId,
                     Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
-                    IsEmailConfirmed = false,
-
+                    IsEmailConfirmed = false, 
                 };
+
                 User checkingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
+
                 if (checkingUser != null)
                 {
-                    return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(checkingUser.Id));
+                    return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(checkingUser.Id);
                 }
                 else
                 {
+                    
                     User user = await _userService.CreateUserAsync(creatingUser);
-              
+
                     var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
                     var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
 
-                    await QueueHelper.EmailVereficationAsync(user);
+                    return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
 
-                    return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
-                    
                 }
             }
             catch (Exception ex)
             {
-                // Здесь вы можете записать сообщение об ошибке в логи или вернуть его как часть ответа для отладки
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+                // Log the exception
+                Logger.Warn($"Internal Server Error: {ex.Message}");
+
+                // Return an appropriate value or throw the exception again based on your requirements
+                throw; // or return an appropriate value like an empty list
             }
         }
+
 
 
         // PUT: api/<AccountController>/changeData

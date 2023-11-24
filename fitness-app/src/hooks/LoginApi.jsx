@@ -6,10 +6,10 @@ async function LoginApi(email , password){
             'Content-Type': 'application/json',
         },
     });
-
+debugger;
     if (response.ok) {
         const responseData = await response.json();
-        if(responseData.length > 0){
+        if(responseData.length !== 0){
             return { user: responseData, isLogged: true };
         }
         else {
