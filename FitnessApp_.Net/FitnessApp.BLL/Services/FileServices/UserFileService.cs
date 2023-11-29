@@ -13,10 +13,11 @@ using System.Drawing;
 using FitnessApp.DAL.InterfaceRepositories;
 using FitnessApp.BLL.DI_Service;
 using FitnessApp.DAL;
+using FitnessApp.BLL.Interface.FileServiceInterface;
 
 namespace FitnessApp.BLL.Services
 {
-    public class UserFileService
+    public class UserFileService: IUserFileService
     {
         private readonly string _storageAccount = "fitnessapp";
         private readonly string _key = "V4tLrHmmwyI/npR8wIzqs6g23spab0EiKy0QoHrfbe8mcjo05VJrskggVMrPS1EkKAQYbMpY08Xv+AStZEaLXg==";

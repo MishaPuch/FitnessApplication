@@ -1,5 +1,6 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
+using FitnessApp.BLL.Interface.FileServiceInterface;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.BLL.Services
 {
-    public class TreningFileService
+    public class TreningFileService: ITreningFileService
     {
         private readonly string _storageAccount = "fitnessapp";
         private readonly string _key = "V4tLrHmmwyI/npR8wIzqs6g23spab0EiKy0QoHrfbe8mcjo05VJrskggVMrPS1EkKAQYbMpY08Xv+AStZEaLXg==";

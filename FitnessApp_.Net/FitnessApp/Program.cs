@@ -12,6 +12,7 @@ using NLog.Config;
 using NLog.Targets;
 using NLog;
 using Microsoft.AspNetCore.Http.Features;
+using FitnessApp.BLL.Interface.FileServiceInterface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,9 +28,9 @@ string connectionString = configuration.GetSection("Data").Value;
 
 builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddSingleton<MealFileService>();
-builder.Services.AddSingleton<UserFileService>();
-builder.Services.AddSingleton<TreningFileService>();
+builder.Services.AddSingleton<IMealFileService, MealFileService>();
+builder.Services.AddSingleton<IUserFileService, UserFileService>();
+builder.Services.AddSingleton<ITreningFileService,TreningFileService>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITrainingAndDietScheduleRepository, TrainingAndDietScheduleRepository>();
@@ -88,7 +89,7 @@ builder.Services.AddCors(options =>
 ////////////////////////////////////
 
 var app = builder.Build();
-    // Configure the HTTP request pipeline.
+    // Configure the HTTP request pipeline.F
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();

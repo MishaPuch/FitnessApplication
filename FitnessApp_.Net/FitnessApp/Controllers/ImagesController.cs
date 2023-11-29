@@ -1,5 +1,6 @@
 ﻿using FitnessApp.BLL.DI_Service;
 using FitnessApp.BLL.Interface;
+using FitnessApp.BLL.Interface.FileServiceInterface;
 using FitnessApp.BLL.Services;
 using FitnessApp.BLL.Services.FileServices;
 using FitnessApp.DAL.Models;
@@ -17,16 +18,16 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        private readonly MealFileService _mealFileService;
-        private readonly UserFileService _userFileService;
-        private readonly TreningFileService _treningFileService;
+        private readonly IMealFileService _mealFileService;
+        private readonly IUserFileService _userFileService;
+        private readonly ITreningFileService _treningFileService;
         private readonly IUserService _userService;
         private readonly IExerciseService _exerciseService;
 
         public ImagesController(
-            MealFileService mealFileService,
-            UserFileService userFileService,
-            TreningFileService treningFileService,
+            IMealFileService mealFileService,
+            IUserFileService userFileService,
+            ITreningFileService treningFileService,
             IUserService userService,
             IExerciseService exerciseService
             )
@@ -75,7 +76,7 @@ namespace FitnessApp.Controllers
         {
             if (file == null || file.Length == 0)
             {
-                return BadRequest("No file was uploaded.");
+                return BadRequest();
             }
             Exercise exercise =await _exerciseService.GetExerciseByIdAsync(exerciseId);
             var result = await _treningFileService.UploadFile(file , exercise);
@@ -83,7 +84,7 @@ namespace FitnessApp.Controllers
             exercise.ExerciseVideo = _treningFileService.MakeExerciseFileName(file, exercise);
             await _exerciseService.UpdateExerciseAsync(exercise);
 
-            return Ok("Image uploaded and processed.");
+            return Ok();
         }
 
 

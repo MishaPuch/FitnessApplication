@@ -19,11 +19,13 @@ namespace FitnessApp.DAL.DiRepositories
     {
         private readonly FitnessAppContext _context;
         private readonly ITreningPlanRepository _treningPlan;
+        private readonly QueueHelper _queueHelper;
         private readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public UserRepository(FitnessAppContext context, ITreningPlanRepository treningPlan )
+        public UserRepository(FitnessAppContext context, ITreningPlanRepository treningPlan,QueueHelper queueHelper )
         {
             _context = context;
             _treningPlan = treningPlan;
+            _queueHelper = queueHelper;
         }
 
         public async Task<User> AddUserAsync(User user)
@@ -37,7 +39,7 @@ namespace FitnessApp.DAL.DiRepositories
                 await _context.SaveChangesAsync();
                 User createdUser = await _context.Users.Include(x=>x.Role).Include(x=>x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
 
-                await QueueHelper.EmailVereficationAsync(user);
+                await _queueHelper.EmailVereficationAsync(user);
 
                 return createdUser;
             }

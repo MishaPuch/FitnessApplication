@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DAL.Helpers
 {
-    public static class QueueHelper
+    public class QueueHelper
     {
-
-
-        public static async Task EmailVereficationAsync(User user)
+        public virtual async Task EmailVereficationAsync(User user)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())

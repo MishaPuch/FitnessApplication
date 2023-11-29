@@ -9,6 +9,7 @@ using FitnessApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 
@@ -27,6 +28,7 @@ namespace FitnessApp.Controllers
         private readonly ITreningService _treningService;
         private readonly IRoleService _roleService;
         private readonly ITreningPlanService _treningPlanService;
+        private readonly QueueHelper _queueHelper;
         private readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
@@ -37,7 +39,8 @@ namespace FitnessApp.Controllers
             ITreningService treningService,
             IRoleService roleService,
             ITreningPlanService treningPlanService,
-            IVereficationUserService vereficationUserService
+            IVereficationUserService vereficationUserService,
+            QueueHelper queueHelper
             )
         {
             _userService = userService;
@@ -47,6 +50,7 @@ namespace FitnessApp.Controllers
             _roleService = roleService;
             _treningPlanService = treningPlanService;
             _vereficationUserService = vereficationUserService;
+            _queueHelper = queueHelper;
         }
 
         // GET: api/<AccountController>
@@ -69,7 +73,7 @@ namespace FitnessApp.Controllers
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
 
-            await QueueHelper.EmailVereficationAsync(user);
+            await _queueHelper.EmailVereficationAsync(user);
 
             if (user != null)
             {
@@ -136,7 +140,7 @@ namespace FitnessApp.Controllers
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
                     var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
 
-                    await QueueHelper.EmailVereficationAsync(user);
+                    await _queueHelper.EmailVereficationAsync(user);
 
                     return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
                     

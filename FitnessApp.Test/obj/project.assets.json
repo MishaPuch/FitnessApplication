@@ -9232,11 +9232,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\misha\\Desktop\\fit\\FitnessApp.Test\\FitnessApp.Test.csproj",
+      "projectUniqueName": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp.Test\\FitnessApp.Test.csproj",
       "projectName": "FitnessApp.Test",
-      "projectPath": "C:\\Users\\misha\\Desktop\\fit\\FitnessApp.Test\\FitnessApp.Test.csproj",
+      "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp.Test\\FitnessApp.Test.csproj",
       "packagesPath": "C:\\Users\\misha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\misha\\Desktop\\fit\\FitnessApp.Test\\obj\\",
+      "outputPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\misha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9253,11 +9253,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\misha\\Desktop\\fit\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {
-              "projectPath": "C:\\Users\\misha\\Desktop\\fit\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj"
+            "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {
+              "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj"
             },
-            "C:\\Users\\misha\\Desktop\\fit\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj": {
-              "projectPath": "C:\\Users\\misha\\Desktop\\fit\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj"
+            "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj": {
+              "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj"
             }
           }
         }

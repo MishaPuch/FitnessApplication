@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.BLL", "FitnessAp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DB88BFF3-014D-4F62-A93F-9DC1A9450592}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Test", "..\FitnessApp.Test\FitnessApp.Test.csproj", "{17415C79-9981-4337-9A7B-3EA19834DF95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DB88BFF3-014D-4F62-A93F-9DC1A9450592}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB88BFF3-014D-4F62-A93F-9DC1A9450592}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB88BFF3-014D-4F62-A93F-9DC1A9450592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17415C79-9981-4337-9A7B-3EA19834DF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17415C79-9981-4337-9A7B-3EA19834DF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17415C79-9981-4337-9A7B-3EA19834DF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17415C79-9981-4337-9A7B-3EA19834DF95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
