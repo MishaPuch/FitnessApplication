@@ -163,6 +163,7 @@ namespace FitnessApp.Controllers
                 UserName = getCreatingUser.UserName,
                 UserEmail = getCreatingUser.UserEmail,
                 Password = getCreatingUser.Password,
+                IsEmailConfirmed=getCreatingUser.IsEmailConfirmed,
                 Sex = getCreatingUser.Sex,
                 Age = getCreatingUser.Age,
                 RestTime = getCreatingUser.RestTime,

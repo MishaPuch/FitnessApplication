@@ -19,6 +19,8 @@ namespace FitnessApp.BLL.GetModels
         [StringLength(100)]
         [Required]
         public string Password { get; set; }
+        public bool IsEmailConfirmed { get; set; }
+
         public string Sex { get; set; }
         [Range(0, 110)]
         public int Age { get; set; }

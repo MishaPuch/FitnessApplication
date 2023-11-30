@@ -84,7 +84,13 @@ namespace FitnessApp.DAL.DiRepositories
         {
             try
             {
-                User changingUser = await _context.Users.FindAsync(user.Id);
+                User changingUser = new();
+                
+                changingUser = await _context.Users.FindAsync(user.Id);
+                if (changingUser == null)
+                {
+                    changingUser = await GetUserByEmailAsync(user.UserEmail);
+                }
 
                 if (changingUser != null)
                 {

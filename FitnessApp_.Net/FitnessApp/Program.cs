@@ -13,6 +13,7 @@ using NLog.Targets;
 using NLog;
 using Microsoft.AspNetCore.Http.Features;
 using FitnessApp.BLL.Interface.FileServiceInterface;
+using FitnessApp.DAL.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer
 builder.Services.AddSingleton<IMealFileService, MealFileService>();
 builder.Services.AddSingleton<IUserFileService, UserFileService>();
 builder.Services.AddSingleton<ITreningFileService,TreningFileService>();
+builder.Services.AddSingleton<QueueHelper>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITrainingAndDietScheduleRepository, TrainingAndDietScheduleRepository>();
