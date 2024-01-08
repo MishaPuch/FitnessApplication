@@ -12,5 +12,7 @@ namespace FitnessApp.Models
         public virtual TypeOfMuscleGroup MuscleGroup { get; set; }
         public int TypeOfTreningId { get; set; }
         public virtual TypeOfTrening TypeOfTrening { get; set; }
+        public int Statistic { get; set; } = 0;
+
     }
 }

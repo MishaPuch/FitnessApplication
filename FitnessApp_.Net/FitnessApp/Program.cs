@@ -11,24 +11,48 @@ using Microsoft.EntityFrameworkCore;
 using NLog.Config;
 using NLog.Targets;
 using NLog;
-using Microsoft.AspNetCore.Http.Features;
 using FitnessApp.BLL.Interface.FileServiceInterface;
 using FitnessApp.DAL.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-    
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+    x.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+    };
+});
+
+builder.Services.AddAuthorization();
+
+
 var AppConfig = builder.Configuration;
 
 IConfigurationSection configuration = AppConfig.GetSection("ConnectionStrings");
 string connectionString = configuration.GetSection("Data").Value;
 
 builder.Services.AddDbContext<FitnessAppContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IMealFileService, MealFileService>();
 builder.Services.AddSingleton<IUserFileService, UserFileService>();
 builder.Services.AddSingleton<ITreningFileService,TreningFileService>();
@@ -48,6 +72,7 @@ builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ITypeOfTreningRepository, TypeOfTreningRepository>();
 builder.Services.AddTransient<IVereficationUserRepository, VereficationUserRepository>();
 
+
 builder.Services.AddTransient<IUserService, UserService>();   
 builder.Services.AddTransient<ITrainingAndDietSchedule, TrainingAndDietSchedule>();
 builder.Services.AddTransient<IExerciseService, ExerciseService>();
@@ -60,20 +85,19 @@ builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<ITypeOfTreningService, TypeOfTreningService>();
 builder.Services.AddTransient<IVereficationUserService, VereficationUserService>();
-//  builder.Services.AddTransient<ICalorificCoefficientValueService, CalorificCoefficientValueService>();
 
 #region NLog Initializator
 
-var config = new NLog.Config.LoggingConfiguration();
+var LogConfig = new NLog.Config.LoggingConfiguration();
 LogManager.Configuration = new LoggingConfiguration();
 var consoleTarget = new ColoredConsoleTarget("Console Target")
 {
     Layout = @"${longdate}|${level:uppercase=true}|${logger}|${message}"
 };
 // Rules for mapping loggers to targets
-config.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, consoleTarget);
+LogConfig.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, consoleTarget);
 // Apply config
-NLog.LogManager.Configuration = config;
+NLog.LogManager.Configuration = LogConfig;
 
 #endregion NLog Initializator
 
@@ -91,27 +115,28 @@ builder.Services.AddCors(options =>
 ////////////////////////////////////
 
 var app = builder.Build();
-    // Configure the HTTP request pipeline.F
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbContext = scope.ServiceProvider
-            .GetRequiredService<FitnessAppContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider
+        .GetRequiredService<FitnessAppContext>();
 
-        dbContext.Database.Migrate();
-    }
-    ///////
-    app.UseCors();
-    //////
-    app.UseHttpsRedirection();
+    dbContext.Database.Migrate();
+}
+///////
+app.UseCors();
+//////
+app.UseHttpsRedirection();
 
-    app.UseAuthorization();
+app.UseAuthentication();
 
-    app.MapControllers();
+app.UseAuthorization();
+    
+app.MapControllers();
 
-    app.Run();
+app.Run();

@@ -111,26 +111,9 @@ function Registration() {
 
                     <h1>Registration</h1>
 
-                    <InputText type="text" id="txtName" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="How i can call you" onChange={(e) => handleNameChange(e.target.value)} /> <br />
+                    <InputText type="text" id="txtName" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Your Name" onChange={(e) => handleNameChange(e.target.value)} /> <br />
                     <InputText type="text" id="txtEmail" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Your Email" onChange={(e) => handleEmailChange(e.target.value)} /> <br />
-                    <input
-                        type="file"
-                        name="myImage"
-                       // onChange={handleImageChange} // Attach the image selection handler
-                    />
-                    {/* {imagePreview && (
-                        <div>
-                            <img
-                                alt="Selected"
-                                width={"250px"}
-                                src={imagePreview}
-                            />
-                            <br />
-                        </div>
-                    )} */}
 
-                    <br />
-                    <br />
 
                     <InputText type="text" id="txtAge" className="p-inputtext-sm m-2 ml-5 mr-5" placeholder="Your Age" onChange={(e) => handleAgeChange(e.target.value)} /> <br />
 

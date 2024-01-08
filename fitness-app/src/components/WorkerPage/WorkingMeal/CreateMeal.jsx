@@ -68,7 +68,7 @@ export default function CreateMeal() {
             <div className="setting-card">
                 <Card style={{ width: '1240px', height: '500px' }}>
                     <div className="grid-container">
-                        <div className="">
+                        <div className="grid-item">
                             <span className="p-float-label grid-item">
                                 <p>Food Name</p>
                                 <InputText id="FoodName" name="FoodName" value={foodItem.FoodName} onChange={handleChange} />
@@ -82,10 +82,13 @@ export default function CreateMeal() {
                                 <InputText id="FoodInstructions" name="FoodInstructions" value={foodItem.FoodInstructions} onChange={handleChange} />
                             </span>
                             <span className="p-float-label grid-item">
-                                <p>Foto</p>
-                                <InputText id="Foto" name="Foto" value={foodItem.Foto} onChange={handleChange} />
+                                <p>Calorific Of Meal</p>
+                                <InputText id="CalorificOfMeal" name="CalorificOfMeal" value={foodItem.CalorificOfMeal} onChange={handleChange} />
                             </span>
+                           
                         </div>
+                        
+
                         <div className="grid-item">
                             <span className="p-float-label grid-item">
                                 <p>Protein</p>
@@ -99,10 +102,7 @@ export default function CreateMeal() {
                                 <p>Carbon</p>
                                 <InputText id="Carbon" name="Carbon" value={foodItem.Carbon} onChange={handleChange} />
                             </span>
-                            <span className="p-float-label grid-item">
-                                <p>Calorific Of Meal</p>
-                                <InputText id="CalorificOfMeal" name="CalorificOfMeal" value={foodItem.CalorificOfMeal} onChange={handleChange} />
-                            </span>
+                           
                             <span className="p-float-label grid-item">
                                 <p>Type Of Meal ID</p>
                                 <Dropdown

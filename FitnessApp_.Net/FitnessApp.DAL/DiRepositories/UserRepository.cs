@@ -94,20 +94,7 @@ namespace FitnessApp.DAL.DiRepositories
 
                 if (changingUser != null)
                 {
-                    changingUser.UserName = user.UserName;
-                    changingUser.UserEmail = user.UserEmail;
-                    changingUser.Password = user.Password;
-                    changingUser.Sex = user.Sex;
-                    changingUser.Age = user.Age;
-                    changingUser.IsEmailConfirmed = user.IsEmailConfirmed;
-                    changingUser.RestTime = user.RestTime;
-                    changingUser.CalorificValue = user.CalorificValue;
-                    changingUser.DateOFLastPayment = user.DateOFLastPayment;
-                    changingUser.TreningPlanId = user.TreningPlanId;
-                    changingUser.TreningPlan = user.TreningPlan;
-                    changingUser.RoleId = user.RoleId;
-                    changingUser.Role = user.Role;
-                    changingUser.Avatar = user.Avatar;
+                    _context.Users.Update(changingUser);
 
                     await _context.SaveChangesAsync();
                 }

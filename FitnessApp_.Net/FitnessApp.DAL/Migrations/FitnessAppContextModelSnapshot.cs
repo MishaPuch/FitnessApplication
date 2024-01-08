@@ -82,6 +82,9 @@ namespace FitnessApp.DAL.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
+                    b.Property<int>("Statistic")
+                        .HasColumnType("int");
+
                     b.Property<int>("TypeOfMealId")
                         .HasColumnType("int");
 
@@ -271,6 +274,9 @@ namespace FitnessApp.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MuscleGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Statistic")
                         .HasColumnType("int");
 
                     b.Property<int>("TypeOfTreningId")

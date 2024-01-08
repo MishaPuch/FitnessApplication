@@ -4,6 +4,9 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import AdminMain from './AdminMain/AdminMain';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
+import StatisticsExercise from './statistic/exerciseStatistic';
+import StatisticsMeal from './statistic/mealStatistic';
+
 
 export default function AdminPage() {
     const navigate = useNavigate();
@@ -21,7 +24,19 @@ export default function AdminPage() {
                     </p>
                 </TabPanel>
                
+                <TabPanel header="Header II">
+                    <p className="m-0">
+                        <StatisticsExercise/>
+                    </p>
+                </TabPanel>
+
                 <TabPanel header="Header III">
+                    <p className="m-0">
+                        <StatisticsMeal/>   
+                    </p>
+                </TabPanel>
+
+                <TabPanel header="Header IV">
                     <p className="m-0">
                         <Button onClick={handleLogout}>logout</Button>
                     </p>

@@ -27,6 +27,8 @@ const SelectedDate = (props) => {
             if (response.ok) {
                 const responseData = await response.json();
                 setFullDay(responseData);
+                console.log(responseData);
+
             } else {
                 alert('Error while fetching users');
             }

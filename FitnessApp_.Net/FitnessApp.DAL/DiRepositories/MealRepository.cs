@@ -1,4 +1,4 @@
-﻿    using FitnessApp.DAL.interfaceRepositories;
+﻿using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;

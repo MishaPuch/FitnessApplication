@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,13 +24,15 @@ namespace FitnessApp.DAL.Helpers
                 var userJson = JsonConvert.SerializeObject(user);
                 var body = Encoding.UTF8.GetBytes(userJson);
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "EmailVarefication",
-                                     basicProperties: null,
-                                     body: body);
+                await Task.Run(() =>
+                {
+                    channel.BasicPublish(exchange: "",
+                                         routingKey: "EmailVarefication",
+                                         basicProperties: null,
+                                         body: body);
 
-
-                Console.WriteLine($" User with email {user.UserEmail} was sant to verefication ");
+                    Console.WriteLine($" User with email {user.UserEmail} was sent to verification ");
+                });
             }
         }
     }

@@ -352,3 +352,4 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\Fitne
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\FitnessApp.Test.csproj.CopyComplete
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\FitnessApp.Test.genruntimeconfig.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\ref\FitnessApp.Test.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

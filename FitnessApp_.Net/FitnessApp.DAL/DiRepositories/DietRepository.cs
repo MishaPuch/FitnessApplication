@@ -15,9 +15,11 @@ namespace FitnessApp.DAL.DiRepositories
     public class DietRepository : IDietRepository
     {
         private readonly FitnessAppContext _context;
-        public DietRepository(FitnessAppContext context)
+        private readonly IMealRepository _mealRepository;
+        public DietRepository(FitnessAppContext context, IMealRepository mealRepository)
         {
             _context = context;
+            _mealRepository = mealRepository;
         }
         public async Task<List<Diet>> GetAllDietsAsync()
         {
@@ -48,10 +50,10 @@ namespace FitnessApp.DAL.DiRepositories
             List<Meal> dinners = await _context.Meals.Where(x => x.TypeOfMealId == 3).ToListAsync();
             List<Meal> snaks = await _context.Meals.Where(x => x.TypeOfMealId == 4).ToListAsync();
 
-            Diet breakfast = GetRandomUniqueDietInList(dietsForOneDay, breakfasts, treningAndDietScheduleId);
-            Diet lunch = GetRandomUniqueDietInList(dietsForOneDay, lunchs, treningAndDietScheduleId);
-            Diet dinner = GetRandomUniqueDietInList(dietsForOneDay, dinners, treningAndDietScheduleId);
-            Diet snak = GetRandomUniqueDietInList(dietsForOneDay, snaks, treningAndDietScheduleId);
+            Diet breakfast =await GetRandomUniqueDietInList(dietsForOneDay, breakfasts, treningAndDietScheduleId);
+            Diet lunch = await GetRandomUniqueDietInList(dietsForOneDay, lunchs, treningAndDietScheduleId);
+            Diet dinner = await GetRandomUniqueDietInList(dietsForOneDay, dinners, treningAndDietScheduleId);
+            Diet snak = await GetRandomUniqueDietInList(dietsForOneDay, snaks, treningAndDietScheduleId);
 
             dietsForOneDay.Add(breakfast);
             dietsForOneDay.Add(lunch);
@@ -62,7 +64,7 @@ namespace FitnessApp.DAL.DiRepositories
             //можнобудет добавить сюда проверку юзера и если у него стоит 5 приёмов пищи , то зациклить снэки или что-от ещё
             //добавить сюда больше приёмов пищи (4-5)
         }
-        public Diet GetRandomUniqueDietInList(List<Diet> diets ,List<Meal> meals ,int treningAndDietScheduleId)
+        public async Task<Diet> GetRandomUniqueDietInList(List<Diet> diets ,List<Meal> meals ,int treningAndDietScheduleId)
         {
             Random randomNumber = new Random();
 
@@ -85,6 +87,13 @@ namespace FitnessApp.DAL.DiRepositories
                     Diet diet = new Diet();
                     diet.TrainingAndDietScheduleId = treningAndDietScheduleId;
                     diet.MealId = meal.Id;
+                     
+                    Meal updatedMeal= await _mealRepository.GetMealByIdAsync(meal.Id);
+                    if(updatedMeal != null)
+                    {
+                        updatedMeal.Statistic++;
+                        await _mealRepository.UpdateMealAsync(updatedMeal);
+                    }
                         
                     return diet;
                 }
@@ -102,10 +111,10 @@ namespace FitnessApp.DAL.DiRepositories
 
             foreach (var treningSchedule in treningAndDietSchedules)
             {
-                Diet breakfast = GetRandomUniqueDietInList(dietsForOneWeek, breakfasts, treningSchedule.Id);
-                Diet lunch = GetRandomUniqueDietInList(dietsForOneWeek, lunchs, treningSchedule.Id);
-                Diet dinner = GetRandomUniqueDietInList(dietsForOneWeek, dinners, treningSchedule.Id);
-                Diet snak = GetRandomUniqueDietInList(dietsForOneWeek, snaks, treningSchedule.Id);
+                Diet breakfast = await GetRandomUniqueDietInList(dietsForOneWeek, breakfasts, treningSchedule.Id);
+                Diet lunch = await GetRandomUniqueDietInList(dietsForOneWeek, lunchs, treningSchedule.Id);
+                Diet dinner = await GetRandomUniqueDietInList(dietsForOneWeek, dinners, treningSchedule.Id);
+                Diet snak = await GetRandomUniqueDietInList(dietsForOneWeek, snaks, treningSchedule.Id);
 
                 dietsForOneWeek.Add(breakfast);
                 dietsForOneWeek.Add(lunch);
@@ -126,9 +135,9 @@ namespace FitnessApp.DAL.DiRepositories
 
             for (int i = 0; i < weeksInMonth; i++)
             {
-                List<Diet> dietForAWeek = await MakeDietForAWeekAsync(treningAndDietSchedules.Take(7).ToList()); //Take(7) - первые 7 элементов списка
+                List<Diet> dietForAWeek = await MakeDietForAWeekAsync(treningAndDietSchedules.Take(7).ToList()); 
                 fullMonthDiet.AddRange(dietForAWeek);
-                treningAndDietSchedules= treningAndDietSchedules.Skip(7).ToList(); // RemoveRange(0, 7) - 0 - индекс с которого начать , 7 - сколько элементов  
+                treningAndDietSchedules= treningAndDietSchedules.Skip(7).ToList();
             }
 
             if (restDaysInMonth > 0)
@@ -141,6 +150,13 @@ namespace FitnessApp.DAL.DiRepositories
                 }
                 fullMonthDiet.AddRange(dietForRestDays);
             }
+            foreach (Diet diet in fullMonthDiet)
+            {
+                Meal meal = await _mealRepository.GetMealByIdAsync(diet.MealId);
+                meal.Statistic++;
+                await _mealRepository.UpdateMealAsync(meal);
+            }
+          
 
             await _context.AddRangeAsync(fullMonthDiet);
             await _context.SaveChangesAsync();

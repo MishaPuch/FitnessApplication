@@ -1,0 +1,50 @@
+/* AdminMain.css */
+.admin-main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .role-badge {
+    display: inline-block;
+    padding: 8px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .user {
+    background-color: #4CAF50;
+  }
+  
+  .worker {
+    background-color: #607D8B;
+  }
+  
+  .admin {
+    background-color: #2196F3;
+  }
+  
+  .user-avatar {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  

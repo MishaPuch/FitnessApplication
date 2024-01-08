@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VZFc9bz7pynFFsNtyT04JM2hFX36mFhBKPmlC90PwS5+4mJOfxFnL1dqlEixkZFxmKTzTC19ixnb1KkfyHyfmw==",
+  "dgSpecHash": "aYqTadhbfDp28j7/wPvhCKJeyYAkqHpMfFRKCrZD6uTP83aJosun79CeexBxLr/hlXR3muHfR5RkjhN9mWQ2jw==",
   "success": true,
   "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\FitnessApp.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\misha\\.nuget\\packages\\azure.storage.blobs\\12.18.0\\azure.storage.blobs.12.18.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.storage.common\\12.17.0\\azure.storage.common.12.17.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\misha\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

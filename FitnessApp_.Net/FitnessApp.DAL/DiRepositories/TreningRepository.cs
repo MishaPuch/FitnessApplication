@@ -13,9 +13,11 @@ namespace FitnessApp.DAL.DiRepositories
     public class TreningRepository : ITreningRepository
     {
         private readonly FitnessAppContext _context;
-        public TreningRepository(FitnessAppContext context)
+        private readonly IExerciseRepository _exerciseRepository;
+        public TreningRepository(FitnessAppContext context, IExerciseRepository exerciseRepository)
         {
             _context = context;
+            _exerciseRepository = exerciseRepository;
         }
         public async Task<Trening> GetTreningByIdAsync(int treningId)
         {
@@ -176,6 +178,12 @@ namespace FitnessApp.DAL.DiRepositories
                     treningForRestDays.AddRange(treningForOneDay);
                 }
                 FullMonthTrening.AddRange(treningForRestDays);
+                foreach(Trening trening in FullMonthTrening)
+                {
+                    Exercise exercise= await _exerciseRepository.GetExerciseByIdAsync(trening.ExerciseId);
+                    exercise.Statistic++;
+                    await _exerciseRepository.UpdateExerciseAsync(exercise);
+                }
             }
 
             await _context.AddRangeAsync(FullMonthTrening);

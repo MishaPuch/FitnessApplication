@@ -145,7 +145,18 @@ export default function Settings() {
                                     </select> <br />
                                 </div>
                             </span>
+                            <span className="p-float-label grid-item">
+                                <div className="p-2" >
+                                    <p> Trening plan </p>
+                                    <select id="selectCalory" value={calory} onChange={(e) => handleCalorySelect(e.target.value)}>
+                                        <option value={1}>Push Pull Legs</option>
+                                        <option value={2}>Upper Lower</option>
+                                        
+                                    </select> <br />
+                                </div>
+                            </span>
                         </div>
+                        
                         <div className="grid-item">
                             <span className="p-float-label grid-item">  
                             <div>

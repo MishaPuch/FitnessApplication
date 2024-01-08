@@ -45,3 +45,9 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\SixLabors.Im
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Newtonsoft.Json.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\RabbitMQ.Client.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\System.Threading.Channels.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll

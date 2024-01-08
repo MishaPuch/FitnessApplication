@@ -6,12 +6,19 @@ using FitnessApp.BLL.Services.FileServices;
 using FitnessApp.DAL.Helpers;
 using FitnessApp.DAL.ViewModel;
 using FitnessApp.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.Tokens;
 using NLog;
 using System.Diagnostics.Contracts;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Security.Claims;
+using System.Text;
 
 namespace FitnessApp.Controllers
 {
@@ -73,7 +80,6 @@ namespace FitnessApp.Controllers
         {
             User? user = await _userService.GetUserByEmailAndPasswordAsync(userEmail, password);
 
-            await _queueHelper.EmailVereficationAsync(user);
 
             if (user != null)
             {
@@ -184,8 +190,8 @@ namespace FitnessApp.Controllers
         [HttpDelete("DeleteUser/{userId:int}")]
         public async Task DeleteUser(int userId)
         {
-            await _userService.DeleteUserAsync(userId);
             Logger.Info($"user :id {userId} - was saccesfully deleted");
+            await _userService.DeleteUserAsync(userId);
         }
 
         // PUT: api/<AccountController>/confirmationEmail/{email}/{vereficationCode}

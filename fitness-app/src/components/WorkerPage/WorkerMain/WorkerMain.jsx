@@ -46,16 +46,15 @@ function WorkerMain() {
     };
 
     const imageBodyTemplate = (data) => {
-      if(data.avatar!=""){
-      return (
-        <img
-          src={`https://fitnessapp.blob.core.windows.net/avatars/${data.avatar}`}
-          alt={data.image}
-          className="w-6rem shadow-2 border-round"
-        />
-      );
-      }
-      else{
+      if (data.avatar !== "") {
+        return (
+          <img
+            src={`https://fitnessapp.blob.core.windows.net/avatars/${data.avatar}`}
+            alt={data.image}
+            className="w-6rem shadow-2 border-round"
+          />
+        );
+      } else {
         return (
           <img
             src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRavIqQYivR75p5gMVUiR_tZqoGzmqIVGbXRw&usqp=CAU`}
@@ -79,30 +78,33 @@ function WorkerMain() {
     };
 
     return (
-      <div className="card">
+      <div className="card p-mb-3 p-p-3">
         <DataTable value={[data]} tableStyle={{ minWidth: '60rem' }}>
-          {data.roleId === 1 && (
-            <div style={{ backgroundColor: 'var(--green-400)' }}>U</div>
-          )}
-          {data.roleId === 2 && (
-            <div style={{ backgroundColor: 'var(--bluegray-400)' }}>W</div>
-          )}
-          {data.roleId === 3 && (
-            <div style={{ backgroundColor: 'var(--primary-400)' }}>A</div>
-          )}
+          <Column header="Role" body={(rowData) => (
+            <div className={`role-badge p-mb-2`} style={{
+              backgroundColor:
+                rowData.roleId === 1 ? 'var(--green-400)' :
+                  (rowData.roleId === 2 ? 'var(--bluegray-400)' : 'var(--primary-400)'
+                )
+            }}>
+              {rowData.roleId === 1 ? 'U' : (rowData.roleId === 2 ? 'W' : 'A')}
+            </div>
+          )}></Column>
           <Column field="userName" header="Name" body={nameBodyTemplate}></Column>
           <Column header="Image" body={imageBodyTemplate}></Column>
           <Column field="calorificValue" header="Price" body={emailBodyTemplate}></Column>
           <Column field="treningPlanId" header="Plan"></Column>
           <Column field="dateOFLastPayment" header="Days Left" body={dateOFLastPaymentBodyTemplate}></Column>
-          <Column body={<Button label="Change Info" onClick={() => handleChangeUser(data)} />}></Column>
+          <Column body={(rowData) => (
+            <Button label="Change Info" onClick={() => handleChangeUser(rowData)} className="p-button-primary p-mr-2" />
+          )}></Column>
         </DataTable>
       </div>
     );
   };
 
   return (
-    <div className="card">
+    <div className="p-m-3">
       <DataScroller value={users} itemTemplate={itemTemplate} rows={users.length} inline scrollHeight="500px" header="Scroll Down to Load More" />
     </div>
   );
