@@ -20,5 +20,7 @@ namespace FitnessApp.DAL.Models
         [JsonIgnore]
         public virtual TreningAndDietSchedule TrainingAndDietSchedules { get; set; }
         public string Times { get; set; }
+        public int TreningPlanId { get; set; }
+
     }
 }

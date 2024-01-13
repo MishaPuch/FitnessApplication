@@ -26,6 +26,14 @@ namespace FitnessApp.DAL.DiRepositories
                 .Include(x=>x.Diets)
                 .ToListAsync();
         }
+        public async Task<FitnessApp.Models.TreningAndDietSchedule> GetTreningAndDietSchedulesByIdAsync(int id)
+        {
+            return await _context.TrainingAndDietSchedule
+                .Include(x => x.Trainings)
+                .Include(x => x.User)
+                .Include(x => x.Diets)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
 
         public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetDalyPlanAsync(int userId, DateTime day)
         {

@@ -353,3 +353,11 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\Fitne
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\FitnessApp.Test.genruntimeconfig.cache
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\obj\Debug\net6.0\ref\FitnessApp.Test.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\MailKit.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\MimeKit.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp.Test\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

@@ -227,3 +227,11 @@ C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\n
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\RabbitMQ.Client.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Threading.Channels.dll
 C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\MailKit.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\MimeKit.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

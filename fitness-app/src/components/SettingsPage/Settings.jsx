@@ -3,17 +3,17 @@ import { PlanDataContext } from '../../State/PlanDataState';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
+import { RadioButton } from 'primereact/radiobutton';
 import Header from '../Header/Header';
 import TaskBar from '../TaskBar/TaskBar';
-import './Settings.css'
-import '../UserInfoPage/UserAccount.css'
 import { useNavigate } from 'react-router-dom';
 import useChangeUserApi from '../../hooks/useChangeUserApi';
+import './Settings.css';
+import '../UserInfoPage/UserAccount.css';
 
 export default function Settings() {
     const { planData } = useContext(PlanDataContext);
-    const changeUser=useChangeUserApi();
+    const changeUser = useChangeUserApi();
 
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -24,15 +24,15 @@ export default function Settings() {
     const [password, setPassword] = useState(planData[0]?.user?.password || "");
     const [calory, setCalory] = useState(planData[0]?.user?.calorificValue || "");
     const [restTime, setRestTime] = useState(planData[0]?.user?.restTime || 0);
+    const [treningPlan, setTreningPlan] = useState(planData[0]?.user?.treningPlan || null);
     const navigate = useNavigate();
- 
+
     useEffect(() => {
         if (planData.length === 0) {
             navigate('/');
         }
     }, []);
 
-    
     const handleSave = async () => {
         const userData = {
             userName: name,
@@ -42,62 +42,57 @@ export default function Settings() {
             password: password,
             restTime: restTime,
             calorificValue: calory,
+            treningPlan: treningPlan,
         };
         try {
             changeUser(userData);
         } catch (error) {
-        console.error("Error:", error);
+            console.error("Error:", error);
         }
-    }
+    };
 
     const handleNameChange = (value) => {
         setName(value);
-    }
-
-    
+    };
 
     const handleAgeChange = (value) => {
         if (!isNaN(value) && value >= 0) {
             setAge(value);
         }
-    }
+    };
 
     const handlePasswordChange = (value) => {
         setPassword(value);
-    }
+    };
 
     const handleCalorySelect = (value) => {
-        console.log("calory value: " + value);
         setCalory(value);
-    }
-
-    
+    };
 
     const handleRestTimeChange = (value) => {
-            if (!isNaN(value) && value >= 0) {
+        if (!isNaN(value) && value >= 0) {
             setRestTime(value);
         }
-    }
-    
+    };
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
-    
+
         if (file) {
             const formData = new FormData();
-            formData.append('file', file); 
-    
+            formData.append('file', file);
+
             try {
                 fetch(`https://localhost:7060/api/Images/PostTheAvatarFoto/${planData[0].user.id}`, {
                     method: 'POST',
                     body: formData,
                 })
-                .then((response) => response.arrayBuffer()) 
-                .then((data) => {
-                })
-                .catch((error) => {
-                    console.error('Ошибка:', error);
-                });
+                    .then((response) => response.arrayBuffer())
+                    .then((data) => {})
+                    .catch((error) => {
+                        console.error('Ошибка:', error);
+                    });
             } catch (error) {
                 console.error('Ошибка:', error);
             }
@@ -105,9 +100,11 @@ export default function Settings() {
             console.error("Файл не выбран.");
         }
     };
-    
-    
-    
+
+    useEffect(() => {
+        console.log(treningPlan);
+    }, [treningPlan]);
+
     return (
         <div className="container">
             <div className="avatar">
@@ -145,21 +142,12 @@ export default function Settings() {
                                     </select> <br />
                                 </div>
                             </span>
-                            <span className="p-float-label grid-item">
-                                <div className="p-2" >
-                                    <p> Trening plan </p>
-                                    <select id="selectCalory" value={calory} onChange={(e) => handleCalorySelect(e.target.value)}>
-                                        <option value={1}>Push Pull Legs</option>
-                                        <option value={2}>Upper Lower</option>
-                                        
-                                    </select> <br />
-                                </div>
-                            </span>
+                            
                         </div>
                         
                         <div className="grid-item">
                             <span className="p-float-label grid-item">  
-                            <div>
+                                <div>
                                 <input type="file" accept="image/*" onChange={handleFileChange} />
                                 {selectedFile && (
                                     <div>
@@ -183,11 +171,36 @@ export default function Settings() {
                             </span>
                             <br />
                             <br />
+                            
                             <span>
-                                <div className="p-float-label grid-item">
-                                    <Button label='Submit' onClick={handleSave} style={{ width: '207px' }} />
+                                <div className="flex flex-wrap gap-3">
+                                    <div className="flex align-items-center">
+                                        <RadioButton
+                                            inputId="ingredient1"
+                                            name="treningPlan"
+                                            value="PushPullLegs"
+                                            onChange={(e) => setTreningPlan(e.value)}
+                                            checked={treningPlan === 'PushPullLegs'}
+                                        />
+                                        <label htmlFor="ingredient1" className="ml-2">
+                                            PushPullLegs
+                                        </label>
+                                    </div>
+                                    <div className="flex align-items-center">
+                                        <RadioButton
+                                            inputId="ingredient2"
+                                            name="treningPlan"
+                                            value="UpperLower"
+                                            onChange={(e) => setTreningPlan(e.value)}
+                                            checked={treningPlan === 'UpperLower'}
+                                        />
+                                        <label htmlFor="ingredient2" className="ml-2">
+                                            UpperLower
+                                        </label>
+                                    </div>
+                                    <Button label="Submit" onClick={handleSave} style={{ width: '207px' }} />
                                 </div>
-                            </span>
+                            </span>     
                         </div>
                     </div>
                 </Card>

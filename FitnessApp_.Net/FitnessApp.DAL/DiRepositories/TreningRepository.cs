@@ -14,10 +14,12 @@ namespace FitnessApp.DAL.DiRepositories
     {
         private readonly FitnessAppContext _context;
         private readonly IExerciseRepository _exerciseRepository;
-        public TreningRepository(FitnessAppContext context, IExerciseRepository exerciseRepository)
+        private readonly ITrainingAndDietScheduleRepository _trainingAndDietScheduleRepository;
+        public TreningRepository(FitnessAppContext context, IExerciseRepository exerciseRepository, ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository)
         {
             _context = context;
             _exerciseRepository = exerciseRepository;
+            _trainingAndDietScheduleRepository= trainingAndDietScheduleRepository;
         }
         public async Task<Trening> GetTreningByIdAsync(int treningId)
         {
@@ -97,6 +99,7 @@ namespace FitnessApp.DAL.DiRepositories
                     trening.ExerciseId = exercise.Id;
                     trening.Times = "3x10";
 
+
                     return trening;
                 }
 
@@ -169,6 +172,7 @@ namespace FitnessApp.DAL.DiRepositories
                     if (treningAndDietSchedule.User.TreningPlanId == 1)
                     { 
                          treningForOneDay = await MakeTreningForADayPushPullLegsAsync(treningAndDietSchedule);
+                        
                     }
                     else if(treningAndDietSchedule.User.TreningPlanId == 2)
                     {
@@ -182,6 +186,11 @@ namespace FitnessApp.DAL.DiRepositories
                 {
                     Exercise exercise= await _exerciseRepository.GetExerciseByIdAsync(trening.ExerciseId);
                     exercise.Statistic++;
+
+                    TreningAndDietSchedule treningAndDietSchedule =await _trainingAndDietScheduleRepository
+                        .GetTreningAndDietSchedulesByIdAsync(trening.TrainingAndDietSchedulesId);
+
+                    trening.TreningPlanId = treningAndDietSchedule.User.TreningPlanId;
                     await _exerciseRepository.UpdateExerciseAsync(exercise);
                 }
             }

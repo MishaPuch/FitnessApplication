@@ -20,6 +20,8 @@ import CreateExercise from './components/WorkerPage/WorkingExercise/WorkingExerc
 import UpdateMeal from './components/WorkerPage/WorkingMeal/UpdateMeal';
 import UpdateExercise from './components/WorkerPage/WorkingExercise/WorkingExercise/UpdateExercise';
 import NotVerifiedUser from './components/AlertPages/NotVerifiedUser';
+import ForgetPassword from './ForgetPassword/ForgetPassword';
+import ChangingTreningPlan from './components/SettingsPage/ChangeTreningPlan';
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
               <Route path="/UpdateMeal" element={<UpdateMeal />} />
               <Route path="/UpdateExercise" element={<UpdateExercise />} />
               <Route path="/VerifyUser/:email" element={<NotVerifiedUser />} />
+              <Route path='/ForgetPassword' element={<ForgetPassword/>}/>
+              <Route path='/ChangingTreningPlan' element={<ChangingTreningPlan/>}/>
 
 
             </Routes>

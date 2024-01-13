@@ -69,6 +69,11 @@ namespace FitnessApp.BLL.Services
             return fullModel;
         }
 
+        public async Task<TreningAndDietSchedule> GetTreningAndDietSchedulesByIdAsync(int id)
+        {
+            return await _trainingAndDietScheduleRepository.GetTreningAndDietSchedulesByIdAsync(id);
+        }
+
         public async Task<List<FullModel>> GetUserTodaysPlanAsync(int userId)
         {
             List<Models.TreningAndDietSchedule> todaysPlan = await _trainingAndDietScheduleRepository.GetTodaysPlanAsync(userId);

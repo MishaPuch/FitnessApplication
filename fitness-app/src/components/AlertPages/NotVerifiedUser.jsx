@@ -16,6 +16,7 @@ const NotVerifiedUser = () => {
 
     async function handleVerifyClick() {
         const verificationCode = verificationCodeRef.current.value;
+        debugger;
         try {
             const response = await fetch(`https://localhost:7060/api/Account/confirmationEmail/${email}/${verificationCode}`, {
             method: 'PUT',

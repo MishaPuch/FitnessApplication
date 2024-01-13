@@ -6,7 +6,6 @@ async function LoginApi(email , password){
             'Content-Type': 'application/json',
         },
     });
-
     if (response.ok) {
         const responseData = await response.json();
         if(responseData.length > 0){

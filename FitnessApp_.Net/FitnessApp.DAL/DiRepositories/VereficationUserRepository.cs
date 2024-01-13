@@ -28,7 +28,7 @@ namespace FitnessApp.BLL.Services
         }
         public async Task<VereficationUser> GetVereficationUserByEmailAsync(string email)
         {
-            return await _context.VereficationUsers.FirstOrDefaultAsync(x => x.Email == email);
+            return await _context.VereficationUsers.OrderBy(u=>u.Id).LastOrDefaultAsync(x => x.Email == email);
         }
        
     }

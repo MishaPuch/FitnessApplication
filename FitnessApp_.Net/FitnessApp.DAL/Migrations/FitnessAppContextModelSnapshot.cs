@@ -46,6 +46,33 @@ namespace FitnessApp.DAL.Migrations
                     b.ToTable("CalorificCoefficientValues");
                 });
 
+            modelBuilder.Entity("FitnessApp.DAL.Models.ChangingTreningPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActualUserTreningPlan")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisiredTreningPlan")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChangingTreningPlans");
+                });
+
             modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>
                 {
                     b.Property<int>("Id")
@@ -128,6 +155,9 @@ namespace FitnessApp.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrainingAndDietSchedulesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreningPlanId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -380,6 +410,17 @@ namespace FitnessApp.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("TypeOfMeal");
+                });
+
+            modelBuilder.Entity("FitnessApp.DAL.Models.ChangingTreningPlan", b =>
+                {
+                    b.HasOne("FitnessApp.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FitnessApp.DAL.Models.Meal", b =>

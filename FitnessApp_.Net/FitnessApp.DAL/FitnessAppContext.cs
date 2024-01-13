@@ -1,6 +1,7 @@
 ﻿using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +30,12 @@ namespace FitnessApp.DAL
         public DbSet<TreningPlan> TreningPlans { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<VereficationUser> VereficationUsers { get; set; }
+        public DbSet<ChangingTreningPlan> ChangingTreningPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Diet>().HasKey(d => d.Id);
-
-
         }
         
     }

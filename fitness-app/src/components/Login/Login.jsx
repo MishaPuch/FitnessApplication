@@ -69,6 +69,9 @@ const LoginForm = () => {
                 <Link to="/registration">
                     <Button label='Registration' link />
                 </Link>
+                <Link to="/ForgetPassword">
+                    <Button label='Forget password' link />
+                </Link>
 
             </Card>
         </div>

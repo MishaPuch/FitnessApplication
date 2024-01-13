@@ -71,7 +71,7 @@ builder.Services.AddTransient<ITreningPlanRepository,TreningPlanRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ITypeOfTreningRepository, TypeOfTreningRepository>();
 builder.Services.AddTransient<IVereficationUserRepository, VereficationUserRepository>();
-
+builder.Services.AddTransient<IChangingTreningPlanRepository, ChangingTreningPlanRepository>(); 
 
 builder.Services.AddTransient<IUserService, UserService>();   
 builder.Services.AddTransient<ITrainingAndDietSchedule, TrainingAndDietSchedule>();
@@ -85,6 +85,7 @@ builder.Services.AddTransient<ITypeOfMealService, TypeOfMealService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<ITypeOfTreningService, TypeOfTreningService>();
 builder.Services.AddTransient<IVereficationUserService, VereficationUserService>();
+builder.Services.AddTransient<IChangingTreningPlanService, ChangingTreningPlanService>();
 
 #region NLog Initializator
 

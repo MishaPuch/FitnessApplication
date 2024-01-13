@@ -1,4 +1,5 @@
-﻿using FitnessApp.BLL.DI_Service;
+﻿using EmailVereficationMicroservice.Helper;
+using FitnessApp.BLL.DI_Service;
 using FitnessApp.BLL.GetModels;
 using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
@@ -100,8 +101,9 @@ namespace FitnessApp.Controllers
                 }
                 else
                 {
-                    return await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
                     Logger.Info($"user was found : {user}");
+                    List<FullModel> result= await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id);
+                    return result;
                 }
             }
             else
@@ -140,7 +142,7 @@ namespace FitnessApp.Controllers
                 }
                 else
                 {
-                    User user = await _userService.CreateUserAsync(creatingUser);
+                    User user = await _userService.CreateUserAsync(creatingUser);   
               
                     var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
@@ -199,6 +201,16 @@ namespace FitnessApp.Controllers
         public async Task ConfirmationEmail( string email , int vereficationCode)
         {
             await _vereficationUserService.CheckThePassword(email, vereficationCode);
+        }
+
+        // GET: api/<AccountController>/sendPasswordToEmail/{email}
+        [HttpGet ("sendPasswordToEmail/{email}")]
+        public async Task<IActionResult> SendPasswordToEmail(string email)
+        {
+            User user = await _userService.GetUserByEmailAsync(email);
+            await EmailService.SendEmailAsync(email, user.Password);
+
+            return Ok();
         }
     }
 }
