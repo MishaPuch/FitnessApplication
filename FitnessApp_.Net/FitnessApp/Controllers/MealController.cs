@@ -62,7 +62,7 @@ namespace FitnessApp.Controllers
         public async Task<Meal> UpdateMealAsync ([FromBody] GetMeal getMeal)
         {
             Meal meal = new Meal() { 
-         
+                Id = getMeal.Id,
                 FoodName = getMeal.FoodName,
                 FoodIngredients = getMeal.FoodIngredients,
                 FoodInstructions = getMeal.FoodInstructions,
@@ -72,8 +72,8 @@ namespace FitnessApp.Controllers
                 Carbon = getMeal.Carbon,
                 CalorificOfMeal = getMeal.CalorificOfMeal,
                 TypeOfMealId = getMeal.TypeOfMealId,
-                TypeOfMeal = await _typeOfMealService.GetTypeOfMealByIdAsync(getMeal.TypeOfMealId)
-
+                TypeOfMeal = await _typeOfMealService.GetTypeOfMealByIdAsync(getMeal.TypeOfMealId),
+                Statistic=getMeal.Statistic
             };
             return await _mealService.UpdateMealAsync(meal);
         }

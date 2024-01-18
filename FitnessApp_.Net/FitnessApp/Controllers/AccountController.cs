@@ -159,7 +159,7 @@ namespace FitnessApp.Controllers
         [HttpPut("changeData")]
         public async Task ChangeUserData([FromBody] GetUser getChaningUser)
         {
-            User user = await _userService.GetUserByEmailAsync(getChaningUser.UserEmail);
+                User user = await _userService.GetUserByEmailAsync(getChaningUser.UserEmail);
 
             if (user.TreningPlanId != getChaningUser.TreningPlanId)
             {
@@ -177,9 +177,9 @@ namespace FitnessApp.Controllers
                 }
                 catch (Exception ex)
                 {
-                    
-                }
 
+                }
+            }
                 user.UserName = getChaningUser.UserName;
                 user.UserEmail = getChaningUser.UserEmail;
                 user.Password = getChaningUser.Password;
@@ -191,11 +191,12 @@ namespace FitnessApp.Controllers
                 user.DateOFLastPayment = getChaningUser.DateOFLastPayment;
                 user.RoleId = getChaningUser.RoleId;
                 user.Role = await _roleService.GetByUserIdAsync(getChaningUser.RoleId);
+                
 
 
                 await _userService.CangeUserDataAsync(user);
                 Logger.Info($"user : {user.Id} - was saccesfully changed");
-            }
+            
             
         }
 

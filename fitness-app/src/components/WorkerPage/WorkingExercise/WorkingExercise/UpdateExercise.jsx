@@ -9,7 +9,6 @@ export default function UpdateExercise() {
     const navigate = useNavigate();
     const location = useLocation();
     const initialExerciseData = location.state.exerciseData;
-
     const muscleGroupOptions = [
         { label: 'Triceps', value: 1 },
         { label: 'Legs', value: 2 },
@@ -25,7 +24,6 @@ export default function UpdateExercise() {
         { label: 'Home', value: 1 },
         { label: 'Gym', value: 2 },
     ];
-
     const [exerciseData, setExerciseData] = useState({
         id: initialExerciseData.id,
         exerciseName: initialExerciseData.exerciseName,
@@ -33,8 +31,8 @@ export default function UpdateExercise() {
         exerciseVideo: initialExerciseData.exerciseVideo,
         muscleGroupId: initialExerciseData.muscleGroup.id,
         typeOfTreningId: initialExerciseData.typeOfTrening.id,
+        statistic: initialExerciseData.statistic
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setExerciseData({
@@ -44,6 +42,7 @@ export default function UpdateExercise() {
     };
 
     async function handleSave() {
+        debugger;
         try {
             const response = await fetch("https://localhost:7060/api/Exercise/update-exercise", {
                 method: "PUT",

@@ -62,13 +62,15 @@ namespace FitnessApp.Controllers
         {
             Exercise exercise = new Exercise()
             {
+                Id= getExercise.Id,
                 ExerciseName = getExercise.ExerciseName,
                 ExerciseDescription = getExercise.ExerciseDescription,
                 ExerciseVideo = getExercise.ExerciseVideo,
                 MuscleGroupId = getExercise.MuscleGroupId,
                 MuscleGroup = await _typeOfMuscleGroupService.GetTypeOfMuscleGroupByIdAsync(getExercise.MuscleGroupId),
                 TypeOfTreningId = getExercise.TypeOfTreningId,
-                TypeOfTrening = await _typeOfTreningService.GetTypeOfTreningByIdAsync(getExercise.TypeOfTreningId)
+                TypeOfTrening = await _typeOfTreningService.GetTypeOfTreningByIdAsync(getExercise.TypeOfTreningId),
+                Statistic=getExercise.Statistic
 
             };
             return await _exerciseService.UpdateExerciseAsync(exercise);

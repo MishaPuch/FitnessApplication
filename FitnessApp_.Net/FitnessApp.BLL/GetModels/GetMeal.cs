@@ -19,5 +19,6 @@ namespace FitnessApp.BLL.GetModels
         public double Carbon { get; set; }
         public double CalorificOfMeal { get; set; }
         public int TypeOfMealId { get; set; }
+        public int Statistic {  get; set; }
     }
 }

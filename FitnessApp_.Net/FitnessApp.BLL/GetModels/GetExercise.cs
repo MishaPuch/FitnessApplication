@@ -15,5 +15,6 @@ namespace FitnessApp.BLL.GetModels
         public string ExerciseVideo { get; set; }
         public int MuscleGroupId { get; set; }
         public int TypeOfTreningId { get; set; }
+        public int Statistic {  get; set; }
     }
 }

@@ -22,7 +22,8 @@ export default function WorkerSettings() {
   const [restTime, setRestTime] = useState(userData.restTime);
   const [password, setPassword] = useState(userData.password);
   const [treningPlanId, setTreningPlanId] = useState(userData.treningPlanId);
-  const [roleId, setRoleId] = useState(userData.roleId); // Исправлено на "setRoleId"
+  const [roleId, setRoleId] = useState(userData.roleId); 
+  const isEmailConfirmed=userData.isEmailConfirmed;
 
   const handle = () => {
     navigate("/WorkerPage");
@@ -36,6 +37,7 @@ export default function WorkerSettings() {
       sex: sex,
       age: age,
       password: password,
+      isEmailConfirmed:isEmailConfirmed,
       restTime: restTime,
       calorificValue: calory,
       treningPlanId: treningPlanId,

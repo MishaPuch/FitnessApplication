@@ -9,7 +9,7 @@ export default function UpdateMeal() {
   const navigate = useNavigate();
   const location = useLocation();
   const mealData = location.state.mealData;
-
+  console.log(mealData);
   const typeOfMealOptions = [
     { label: 'Breakfast', value: 1 },
     { label: 'Lunch', value: 2 },
@@ -27,7 +27,8 @@ export default function UpdateMeal() {
     Fat: mealData.fat,
     Carbon: mealData.carbon,
     CalorificOfMeal: mealData.calorificOfMeal,
-    TypeOfMealId: mealData.typeOfMeal.id
+    TypeOfMealId: mealData.typeOfMeal.id,
+    Statistic:mealData.statistic
   });
 
   const handleChange = (e) => {
