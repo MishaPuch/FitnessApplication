@@ -1,6 +1,7 @@
 ﻿using FitnessApp.DAL.interfaceRepositories;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
+using Microsoft.Data.SqlClient.DataClassification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,14 +38,15 @@ namespace FitnessApp.BLL.Interface
             return await _treningRepository.MakeTreningForADayUpperLowerAsync(treningAndDietSchedule);
         }
 
-        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules , int treningPlanId)
         {
-            return await _treningRepository.MakeTreningForAMonthAsync (treningAndDietSchedules);
+            return await _treningRepository.MakeTreningForAMonthAsync (treningAndDietSchedules, treningPlanId);
         }
 
-        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules , int treningPlanId)
         {
-            return await _treningRepository.MakeTreningForAWeekAsync (treningAndDietSchedules);
+            return await _treningRepository.MakeTreningForAWeekAsync (treningAndDietSchedules, treningPlanId);
         }
+
     }
 }

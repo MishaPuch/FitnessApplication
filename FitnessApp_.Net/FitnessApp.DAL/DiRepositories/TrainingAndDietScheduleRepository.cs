@@ -63,7 +63,14 @@ namespace FitnessApp.DAL.DiRepositories
                 .Where(u => u.User.Id == userId)
                 .ToListAsync();
         }
-
+        public async Task<List<FitnessApp.Models.TreningAndDietSchedule>> GetTreningAndDietForRestMonthByUserIdAsync(int userId)
+        {
+            return await _context.TrainingAndDietSchedule
+                .Include(x => x.Trainings)
+                .Include(x => x.User)
+                .Include(x => x.Diets)
+                .Where(x => (x.Day > DateTime.Now) && (x.User.Id==userId)).ToListAsync();
+        }
         public async Task<FitnessApp.Models.TreningAndDietSchedule> MakeADayInTreningAndSchedulesAsync(int userId, DateTime date)
         {
             TreningAndDietSchedule trainingAndDietForSpecificDay = new TreningAndDietSchedule();

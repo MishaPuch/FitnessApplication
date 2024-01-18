@@ -24,14 +24,15 @@ export default function Settings() {
     const [password, setPassword] = useState(planData[0]?.user?.password || "");
     const [calory, setCalory] = useState(planData[0]?.user?.calorificValue || "");
     const [restTime, setRestTime] = useState(planData[0]?.user?.restTime || 0);
-    const [treningPlan, setTreningPlan] = useState(planData[0]?.user?.treningPlan || null);
+    const [treningPlan, setTreningPlan] = useState(planData[0]?.user?.treningPlan.treningPlanValue || null);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (planData.length === 0) {
             navigate('/');
         }
-    }, []);
+    }, [planData, navigate]);
+    
 
     const handleSave = async () => {
         const userData = {
@@ -42,7 +43,7 @@ export default function Settings() {
             password: password,
             restTime: restTime,
             calorificValue: calory,
-            treningPlan: treningPlan,
+            treningPlanId: treningPlan,
         };
         try {
             changeUser(userData);
@@ -103,8 +104,8 @@ export default function Settings() {
 
     useEffect(() => {
         console.log(treningPlan);
-    }, [treningPlan]);
-
+    }, [treningPlan]);  
+    
     return (
         <div className="container">
             <div className="avatar">
@@ -179,8 +180,8 @@ export default function Settings() {
                                             inputId="ingredient1"
                                             name="treningPlan"
                                             value="PushPullLegs"
-                                            onChange={(e) => setTreningPlan(e.value)}
-                                            checked={treningPlan === 'PushPullLegs'}
+                                            onChange={() => setTreningPlan(1)}
+                                            checked={treningPlan === "PushPullLegs"}
                                         />
                                         <label htmlFor="ingredient1" className="ml-2">
                                             PushPullLegs
@@ -191,8 +192,8 @@ export default function Settings() {
                                             inputId="ingredient2"
                                             name="treningPlan"
                                             value="UpperLower"
-                                            onChange={(e) => setTreningPlan(e.value)}
-                                            checked={treningPlan === 'UpperLower'}
+                                            onChange={() => setTreningPlan(2)}
+                                            checked={treningPlan === "UpperLower"}
                                         />
                                         <label htmlFor="ingredient2" className="ml-2">
                                             UpperLower

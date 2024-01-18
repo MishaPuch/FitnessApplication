@@ -12,12 +12,12 @@ namespace FitnessApp.Test
 {
     public class TreningPlanControllerTest
     {
-        private readonly Mock<ITrainingAndDietSchedule> trainingAndDietScheduleMock;
+        private readonly Mock<ITrainingAndDietScheduleService> trainingAndDietScheduleMock;
         private readonly TreningPlanController controller;
 
         public TreningPlanControllerTest()
         {
-            trainingAndDietScheduleMock = new Mock<ITrainingAndDietSchedule>();
+            trainingAndDietScheduleMock = new Mock<ITrainingAndDietScheduleService>();
             controller = new TreningPlanController(trainingAndDietScheduleMock.Object);
         }
 

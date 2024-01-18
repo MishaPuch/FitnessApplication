@@ -26,13 +26,16 @@ namespace FitnessApp.DAL.DiRepositories
         }
         public async Task<ChangingTreningPlan> GetChangingTreningPlanByIdAsync(int changingTreningPlanId)
         {
-            ChangingTreningPlan changingTreningPlan = await _context.ChangingTreningPlans.LastOrDefaultAsync(x => x.Id == changingTreningPlanId);
+            ChangingTreningPlan changingTreningPlan = await _context.ChangingTreningPlans
+                .Include(x => x.User)
+                .OrderBy(x=>x.Id)
+                .LastOrDefaultAsync(x => x.Id == changingTreningPlanId);
 
             return changingTreningPlan;
         }
         public async Task<List<ChangingTreningPlan>> GetAllChangingTreningPlansAsync()
         {
-            return _context.ChangingTreningPlans.ToList();
+            return _context.ChangingTreningPlans.Include(x => x.User).ToList();
         }
         public async Task<ChangingTreningPlan> CreateChangingTreningPlanAsync(ChangingTreningPlan changingTreningPlan)
         {

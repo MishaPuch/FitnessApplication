@@ -4,7 +4,7 @@ import itemTemplate from '../CardItem/CardItemTrening';
 import { PlanDataContext } from '../../../State/PlanDataState';
 
 export default function ScrollCards() {
-    const { planData } = useContext(PlanDataContext);
+    const {planData } = useContext(PlanDataContext);
     const trenings = GetfullTrening(); 
     
     

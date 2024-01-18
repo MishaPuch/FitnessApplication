@@ -11,7 +11,6 @@ const itemTemplate = (data) => {
                             <div className="text-2xl font-bold text-900">{data.exerciseName}</div>
                             
                             <div className="text-700">{data.exerciseDescription}</div>
-                            
                         </div>
                     </div>
                 </div>

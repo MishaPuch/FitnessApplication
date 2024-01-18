@@ -17,6 +17,6 @@ namespace FitnessApp.DAL.interfaceRepositories
         public Task<List<TreningAndDietSchedule>> GetAllUserPlansAsync(int userId);
         public Task<TreningAndDietSchedule> MakeADayInTreningAndSchedulesAsync(int userId, DateTime date);
         public Task<List<TreningAndDietSchedule>> MakeAMonthInTreningAndSchedulesAsync(int userId, DateTime date);
-
+        public Task<List<TreningAndDietSchedule>> GetTreningAndDietForRestMonthByUserIdAsync(int userId);
     }
 }

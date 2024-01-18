@@ -74,7 +74,7 @@ builder.Services.AddTransient<IVereficationUserRepository, VereficationUserRepos
 builder.Services.AddTransient<IChangingTreningPlanRepository, ChangingTreningPlanRepository>(); 
 
 builder.Services.AddTransient<IUserService, UserService>();   
-builder.Services.AddTransient<ITrainingAndDietSchedule, TrainingAndDietSchedule>();
+builder.Services.AddTransient<ITrainingAndDietScheduleService, TrainingAndDietScheduleService>();
 builder.Services.AddTransient<IExerciseService, ExerciseService>();
 builder.Services.AddTransient<ITreningService, TreningService>();
 builder.Services.AddTransient<ITypeOfMuscleGroupService, TypeOfMuscleGroupService>();

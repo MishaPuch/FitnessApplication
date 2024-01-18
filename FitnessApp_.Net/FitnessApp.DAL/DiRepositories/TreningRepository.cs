@@ -1,10 +1,13 @@
 ﻿using FitnessApp.DAL.interfaceRepositories;
+using FitnessApp.DAL.InterfaceRepositories;
 using FitnessApp.DAL.Models;
 using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +18,13 @@ namespace FitnessApp.DAL.DiRepositories
         private readonly FitnessAppContext _context;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ITrainingAndDietScheduleRepository _trainingAndDietScheduleRepository;
-        public TreningRepository(FitnessAppContext context, IExerciseRepository exerciseRepository, ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository)
+        private readonly IUserRepository _userRepository;
+        public TreningRepository(FitnessAppContext context, IExerciseRepository exerciseRepository, ITrainingAndDietScheduleRepository trainingAndDietScheduleRepository, IUserRepository userRepository)
         {
             _context = context;
             _exerciseRepository = exerciseRepository;
             _trainingAndDietScheduleRepository= trainingAndDietScheduleRepository;
+            _userRepository = userRepository;
         }
         public async Task<Trening> GetTreningByIdAsync(int treningId)
         {
@@ -28,7 +33,9 @@ namespace FitnessApp.DAL.DiRepositories
 
         public async Task<List<Trening>> GetTreningsByTreningScheduleIdAsync(int TreningScheduleId)
         {
-            return await _context.Trenings.Include(x => x.Exercise).ThenInclude(x => x.MuscleGroup).Include(x=>x.Exercise).ThenInclude(x=>x.TypeOfTrening).Where(x => x.TrainingAndDietSchedules.Id == TreningScheduleId).ToListAsync();
+            TreningAndDietSchedule treningAndDietSchedule=await _trainingAndDietScheduleRepository.GetTreningAndDietSchedulesByIdAsync(TreningScheduleId);
+            User user = await _userRepository.GetUserByIdAsync(treningAndDietSchedule.UserId);
+            return await _context.Trenings.Include(x => x.Exercise).ThenInclude(x => x.MuscleGroup).Include(x=>x.Exercise).ThenInclude(x=>x.TypeOfTrening).Where(x => (x.TrainingAndDietSchedules.Id == TreningScheduleId)&&(x.TreningPlanId==user.TreningPlanId)).ToListAsync();
         }
 
         public async Task<List<Trening>> MakeTreningForADayPushPullLegsAsync(TreningAndDietSchedule treningAndDietSchedule)
@@ -119,7 +126,7 @@ namespace FitnessApp.DAL.DiRepositories
 
 
 
-        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        public async Task<List<Trening>> MakeTreningForAWeekAsync(List<TreningAndDietSchedule> treningAndDietSchedules, int treningPlanId)
         {
             List<Trening> treningsForAWeek = new List<Trening>();
 
@@ -128,11 +135,11 @@ namespace FitnessApp.DAL.DiRepositories
                 List<TreningAndDietSchedule> treningSchedulesCopy = new List<TreningAndDietSchedule>(treningAndDietSchedules);
                 List<Trening> treningsForOneDay=new List<Trening>();
 
-                if (treningAndDietSchedules[0].User.TreningPlanId == 1)
+                if (treningPlanId == 1)
                 {
                     treningsForOneDay = await MakeTreningForADayPushPullLegsAsync(treningSchedulesCopy[i]);
                 }
-                else if (treningAndDietSchedules[0].User.TreningPlanId == 2)
+                else if (treningPlanId == 2)
                 {
                     treningsForOneDay = await MakeTreningForADayUpperLowerAsync(treningSchedulesCopy[i]);
 
@@ -146,7 +153,7 @@ namespace FitnessApp.DAL.DiRepositories
 
 
 
-        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules)
+        public async Task<List<Trening>> MakeTreningForAMonthAsync(List<TreningAndDietSchedule> treningAndDietSchedules , int treningPlanId)
         {
             List<Trening> FullMonthTrening = new List<Trening>();
 
@@ -156,7 +163,7 @@ namespace FitnessApp.DAL.DiRepositories
 
             for (int i = 0; i < weeksInMonth; i++)
             {
-                List<Trening> treningsForAWeek = await MakeTreningForAWeekAsync(treningAndDietSchedules.Take(7).ToList());
+                List<Trening> treningsForAWeek = await MakeTreningForAWeekAsync(treningAndDietSchedules.Take(7).ToList(), treningPlanId);
                 FullMonthTrening.AddRange(treningsForAWeek);
                 treningAndDietSchedules = treningAndDietSchedules.Skip(7).ToList(); 
             }
@@ -169,12 +176,12 @@ namespace FitnessApp.DAL.DiRepositories
                 {
                     List<Trening> treningForOneDay = new List<Trening>();
 
-                    if (treningAndDietSchedule.User.TreningPlanId == 1)
+                    if (treningPlanId == 1)
                     { 
                          treningForOneDay = await MakeTreningForADayPushPullLegsAsync(treningAndDietSchedule);
                         
                     }
-                    else if(treningAndDietSchedule.User.TreningPlanId == 2)
+                    else if(treningPlanId == 2)
                     {
                         treningForOneDay = await MakeTreningForADayUpperLowerAsync(treningAndDietSchedule);
 
@@ -190,7 +197,7 @@ namespace FitnessApp.DAL.DiRepositories
                     TreningAndDietSchedule treningAndDietSchedule =await _trainingAndDietScheduleRepository
                         .GetTreningAndDietSchedulesByIdAsync(trening.TrainingAndDietSchedulesId);
 
-                    trening.TreningPlanId = treningAndDietSchedule.User.TreningPlanId;
+                    trening.TreningPlanId = treningPlanId;
                     await _exerciseRepository.UpdateExerciseAsync(exercise);
                 }
             }

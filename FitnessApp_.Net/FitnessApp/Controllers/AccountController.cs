@@ -5,21 +5,12 @@ using FitnessApp.BLL.Interface;
 using FitnessApp.BLL.Services;
 using FitnessApp.BLL.Services.FileServices;
 using FitnessApp.DAL.Helpers;
+using FitnessApp.DAL.Models;
 using FitnessApp.DAL.ViewModel;
 using FitnessApp.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
-using Microsoft.IdentityModel.Tokens;
 using NLog;
-using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Security.Claims;
-using System.Text;
+
 
 namespace FitnessApp.Controllers
 {
@@ -31,24 +22,26 @@ namespace FitnessApp.Controllers
         private readonly MealFileService _mealFileService;
         private readonly IVereficationUserService _vereficationUserService;
         private readonly IUserService _userService;
-        private readonly ITrainingAndDietSchedule _trainingAndDietSchedule;
+        private readonly ITrainingAndDietScheduleService _trainingAndDietSchedule;
         private readonly IDietService _dietService;
         private readonly ITreningService _treningService;
         private readonly IRoleService _roleService;
         private readonly ITreningPlanService _treningPlanService;
+        private readonly IChangingTreningPlanService _changingTreningPlanService;
         private readonly QueueHelper _queueHelper;
         private readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
         public AccountController(
             IUserService userService,
-            ITrainingAndDietSchedule trainingAndDietSchedule,
+            ITrainingAndDietScheduleService trainingAndDietSchedule,
             IDietService dietService,
             ITreningService treningService,
             IRoleService roleService,
             ITreningPlanService treningPlanService,
             IVereficationUserService vereficationUserService,
-            QueueHelper queueHelper
+            QueueHelper queueHelper,
+            IChangingTreningPlanService changingTreningPlanService
             )
         {
             _userService = userService;
@@ -59,6 +52,7 @@ namespace FitnessApp.Controllers
             _treningPlanService = treningPlanService;
             _vereficationUserService = vereficationUserService;
             _queueHelper = queueHelper;
+            _changingTreningPlanService=changingTreningPlanService;
         }
 
         // GET: api/<AccountController>
@@ -114,7 +108,7 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost("create-user")]
-        public async Task<IActionResult> Register([FromBody] GetUser getCreatingUser/*, [FromForm] IFormFile file*/)
+        public async Task<IActionResult> Register([FromBody] GetUser getCreatingUser)
         {
             try
             {
@@ -146,7 +140,7 @@ namespace FitnessApp.Controllers
               
                     var treningAndDietSchedule = await _trainingAndDietSchedule.MakeAMonthInTreningAndSchedulesAsync(user.Id, user.DateOFLastPayment);
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
-                    var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule);
+                    var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule, user.TreningPlanId);
 
                     await _queueHelper.EmailVereficationAsync(user);
 
@@ -156,7 +150,6 @@ namespace FitnessApp.Controllers
             }
             catch (Exception ex)
             {
-                // Здесь вы можете записать сообщение об ошибке в логи или вернуть его как часть ответа для отладки
                 return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
@@ -164,27 +157,45 @@ namespace FitnessApp.Controllers
 
         // PUT: api/<AccountController>/changeData
         [HttpPut("changeData")]
-        public async Task ChangeUserData([FromBody] GetUser getCreatingUser)
+        public async Task ChangeUserData([FromBody] GetUser getChaningUser)
         {
-            User user    = new User()
-            {
-                UserName = getCreatingUser.UserName,
-                UserEmail = getCreatingUser.UserEmail,
-                Password = getCreatingUser.Password,
-                IsEmailConfirmed=getCreatingUser.IsEmailConfirmed,
-                Sex = getCreatingUser.Sex,
-                Age = getCreatingUser.Age,
-                RestTime = getCreatingUser.RestTime,
-                CalorificValue = getCreatingUser.CalorificValue,
-                DateOFLastPayment = getCreatingUser.DateOFLastPayment,
-                TreningPlanId = getCreatingUser.TreningPlanId,
-                TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
-                RoleId = getCreatingUser.RoleId,
-                Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
+            User user = await _userService.GetUserByEmailAsync(getChaningUser.UserEmail);
 
-            };
-            await _userService.CangeUserDataAsync(user);
+            if (user.TreningPlanId != getChaningUser.TreningPlanId)
+            {
+                ChangingTreningPlan changingTreningPlan = new ChangingTreningPlan()
+                {
+                    UserId = user.Id,
+                    User = await _userService.GetUserByIdAsync(user.Id),
+                    ActualUserTreningPlan = user.TreningPlanId,
+                    DisiredTreningPlan = getChaningUser.TreningPlanId,
+                    IsApproved = null
+                };
+                try
+                {
+                    await _changingTreningPlanService.CreateChangingTreningPlanAsync(changingTreningPlan);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+
+                user.UserName = getChaningUser.UserName;
+                user.UserEmail = getChaningUser.UserEmail;
+                user.Password = getChaningUser.Password;
+                user.IsEmailConfirmed = getChaningUser.IsEmailConfirmed;
+                user.Sex = getChaningUser.Sex;
+                user.Age = getChaningUser.Age;
+                user.RestTime = getChaningUser.RestTime;
+                user.CalorificValue = getChaningUser.CalorificValue;
+                user.DateOFLastPayment = getChaningUser.DateOFLastPayment;
+                user.RoleId = getChaningUser.RoleId;
+                user.Role = await _roleService.GetByUserIdAsync(getChaningUser.RoleId);
+
+
+                await _userService.CangeUserDataAsync(user);
                 Logger.Info($"user : {user.Id} - was saccesfully changed");
+            }
             
         }
 
@@ -213,4 +224,5 @@ namespace FitnessApp.Controllers
             return Ok();
         }
     }
+
 }

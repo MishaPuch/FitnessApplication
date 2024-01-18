@@ -36,8 +36,4 @@
 		<ProjectReference Include="..\FitnessApp.BLL\FitnessApp.BLL.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="NewFolder\" />
-	</ItemGroup>
-
 </Project>

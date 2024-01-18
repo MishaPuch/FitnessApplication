@@ -15,7 +15,7 @@ using Moq;
 public class AccountControllerTests
 {
     private readonly Mock<IUserService> userServiceMock;
-    private readonly Mock<ITrainingAndDietSchedule> trainingAndDietScheduleMock;
+    private readonly Mock<ITrainingAndDietScheduleService> trainingAndDietScheduleMock;
     private readonly Mock<IDietService> dietServiceMock;
     private readonly Mock<ITreningService> treningServiceMock;
     private readonly Mock<IRoleService> roleServiceMock;
@@ -26,7 +26,7 @@ public class AccountControllerTests
     public AccountControllerTests()
     {
         userServiceMock = new Mock<IUserService>();
-        trainingAndDietScheduleMock = new Mock<ITrainingAndDietSchedule>();
+        trainingAndDietScheduleMock = new Mock<ITrainingAndDietScheduleService>();
         dietServiceMock = new Mock<IDietService>();
         treningServiceMock = new Mock<ITreningService>();
         roleServiceMock = new Mock<IRoleService>();

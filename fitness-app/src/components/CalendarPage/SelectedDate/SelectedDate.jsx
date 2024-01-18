@@ -98,7 +98,7 @@ const SelectedDate = (props) => {
       
         return allDietProducts;
     }
-    
+    console.log(trenings);
     return(
         <div>          
             <p style={{ marginTop:'-20px' ,marginBottom:'-90px', padding:'20px'}} >
