@@ -24,9 +24,17 @@ export default function Settings() {
     const [password, setPassword] = useState(planData[0]?.user?.password || "");
     const [calory, setCalory] = useState(planData[0]?.user?.calorificValue || "");
     const [restTime, setRestTime] = useState(planData[0]?.user?.restTime || 0);
-    const [treningPlan, setTreningPlan] = useState(planData[0]?.user?.treningPlan.treningPlanValue || null);
+    const [treningPlan, setTreningPlan] = useState(planData[0]?.user?.treningPlanId || null);
+    const [isEmailConfirmed, setIsEmailConfirmed]=useState(planData[0]?.user?.isEmailConfirmed||null);
+    const [dateOFLastPayment, SetDateOFLastPayment]=useState(planData[0]?.user?.dateOFLastPayment);
+    const [roleId, setRoleId]=useState(planData[0]?.user?.roleId||null);
+
+
+
+
     const navigate = useNavigate();
 
+    console.log(planData[0]);
     useEffect(() => {
         if (planData.length === 0) {
             navigate('/');
@@ -38,12 +46,16 @@ export default function Settings() {
         const userData = {
             userName: name,
             userEmail: email,
+            password: password,
             sex: sex,
             age: age,
-            password: password,
             restTime: restTime,
             calorificValue: calory,
             treningPlanId: treningPlan,
+            roleId:roleId,
+            dateOFLastPayment:dateOFLastPayment,
+            isEmailConfirmed:isEmailConfirmed
+
         };
         try {
             changeUser(userData);
@@ -147,7 +159,7 @@ export default function Settings() {
                         </div>
                         
                         <div className="grid-item">
-                            <span className="p-float-label grid-item">  
+                            {/* <span className="p-float-label grid-item">  
                                 <div>
                                 <input type="file" accept="image/*" onChange={handleFileChange} />
                                 {selectedFile && (
@@ -157,7 +169,7 @@ export default function Settings() {
                                     </div>
                                 )}
                                 </div>          
-                            </span>
+                            </span> */}
                             <span className="p-float-label grid-item">
                                 <p>Gender</p>
                                 <InputText id="sex" value={sex} className="p-invalid" />
@@ -181,7 +193,7 @@ export default function Settings() {
                                             name="treningPlan"
                                             value="PushPullLegs"
                                             onChange={() => setTreningPlan(1)}
-                                            checked={treningPlan === "PushPullLegs"}
+                                            checked={treningPlan === 1}
                                         />
                                         <label htmlFor="ingredient1" className="ml-2">
                                             PushPullLegs
@@ -193,7 +205,7 @@ export default function Settings() {
                                             name="treningPlan"
                                             value="UpperLower"
                                             onChange={() => setTreningPlan(2)}
-                                            checked={treningPlan === "UpperLower"}
+                                            checked={treningPlan === 2}
                                         />
                                         <label htmlFor="ingredient2" className="ml-2">
                                             UpperLower

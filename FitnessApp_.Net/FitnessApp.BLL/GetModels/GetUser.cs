@@ -10,7 +10,6 @@ namespace FitnessApp.BLL.GetModels
 {
     public class GetUser
     {
-        public int Id { get; set; }
         [StringLength(100)]
         public string UserName { get; set; }
         [RegularExpression(@"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")]
