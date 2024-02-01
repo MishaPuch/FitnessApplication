@@ -96,7 +96,7 @@ export default function AdminMain() {
                 <div className="user-card">
                     <DataTable value={[data]} tableStyle={{ width: '60rem', height:'5rem' }}>
                         {renderRoleBadge(data.roleId)}
-                        <Column key="userName" field="userName" header="Name" style={{ width: '20%' }} body={(rowData) => rowData.userName} />
+                        <Column key="userEmail" field="userEmail" header="Email" style={{ width: '20%' }} body={(rowData) => rowData.userEmail} />
                         <Column field="image" header="Image" style={{ width: '10%' }} body={(rowData) => (
                             <img src={`https://fitnessapp.blob.core.windows.net/avatars/${rowData.avatar}`} alt={rowData.avatar} className="user-avatar" />
                         )} />

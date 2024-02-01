@@ -42,7 +42,7 @@ export default function UpdateExercise() {
     };
 
     async function handleSave() {
-        debugger;
+        
         try {
             const response = await fetch("https://localhost:7060/api/Exercise/update-exercise", {
                 method: "PUT",
