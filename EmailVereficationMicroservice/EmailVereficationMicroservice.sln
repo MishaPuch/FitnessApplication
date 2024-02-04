@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailVereficationMicroservice", "EmailVereficationMicroservice\EmailVereficationMicroservice.csproj", "{C2F3FEA5-F570-41D1-8347-B5EF9FCAF4B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2F3FEA5-F570-41D1-8347-B5EF9FCAF4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F3FEA5-F570-41D1-8347-B5EF9FCAF4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F3FEA5-F570-41D1-8347-B5EF9FCAF4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F3FEA5-F570-41D1-8347-B5EF9FCAF4B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7BFAD0B-B9DE-48F0-AA46-87582EFD1A91}
+	EndGlobalSection
+EndGlobal
