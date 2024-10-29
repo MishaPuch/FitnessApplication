@@ -67,6 +67,7 @@ namespace FitnessApp.Controllers
         public async Task<User> GetUser(int userId)
         {
             return await _userService.GetUserByIdAsync(userId);
+            
         }
 
         // GET: api/<AccountController>/user/{userEmail}/{password}
@@ -78,7 +79,7 @@ namespace FitnessApp.Controllers
 
             if (user != null)
             {
-                if (user.Role.ID == 2 || user.Role.ID == 3)
+                if (user.Role.ID == 2 || user.Role.ID == 3 || user.DateOFLastPayment<DateTime.Now)
                 {
                     List<FullModel> result = new List<FullModel>();
                     FullModel fullModel = new FullModel()
@@ -126,7 +127,7 @@ namespace FitnessApp.Controllers
                     TreningPlan = await _treningPlanService.GetTreningPlanByIdAsync(getCreatingUser.TreningPlanId),
                     RoleId = getCreatingUser.RoleId,
                     Role = await _roleService.GetByUserIdAsync(getCreatingUser.RoleId),
-                    IsEmailConfirmed = false,
+                    IsEmailConfirmed = true,
 
                 };
                 User checkingUser = await _userService.GetUserByEmailAsync(creatingUser.UserEmail);
@@ -142,7 +143,7 @@ namespace FitnessApp.Controllers
                     var dietForAMonth = await _dietService.MakeDietForAMonthAsync(treningAndDietSchedule);
                     var treningForAMonth = await _treningService.MakeTreningForAMonthAsync(treningAndDietSchedule, user.TreningPlanId);
 
-                    await _queueHelper.EmailVereficationAsync(user);
+                    //await _queueHelper.EmailVereficationAsync(user);
 
                     return Ok(await _trainingAndDietSchedule.GetUserTodaysPlanAsync(user.Id));
                     

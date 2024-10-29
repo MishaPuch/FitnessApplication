@@ -1,5 +1,6 @@
 // useLoginApi.jsx
 async function LoginApi(email , password){
+    debugger;
     const response = await fetch(`https://localhost:7060/api/Account/user/${email}/${password}`, {
         method: 'GET',
         headers: {

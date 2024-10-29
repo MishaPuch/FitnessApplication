@@ -39,14 +39,12 @@ namespace FitnessApp.DAL.DiRepositories
                 await _context.SaveChangesAsync();
                 User createdUser = await _context.Users.Include(x=>x.Role).Include(x=>x.TreningPlan).FirstOrDefaultAsync(u => u.UserEmail == user.UserEmail);
 
-                await _queueHelper.EmailVereficationAsync(user);
+                //await _queueHelper.EmailVereficationAsync(user);
 
                 return createdUser;
             }
             catch (Exception ex)
             {
-                // Log the inner exception for debugging.
-                // You can log it to a file, the console, or another suitable location.
                 Logger.Error(ex.InnerException.ToString());
                 throw;
             }
@@ -101,9 +99,7 @@ namespace FitnessApp.DAL.DiRepositories
             }
             catch (Exception ex)
             {
-                // Обработка ошибки
                 Logger.Error(ex);
-                // Возможно, следует выбросить исключение или выполнить другие действия по обработке ошибки
             }
         }
 

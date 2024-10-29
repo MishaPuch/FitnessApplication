@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FitnessApp.BLL
-build_property.ProjectDir = C:\Users\misha\Desktop\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\
+build_property.ProjectDir = C:\Users\misha\Documents\Folders\FitnessApplication\FitnessApp_.Net\FitnessApp.BLL\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

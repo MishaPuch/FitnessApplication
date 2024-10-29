@@ -46,7 +46,6 @@ function Registration() {
                 body: JSON.stringify(userData),
             });
 
-            // Переберите итератор и выведите содержимое на консоль
             
             if (response.ok) {
                 console.log("User registration successful!");

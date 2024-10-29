@@ -1,0 +1,249 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|c:\\users\\misha\\documents\\folders\\fitnessapplication\\fitnessapp_.net\\fitnessapp\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp.dal\\direpositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|solutionrelative:fitnessapp.dal\\direpositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA89B441-4369-4608-B4E1-90B6F2F1CBA2}|FitnessApp.BLL\\FitnessApp.BLL.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp.bll\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA89B441-4369-4608-B4E1-90B6F2F1CBA2}|FitnessApp.BLL\\FitnessApp.BLL.csproj|solutionrelative:fitnessapp.bll\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp.dal\\fitnessappcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|solutionrelative:fitnessapp.dal\\fitnessappcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA89B441-4369-4608-B4E1-90B6F2F1CBA2}|FitnessApp.BLL\\FitnessApp.BLL.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp.bll\\services\\traininganddietscheduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA89B441-4369-4608-B4E1-90B6F2F1CBA2}|FitnessApp.BLL\\FitnessApp.BLL.csproj|solutionrelative:fitnessapp.bll\\services\\traininganddietscheduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp\\controllers\\treningplancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2ADFF95-F586-4BA0-8AB2-D4EDBB675D02}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\treningplancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\fitnessapp.dal\\models\\typeofmusclegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F814F0A3-6B24-4689-ABC1-A2F3334F10F4}|FitnessApp.DAL\\FitnessApp.DAL.csproj|solutionrelative:fitnessapp.dal\\models\\typeofmusclegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 226,
+          "SelectedChildIndex": 23,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FitnessAppContext.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessAppContext.cs",
+              "RelativeDocumentMoniker": "FitnessApp.DAL\\FitnessAppContext.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessAppContext.cs",
+              "RelativeToolTip": "FitnessApp.DAL\\FitnessAppContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwCIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T15:17:01.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "web.config",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\web.config",
+              "RelativeDocumentMoniker": "FitnessApp\\web.config",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\web.config",
+              "RelativeToolTip": "FitnessApp\\web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-07-01T09:09:28.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Program.cs",
+              "RelativeDocumentMoniker": "FitnessApp\\Program.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Program.cs",
+              "RelativeToolTip": "FitnessApp\\Program.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAWwHsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-01T07:56:01.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\appsettings.json",
+              "RelativeDocumentMoniker": "FitnessApp\\appsettings.json",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\appsettings.json",
+              "RelativeToolTip": "FitnessApp\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-09T18:17:34.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "FitnessApp.BLL\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\Services\\UserService.cs",
+              "RelativeToolTip": "FitnessApp.BLL\\Services\\UserService.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAqwCcAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T18:13:35.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TrainingAndDietScheduleService.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\Services\\TrainingAndDietScheduleService.cs",
+              "RelativeDocumentMoniker": "FitnessApp.BLL\\Services\\TrainingAndDietScheduleService.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\Services\\TrainingAndDietScheduleService.cs",
+              "RelativeToolTip": "FitnessApp.BLL\\Services\\TrainingAndDietScheduleService.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAMwF4AAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T17:51:50.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TreningPlanController.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\TreningPlanController.cs",
+              "RelativeDocumentMoniker": "FitnessApp\\Controllers\\TreningPlanController.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\TreningPlanController.cs",
+              "RelativeToolTip": "FitnessApp\\Controllers\\TreningPlanController.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAADwv3oAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T20:03:40.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ExerciseController.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\ExerciseController.cs",
+              "RelativeDocumentMoniker": "FitnessApp\\Controllers\\ExerciseController.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\ExerciseController.cs",
+              "RelativeToolTip": "FitnessApp\\Controllers\\ExerciseController.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAmwCQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T19:52:17.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\DiRepositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "FitnessApp.DAL\\DiRepositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\DiRepositories\\UserRepository.cs",
+              "RelativeToolTip": "FitnessApp.DAL\\DiRepositories\\UserRepository.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAQwB4AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-06T08:00:48.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TypeOfMuscleGroup.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\Models\\TypeOfMuscleGroup.cs",
+              "RelativeDocumentMoniker": "FitnessApp.DAL\\Models\\TypeOfMuscleGroup.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\Models\\TypeOfMuscleGroup.cs",
+              "RelativeToolTip": "FitnessApp.DAL\\Models\\TypeOfMuscleGroup.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-06T07:04:24.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "FitnessApp\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "FitnessApp\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAMwHIAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-01-24T23:10:01.236Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

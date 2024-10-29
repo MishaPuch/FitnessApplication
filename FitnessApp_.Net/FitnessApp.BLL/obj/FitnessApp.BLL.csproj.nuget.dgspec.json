@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {}
+    "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {
+    "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
         "projectName": "FitnessApp.BLL",
-        "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
+        "projectPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\FitnessApp.BLL.csproj",
         "packagesPath": "C:\\Users\\misha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\obj\\",
+        "outputPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\misha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
-                "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj"
+              "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
+                "projectPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj"
               }
             }
           }
@@ -38,6 +38,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -93,18 +98,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
+    "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj",
         "projectName": "FitnessApp.DAL",
-        "projectPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj",
+        "projectPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\FitnessApp.DAL.csproj",
         "packagesPath": "C:\\Users\\misha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\obj\\",
+        "outputPath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp_.Net\\FitnessApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\misha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -127,6 +132,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -190,7 +200,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ENuZ4LBofP6Q/OIqiXs1q6BfSmYyv8ZvbiFhIVpItur2Q+C6hGJPCdlSxWePOEJvp0vMsB1YbH0y8ENNX4WeEw==",
+  "dgSpecHash": "Q+nrRCFU+opdb4q56h/q5zwLs7b/PbW8PLMLjPBBj5I62kUq4H9bQpo66Dx0OcR7fp+/bxOsyCcAQZ/4CNGN0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\misha\\Desktop\\FitnessApplication\\FitnessApp.Test\\FitnessApp.Test.csproj",
+  "projectFilePath": "C:\\Users\\misha\\Documents\\Folders\\FitnessApplication\\FitnessApp.Test\\FitnessApp.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\misha\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
